@@ -1,0 +1,25 @@
+{
+  "name": "fictitious-house",
+  "version": "1.0.0",
+  "description": "A text adventure game set in a fictitious house.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelyjoel/fictitious-house.git"
+  },
+  "keywords": [
+    "text",
+    "adventure",
+    "fictitious",
+    "house"
+  ],
+  "author": "Joel Plow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joelyjoel/fictitious-house/issues"
+  },
+  "homepage": "https://github.com/joelyjoel/fictitious-house#readme"
+}
