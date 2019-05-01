@@ -1,4 +1,4 @@
-const Predicate = require('../../src/Predicate')
+const {Predicate} = require('english-io')
 const LocationPredicate = require('../LocationPredicate.js')
 
 module.exports = {

@@ -1,5 +1,6 @@
 const predicates = require('../predicates/location')
 const {S} = require('../../src/Sentence')
+const S = require('english-io').Sentence.S
 
 function getLocationFacts(entity, location, locationType) {
   if(!location || !entity)

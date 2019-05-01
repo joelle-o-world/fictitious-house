@@ -1,5 +1,5 @@
 const getAccessibleLocations = require('./getAccessibleLocations')
-const {S} = require('../../src/Sentence')
+const S = require('english-io').Sentence.S
 const {goInto, getOnto} = require('../predicates/movement')
 
 function getRoute(A, B) { // A and B are location,loctionType pairs

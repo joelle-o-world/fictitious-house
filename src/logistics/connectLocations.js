@@ -1,4 +1,4 @@
-const {S} = require('../../src/Sentence')
+const S = require('english-io').Sentence.S
 const {leadTo} = require('../predicates')
 
 function connectLocations(entity1, entity2) {

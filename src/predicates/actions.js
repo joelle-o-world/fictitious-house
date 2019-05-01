@@ -1,7 +1,7 @@
-const Predicate = require('../../src/Predicate')
-const TimedPredicate = require('../../src/TimedPredicate')
+const {Predicate} = require('english-io')
+const S = require('english-io').Sentence.S
+const TimedPredicate = require('../TimedPredicate')
 //const {goTo} = require('./movement')
-const {S} = require('../../src/Sentence')
 const goTo = require('./goTo')
 const {hold, beOn, beIn} = require('./location')
 

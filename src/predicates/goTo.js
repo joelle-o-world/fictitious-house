@@ -1,5 +1,5 @@
 const getRoute = require('../logistics/getRoute')
-const Predicate = require('../../src/Predicate')
+const {Predicate} = require('english-io')
 
 let goTo = new Predicate({
   verb:'go', params:['subject', 'to'],

@@ -1,5 +1,5 @@
-const Predicate = require('../../src/Predicate')
-const TimedPredicate = require('../../src/TimedPredicate')
+const {Predicate} = require('english-io')
+const TimedPredicate = require('../TimedPredicate')
 
 module.exports = {
   // LOCATION
