@@ -58,12 +58,12 @@ class ExplorerGame extends EventEmitter {
     setInterval(() => {
       let sentence = this.wanderingDescriber.next()
       if(sentence)
-        this.io.writeln(sentencify(sentence.str(this.mainTense, this.ctx, 1)))
+        this.io.writeln(sentencify(sentence.str(this.mainTense, this.ctx, 0)))
     }, 6000)
 
     // feed changes in game world into the io output
     this.changeListener.on('fact', change => {
-      this.io.writeln(sentencify(change.str(this.mainTense, this.ctx, 1)))
+      this.io.writeln(sentencify(change.str(this.mainTense, this.ctx, 0)))
       this.wanderingDescriber.log(change)
     })
 

@@ -3,7 +3,12 @@ const LocationPredicate = require('../LocationPredicate.js')
 
 module.exports = {
   beIn: new LocationPredicate({
-    verb: 'be', thing: 'subject', location:'in', locationType:'IN'
+    //verb: 'be', thing: 'subject', location:'in',
+    forms: [
+      {verb: 'be', params:['subject', 'in']},
+      {verb: 'be', params:['object', 'in'], constants:{subject:'there'}}
+    ],
+    locationType:'IN'
   }),
 
   beOn: new LocationPredicate({

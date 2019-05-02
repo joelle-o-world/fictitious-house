@@ -6,16 +6,21 @@ const DuspLoop = require('../../src/sound/DuspLoop')
 const d1 = require('../../src')
 
 let allEntitys = d1.quickDeclare(
-  'there is a person',
-  'a room is called Room A',
-  'another room is called Room B',
-  'Room A leads to Room B',
-  'a table is in Room A',
-  'the person is in Room A',
-  'a box is in Room B',
-  'a cupboard is in Room B',
-  'an octopus is on the table',
-  'the octopus buzzes'
+  'a person is in a vestibule',
+
+  'the vestibule leads to a bedroom',
+  'the vestibule leads to another bedroom',
+  'the vestibule leads to a staircase',
+  'the second bedroom is a living room',
+  'the second bedroom leads to a garden',
+  'the staircase leads to a landing',
+  'the landing leads to another bedroom',
+  'the landing leads to another bedroom',
+  'the landing leads to another bedroom',
+  'the staircase leads to another landing',
+  'the second landing leads to a bathroom',
+
+  'there is a wardrobe in the second bedroom',
 )
 
 let protagonist = allEntitys[0]
@@ -30,7 +35,8 @@ window.onclick = function() {
     protagonist:protagonist,
     dictionary:d1,
     audioDestination: audioctx.destination,
-    useResponsiveVoice: true,
+    useResponsiveVoice: false,
+    useTickyText: true,
   })
   document.body.appendChild(game1.io.div)
 

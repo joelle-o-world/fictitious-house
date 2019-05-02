@@ -28,7 +28,10 @@ module.exports = [
   {noun:'living room', inherits:'room'},
   {noun:'bedroom', inherits:'room'},
   {noun:'corridor', inherits:'room'},
-  {noun:'hallyway', inherits:'room'},
+  {noun:'hallway', inherits:'room'},
+  {noun:'vestibule', inherits:'room'},
+  {noun:'staircase', inherits:'room'},
+  {noun:'landing', inherits:'room'},
 
   {noun:'garden', inherits:'space'},
   {noun:'street', inherits:'space'},

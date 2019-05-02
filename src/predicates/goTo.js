@@ -10,7 +10,7 @@ let goTo = new Predicate({
   ),
   expand: (subject, to) => {
     let from = {location: subject.location, locationType:subject.locationType}
-    if(to.is_a('room'))
+    if(to.is_a('room') || to.is_a('space'))
       to = {location:to, locationType:'IN'}
     return getRoute.sentences(from, to, subject)
   }

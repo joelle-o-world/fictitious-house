@@ -15,7 +15,6 @@ const pickUp = new TimedPredicate({
   duration: 1,
   afterwards: (subject, object) => S(hold, object, subject),
 })
-console.log(pickUp)
 
 module.exports = {
   lookAt: new Predicate({

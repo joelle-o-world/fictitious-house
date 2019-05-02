@@ -4150,6 +4150,7 @@ module.exports = {
   Entity: require('./Entity'),
   parseImperative: require('./parseImperative'),
   Sentence: require('./Sentence'),
+  S: require('./Sentence').S,
   //SentenceQueue: require('./SentenceQueue'),
 
   DescriptionContext: require('./DescriptionContext'),
@@ -4164,10 +4165,12 @@ module.exports = {
 
   Declarer: require('./Declarer'),
 
+  sub: require('./util/Substitution').sub,
+
   //util: require('./util'),
 }
 
-},{"./Declarer":10,"./DescriptionContext":11,"./Dictionary":12,"./Entity":13,"./EntitySpawner":14,"./FactListener":16,"./Predicate":19,"./PredicateSyntax":21,"./Sentence":22,"./WanderingDescriber":24,"./parseImperative":27,"./search":28,"./util/spellcheck":46}],27:[function(require,module,exports){
+},{"./Declarer":10,"./DescriptionContext":11,"./Dictionary":12,"./Entity":13,"./EntitySpawner":14,"./FactListener":16,"./Predicate":19,"./PredicateSyntax":21,"./Sentence":22,"./WanderingDescriber":24,"./parseImperative":27,"./search":28,"./util/Substitution":31,"./util/spellcheck":46}],27:[function(require,module,exports){
 const search = require('./search')
 const Sentence = require('./Sentence')
 
@@ -6079,12 +6082,12 @@ class ExplorerGame extends EventEmitter {
     setInterval(() => {
       let sentence = this.wanderingDescriber.next()
       if(sentence)
-        this.io.writeln(sentencify(sentence.str(this.mainTense, this.ctx, 1)))
+        this.io.writeln(sentencify(sentence.str(this.mainTense, this.ctx, 0)))
     }, 6000)
 
     // feed changes in game world into the io output
     this.changeListener.on('fact', change => {
-      this.io.writeln(sentencify(change.str(this.mainTense, this.ctx, 1)))
+      this.io.writeln(sentencify(change.str(this.mainTense, this.ctx, 0)))
       this.wanderingDescriber.log(change)
     })
 
@@ -79306,7 +79309,10 @@ module.exports = [
   {noun:'living room', inherits:'room'},
   {noun:'bedroom', inherits:'room'},
   {noun:'corridor', inherits:'room'},
-  {noun:'hallyway', inherits:'room'},
+  {noun:'hallway', inherits:'room'},
+  {noun:'vestibule', inherits:'room'},
+  {noun:'staircase', inherits:'room'},
+  {noun:'landing', inherits:'room'},
 
   {noun:'garden', inherits:'space'},
   {noun:'street', inherits:'space'},
@@ -79470,7 +79476,6 @@ const pickUp = new TimedPredicate({
   duration: 1,
   afterwards: (subject, object) => S(hold, object, subject),
 })
-console.log(pickUp)
 
 module.exports = {
   lookAt: new Predicate({
@@ -79522,7 +79527,7 @@ let goTo = new Predicate({
   ),
   expand: (subject, to) => {
     let from = {location: subject.location, locationType:subject.locationType}
-    if(to.is_a('room'))
+    if(to.is_a('room') || to.is_a('space'))
       to = {location:to, locationType:'IN'}
     return getRoute.sentences(from, to, subject)
   }
@@ -79607,7 +79612,12 @@ const LocationPredicate = require('../LocationPredicate.js')
 
 module.exports = {
   beIn: new LocationPredicate({
-    verb: 'be', thing: 'subject', location:'in', locationType:'IN'
+    //verb: 'be', thing: 'subject', location:'in',
+    forms: [
+      {verb: 'be', params:['subject', 'in']},
+      {verb: 'be', params:['object', 'in'], constants:{subject:'there'}}
+    ],
+    locationType:'IN'
   }),
 
   beOn: new LocationPredicate({
@@ -79648,31 +79658,91 @@ module.exports = {
 
 },{"../LocationPredicate.js":261,"english-io":229}],284:[function(require,module,exports){
 const {Predicate} = require('english-io')
+const {S, sub} = require('english-io')
+//const getRoute = require('../logistics/getRoute')
+const getAccessibleLocations = require('../logistics/getAccessibleLocations')
+
+const GoInto = new Predicate({
+  forms:[
+    {verb: 'go', params: ['subject', 'into']},
+    {verb: 'get', params: ['subject', 'into']},
+    {verb: 'enter', params: ['subject', 'object']},
+  ],
+
+  problem(subject, container) {
+    if(!subject.location)
+      return sub('_ is nowhere', subject)
+
+    let accessibleLocations = [...getAccessibleLocations(subject.location)]
+    if(!accessibleLocations.includes(container))
+      return sub('_ is inaccessible', container)
+  },
+  until: callback => callback(),
+  afterwards: (entity, container) => entity.setLocation(container, 'IN'),
+})
+
+
+
+const GetOnto = new Predicate({
+  verb: 'get',
+  params: ['subject', 'onto'],
+
+  problem(subject, surface) {
+    if(!subject.location)
+      return sub('_ is nowhere', subject)
+
+    let accessibleLocations = [...getAccessibleLocations(subject.location)]
+    if(!accessibleLocations.includes(surface))
+      return sub('_ is inaccessible', surface)
+  },
+  until: callback => callback(),
+  afterwards: (entity, surface) => entity.setLocation(surface, 'ON'),
+})
+
+const BeStuck = new Predicate({
+  forms:[{verb:'be stuck'}],
+  until: callback => callback(),
+})
+
+const Exit = new Predicate({
+  forms:[
+    {verb:'exit', params:['subject']},
+    {verb:'go out'},
+    {verb:'get out'},
+  ],
+  replace(subject) {
+    if(
+      subject.locationType == 'IN' &&
+      (subject.location.is_a('room') || subject.location.is_a('space'))
+    ) {
+      let options = subject.location.adjacentLocations
+      if(options.length) {
+        let room = options[Math.floor(Math.random()*options.length)]
+        return S(GoInto, subject, room)
+      }
+    } else if(subject.locationType == 'IN' && subject.location.open && subject.location.container) {
+      return S(GoInto, subject, subject.location.container)
+    }
+
+    return S(BeStuck, subject)
+  }
+})
+
+
 
 module.exports = {
   // enter an IN location
-  goInto: new Predicate({
-    forms:[
-      {verb: 'go', params: ['subject', 'into']},
-      {verb: 'get', params: ['subject', 'into']},
-      {verb: 'enter', params: ['subject', 'object']},
-  ],
-
-    until: callback => callback(),
-    afterwards: (entity, container) => entity.setLocation(container, 'IN'),
-  }),
+  goInto: GoInto,
 
   // enter an ON location
-  getOnto: new Predicate({
-    verb: 'get',
-    params: ['subject', 'onto'],
+  getOnto: GetOnto,
 
-    until: callback => callback(),
-    afterwards: (entity, surface) => entity.setLocation(surface, 'ON'),
-  }),
+  Exit: Exit,
+
+  BeStuck: BeStuck,
 }
 
-},{"english-io":229}],285:[function(require,module,exports){
+},{"../logistics/getAccessibleLocations":266,"english-io":229}],285:[function(require,module,exports){
 const SoundPredicate = require('../sound/SoundPredicate')
 const DuspLoop = require('../sound/DuspLoop')
 const DuspOnce = require('../sound/DuspOnce')
@@ -80558,16 +80628,21 @@ const DuspLoop = require('../../src/sound/DuspLoop')
 const d1 = require('../../src')
 
 let allEntitys = d1.quickDeclare(
-  'there is a person',
-  'a room is called Room A',
-  'another room is called Room B',
-  'Room A leads to Room B',
-  'a table is in Room A',
-  'the person is in Room A',
-  'a box is in Room B',
-  'a cupboard is in Room B',
-  'an octopus is on the table',
-  'the octopus buzzes'
+  'a person is in a vestibule',
+
+  'the vestibule leads to a bedroom',
+  'the vestibule leads to another bedroom',
+  'the vestibule leads to a staircase',
+  'the second bedroom is a living room',
+  'the second bedroom leads to a garden',
+  'the staircase leads to a landing',
+  'the landing leads to another bedroom',
+  'the landing leads to another bedroom',
+  'the landing leads to another bedroom',
+  'the staircase leads to another landing',
+  'the second landing leads to a bathroom',
+
+  'there is a wardrobe in the second bedroom',
 )
 
 let protagonist = allEntitys[0]
@@ -80582,7 +80657,8 @@ window.onclick = function() {
     protagonist:protagonist,
     dictionary:d1,
     audioDestination: audioctx.destination,
-    useResponsiveVoice: true,
+    useResponsiveVoice: false,
+    useTickyText: true,
   })
   document.body.appendChild(game1.io.div)
 
