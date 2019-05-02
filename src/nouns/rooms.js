@@ -18,3 +18,18 @@ module.exports = {
 
 
 }
+
+module.exports = [
+  {noun:'room', inherits:'thing', extend: e=>e.allowLocatingType('IN')},
+  {noun:'space', inherits:'thing', extend: e=>e.allowLocatingType('IN')},
+
+  {noun:'kitchen', inherits:'room'},
+  {noun:'bathroom', inherits:'room'},
+  {noun:'living room', inherits:'room'},
+  {noun:'bedroom', inherits:'room'},
+  {noun:'corridor', inherits:'room'},
+  {noun:'hallyway', inherits:'room'},
+
+  {noun:'garden', inherits:'space'},
+  {noun:'street', inherits:'space'},
+]

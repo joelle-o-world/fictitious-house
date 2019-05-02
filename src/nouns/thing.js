@@ -1,7 +1,7 @@
 const getLocationFacts = require('./getLocationFacts.js')
 const connectLocations = require('../logistics/connectLocations')
 
-function object(o) {
+function extend(o) {
     // where is this object
     o.location = null
     o.locationType = null
@@ -24,6 +24,8 @@ function object(o) {
     o.emitChildEnter = emitChildEnter
     o.emitChildExit = emitChildExit
 
+    o.nowPlayingSounds = []
+
     // attributes:
     o.__defineGetter__('container', function() {
       // Recursively, search down the location tree to find the first `IN`
@@ -44,7 +46,7 @@ function object(o) {
     o.allowLocatingType('consist')
     o.allowLocationType('consist')
 }
-module.exports = object
+module.exports = {noun:'thing', extend:extend}
 
 function setLocation(location, locationType) {
   if(!locationType) {

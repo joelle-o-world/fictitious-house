@@ -1,9 +1,8 @@
-module.exports = {
-  "body part": entity => {
-    entity.be_a('thing')
-      .allowLocatingType('consist', 'ON')
-      .allowLocationType('consist', 'hold', 'IN', 'ON')
-  },
+let bodyPart = {
+  noun:'body part',
+  inherits: 'thing',
+  extend: e => e.allowLocatingType('consist', 'ON')
+                .allowLocationType('consist', 'hold', 'IN', 'ON')
 }
 
 let body_parts = [
@@ -18,5 +17,7 @@ let body_parts = [
   'lip', 'tooth',
 ]
 
-for(let part of body_parts)
-  module.exports[part] = entity => entity.be_a('body part')
+module.exports = [
+  bodyPart,
+  ...body_parts.map(noun => ({noun:noun, inherits:'body part'}))
+]

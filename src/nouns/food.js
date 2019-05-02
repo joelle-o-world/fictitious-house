@@ -1,5 +1,4 @@
-module.exports = {
-  food: food => food.be_a('thing'),
-
-  sausage: entity => entity.be_a('food'),
-}
+module.exports = [
+  {noun:'food', inherits:'thing'},
+  {noun:'sausage', inherits:'food'}
+]

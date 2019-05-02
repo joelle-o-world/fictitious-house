@@ -1,11 +1,11 @@
 const EventEmitter = require('events')
 const GameIO = require('./GameIO')
-//const parseImperative = require('../src/parseImperative')
 const {
   FactListener,
   WanderingDescriber,
   DescriptionContext,
   sentencify,
+  parseImperative
 } = require('english-io')
 const MobileEar = require('../src/sound/MobileEar')
 
@@ -81,7 +81,7 @@ class ExplorerGame extends EventEmitter {
     this.emit('input', str)
 
     // parse the string as an input
-    let sentence = this.dictionary.parseImperative.first(
+    let sentence = parseImperative.first(
       str, this.protagonist, this.dictionary.predicates)
     if(sentence) {
       this.wanderingDescriber.log(sentence)

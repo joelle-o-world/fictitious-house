@@ -1,8 +1,10 @@
-module.exports = {
-  animal: entity => entity.be_a('thing').allowLocationType('IN', 'ON', 'hold'),
-
-  octopus: entity => entity.be_a('animal'),
-  dolphin: entity => entity.be_a('animal'),
-  goose: entity => entity.be_a('animal'),
-  mule: entity => entity.be_a('animal')
-}
+module.exports = [
+  { noun:'animal',
+    inherits: 'thing',
+    extend: e => e.allowLocationType('IN', 'ON', 'hold'),
+  },
+  { noun: 'octopus', inherits:'animal'},
+  { noun: 'dolphin', inherits:'animal'},
+  { noun: 'goose', inherits:'animal'},
+  { noun: 'mule', inherits:'animal'}
+]

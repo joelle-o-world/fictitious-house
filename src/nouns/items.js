@@ -1,30 +1,38 @@
-module.exports = {
-  item: item => {
-    item.be_a('thing')
-      .allowLocationType('IN', 'hold', 'ON')
+module.exports = [
+  { noun: 'item',
+    inherits:'thing',
+    extend: e => e.allowLocationType('IN', 'hold', 'ON'),
   },
 
-  chair: item => item.be_a('item').allowLocatingType('seat'),
-  armchair: item => item.be_a('chair'),
-  sofa: item => item.be_a('chair'),
+  // MISC
+  {noun:'doorknob', inherits:'thing'},
+  {noun:'cigarette', inherits:'item'},
+  {noun:'filter', inherits:'item'},
+  {noun:'tobacco', inherits:'item'},
+  {noun:'rizla', inherits:'item'},
+  {noun:'computer', inherits:'item'},
+  {noun:'salmon wrap', inherits:'item'},
 
-  table: item => item.be_a('item').allowLocatingType('ON'),
-  desk: item =>item.be_a('table'),
-  nightstand: item => item.be_a('table'),
 
-  bed: item => item.be_a('item').allowLocatingType('ON'),
+  // CHAIRS
+  { noun: 'chair',
+    inherits:'item',
+    extend: e => e.allowLocatingType('SEAT', 'ON'),
+  },
+  { noun: 'armchair', inherits:'chair'},
+  { noun: 'sofa', inherits:'chair'},
 
-  cupboard: item => item.be_a('item').allowLocatingType('IN'),
-  drawer: item => item.be_a('thing').allowLocatingType('IN'),
-  doorknob: item => item.be_a('thing'),
-  wardrobe: item => item.be_a('cupboard'),
+  // TABLES
+  {noun:'table', inherits:'item', extend: e => e.allowLocatingType('ON')},
+  {noun:'desk', inherits:'table'},
+  {noun:'nightstand', inherits:'table'},
 
-  box: item => item.be_a('item').allowLocatingType('IN'),
+  // BED
+  {noun: 'bed', inherits:'item', extend: e => e.allowLocatingType('ON', 'SIT')},
 
-  cigarette: item => item.be_a('item'),
-  filter: item => item.be_a('item'),
-  tobacco: item => item.be_a('item'),
-  rizla: item => item.be_a('item'),
-  computer: item => item.be_a('item'),
-  "salmon wrap": item => item.be_a('item'),
-}
+  // CUPBOARD/BOX
+  {noun: 'cupboard', inherits:'item', extend: e=>e.allowLocatingType('IN')},
+  {noun:'drawer', inherits:'thing', extend:e=>e.allowLocatingType('thing')},
+  {noun:'wardrobe', inherits:'cupboard'},
+  {noun:'box', inherits:'item', extend: e=>e.allowLocatingType('IN')},
+]
