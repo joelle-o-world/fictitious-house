@@ -14,7 +14,7 @@ let allEntitys = d1.quickDeclare(
   'the person is in Room A',
   'a box is in Room B',
   'a cupboard is in Room B',
-  'an octopus is in the box',
+  'an octopus is on the table',
   'the octopus buzzes'
 )
 

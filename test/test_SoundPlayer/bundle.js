@@ -78879,7 +78879,6 @@ module.exports = TimedPredicate
 function delay(seconds, callback) {
   setTimeout(callback, seconds*1000)
 }
-module.exports = delay
 
 },{"english-io":229}],263:[function(require,module,exports){
 module.exports = {
@@ -80569,7 +80568,7 @@ let allEntitys = d1.quickDeclare(
   'the person is in Room A',
   'a box is in Room B',
   'a cupboard is in Room B',
-  'an octopus is in the box',
+  'an octopus is on the table',
   'the octopus buzzes'
 )
 
