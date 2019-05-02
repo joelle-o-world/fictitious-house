@@ -2165,7 +2165,7 @@ module.exports = Entity
 
 const spawn = require('./spawn2')
 
-},{"./Sentence":22,"./entityStr":25,"./spawn2":30,"./util/regOps.js":43,"./util/specarr":45,"./util/spellcheck":46,"events":299,"randexp":4}],14:[function(require,module,exports){
+},{"./Sentence":22,"./entityStr":25,"./spawn2":30,"./util/regOps.js":43,"./util/specarr":45,"./util/spellcheck":46,"events":300,"randexp":4}],14:[function(require,module,exports){
 const Substitution = require('./util/Substitution')
 const getNounPhraselet = require('./util/getNounPhraselet')
 const regops = require('./util/regops')
@@ -2465,7 +2465,7 @@ module.exports = FactListener
 // PROBLEMS:
 // - Eliminating duplicates.
 
-},{"./Sentence":22,"events":299}],17:[function(require,module,exports){
+},{"./Sentence":22,"events":300}],17:[function(require,module,exports){
 /**
  * @class Noun
  * @constructor
@@ -3892,7 +3892,7 @@ class Sentence extends EventEmitter {
 Sentence.prototype.isSentence = true
 module.exports = Sentence
 
-},{"./SentenceQueue":23,"events":299}],23:[function(require,module,exports){
+},{"./SentenceQueue":23,"events":300}],23:[function(require,module,exports){
 // a list of sentence to be executed consequetively
 
 const EventEmitter = require('events')
@@ -3992,7 +3992,7 @@ class SentenceQueue extends EventEmitter {
 }
 module.exports = SentenceQueue
 
-},{"events":299}],24:[function(require,module,exports){
+},{"events":300}],24:[function(require,module,exports){
 /**
   * A class for generating descriptions by following relationships between
   * objects.
@@ -6139,7 +6139,7 @@ class ExplorerGame extends EventEmitter {
 }
 module.exports = ExplorerGame
 
-},{"../src/sound/MobileEar":288,"./GameIO":50,"english-io":229,"events":299}],50:[function(require,module,exports){
+},{"../src/sound/MobileEar":289,"./GameIO":50,"english-io":229,"events":300}],50:[function(require,module,exports){
 /*
 
 HTML PROTOTYPE:
@@ -6289,7 +6289,7 @@ class GameIO extends EventEmitter {
 }
 module.exports = GameIO
 
-},{"./TTSQueue":51,"./TickyText":52,"events":299}],51:[function(require,module,exports){
+},{"./TTSQueue":51,"./TickyText":52,"events":300}],51:[function(require,module,exports){
 /**
   A class for scheduling text to speech in a queue using the Responsive Voice
   API.
@@ -7317,7 +7317,7 @@ AudioBufferList.prototype.join = function join (from, to) {
   return this
 }
 
-},{"audio-buffer":57,"audio-buffer-utils":58,"events":299,"inherits":231,"is-audio-buffer":232,"is-plain-obj":236,"negative-index":238,"object-assign":240}],57:[function(require,module,exports){
+},{"audio-buffer":57,"audio-buffer-utils":58,"events":300,"inherits":231,"is-audio-buffer":232,"is-plain-obj":236,"negative-index":238,"object-assign":240}],57:[function(require,module,exports){
 /**
  * AudioBuffer class
  *
@@ -8329,7 +8329,7 @@ module.exports = function getContext (options) {
 })(this);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":297}],63:[function(require,module,exports){
+},{"buffer":298}],63:[function(require,module,exports){
 module.exports = clamp
 
 function clamp(value, min, max) {
@@ -9547,7 +9547,7 @@ Piglet.prototype.__defineGetter__("circuit", function() {
   return this.unit.circuit
 })
 
-},{"./SignalChunk.js":76,"./config.js":145,"events":299}],75:[function(require,module,exports){
+},{"./SignalChunk.js":76,"./config.js":145,"events":300}],75:[function(require,module,exports){
 const {Readable} = require("stream")
 const AudioBuffer = require('audio-buffer')
 
@@ -9631,7 +9631,7 @@ class RenderStream extends Readable {
 }
 module.exports = RenderStream
 
-},{"audio-buffer":60,"stream":321}],76:[function(require,module,exports){
+},{"audio-buffer":60,"stream":322}],76:[function(require,module,exports){
 function SignalChunk(numberOfChannels, chunkSize) {
   this.numberOfChannels = numberOfChannels
   this.chunkSize = chunkSize
@@ -10071,7 +10071,7 @@ UnitOrPatch.prototype.scheduleFinish = function(t) {
   })
 }
 
-},{"./Event.js":70,"events":299}],79:[function(require,module,exports){
+},{"./Event.js":70,"events":300}],79:[function(require,module,exports){
 const Unit = require("../Unit.js")
 const config = require("../config.js")
 
@@ -12676,7 +12676,7 @@ localConfig.sampleInterval = 1/module.exports.sampleRate
 module.exports = localConfig
 
 }).call(this,require('_process'))
-},{"_process":306,"minimist":237}],146:[function(require,module,exports){
+},{"_process":307,"minimist":237}],146:[function(require,module,exports){
 function constructExpression(o, index, destinations) {
   if(o.constructor == String)
     o = parseExpression(o, index)
@@ -17600,7 +17600,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"audio-buffer":242,"buffer":297,"is-audio-buffer":232,"os":304,"to-array-buffer":251}],242:[function(require,module,exports){
+},{"audio-buffer":242,"buffer":298,"is-audio-buffer":232,"os":305,"to-array-buffer":251}],242:[function(require,module,exports){
 arguments[4][57][0].apply(exports,arguments)
 },{"audio-context":61,"buffer-to-arraybuffer":62,"dup":57,"is-audio-buffer":232,"is-browser":233,"is-buffer":234,"is-plain-obj":236}],243:[function(require,module,exports){
 'use strict';
@@ -78587,7 +78587,7 @@ WAAWritable.prototype.end = function () {
 	return this;
 };
 
-},{"./write":260,"inherits":231,"stream":321}],260:[function(require,module,exports){
+},{"./write":260,"inherits":231,"stream":322}],260:[function(require,module,exports){
 /**
  * @module  web-audio-stream/write
  *
@@ -78907,7 +78907,7 @@ d1.addPredicates(...Object.values(predicates))
 
 module.exports = d1
 
-},{"./adjectives":263,"./nouns":274,"./predicates":281,"english-io":229}],265:[function(require,module,exports){
+},{"./adjectives":263,"./nouns":274,"./predicates":282,"english-io":229}],265:[function(require,module,exports){
 const S = require('english-io').Sentence.S
 const {leadTo} = require('../predicates')
 
@@ -78924,7 +78924,7 @@ function connectLocations(entity1, entity2) {
 
 module.exports = connectLocations
 
-},{"../predicates":281,"english-io":229}],266:[function(require,module,exports){
+},{"../predicates":282,"english-io":229}],266:[function(require,module,exports){
 function* getAccessibleLocations(
   from, // entity.is_a('thing')
   accessible=['IN', 'ON'],
@@ -79107,7 +79107,7 @@ function getRouteSentences(A, B, subject) {
 }
 module.exports.sentences = getRouteSentences
 
-},{"../predicates/movement":283,"./getAccessibleLocations":266,"english-io":229}],269:[function(require,module,exports){
+},{"../predicates/movement":284,"./getAccessibleLocations":266,"english-io":229}],269:[function(require,module,exports){
 module.exports = [
   { noun:'animal',
     inherits: 'thing',
@@ -79202,19 +79202,10 @@ function getLocationFacts(entity, location, locationType) {
 }
 module.exports = getLocationFacts
 
-},{"../predicates/location":282,"english-io":229}],274:[function(require,module,exports){
+},{"../predicates/location":283,"english-io":229}],274:[function(require,module,exports){
 module.exports = [
   require('./thing'),
-
-  { noun: 'person',
-    inherits:'thing',
-    extend: e => e.allowLocatingType('hold', 'wear', 'consist')
-                  .allowLocationType('IN', 'ON')
-  },
-
-  { noun: 'human', alias:'person' },
-  { noun: 'woman', inherits:'person', extend: e => e.pronoun = 'her'},
-  { noun: 'man', inherits:'person', extend: e => e.pronoun = 'him'},
+  ...require('./people'),
   ...require('./rooms'),
   ...require('./items'),
   ...require('./plants'),
@@ -79224,15 +79215,7 @@ module.exports = [
   ...require('./animals'),
 ]
 
-/*let phrasalNouns = Object.keys(module.exports).filter(noun => / /.test(noun))
-Object.defineProperty(module.exports, 'phrasal', {
-  enumerable: false,
-  configurable: false,
-  writable: false,
-  value: phrasalNouns
-})*/
-
-},{"./animals":269,"./bodyparts":270,"./food":271,"./garments":272,"./items":275,"./plants":276,"./rooms":277,"./thing":278}],275:[function(require,module,exports){
+},{"./animals":269,"./bodyparts":270,"./food":271,"./garments":272,"./items":275,"./people":276,"./plants":277,"./rooms":278,"./thing":279}],275:[function(require,module,exports){
 module.exports = [
   { noun: 'item',
     inherits:'thing',
@@ -79274,12 +79257,25 @@ module.exports = [
 
 },{}],276:[function(require,module,exports){
 module.exports = [
+  { noun: 'person',
+    inherits:'thing',
+    extend: e => e.allowLocatingType('hold', 'wear', 'consist')
+                  .allowLocationType('IN', 'ON')
+  },
+
+  { noun: 'human', alias:'person' },
+  { noun: 'woman', inherits:'person', extend: e => e.pronoun = 'her'},
+  { noun: 'man', inherits:'person', extend: e => e.pronoun = 'him'},
+]
+
+},{}],277:[function(require,module,exports){
+module.exports = [
   {noun:'plant', inherits:'thing'},
   {noun:'tree', inherits:'plant'},
   {noun:'london plane', inherits:'tree'},
 ]
 
-},{}],277:[function(require,module,exports){
+},{}],278:[function(require,module,exports){
 module.exports = {
   room: room => {
     room
@@ -79316,7 +79312,7 @@ module.exports = [
   {noun:'street', inherits:'space'},
 ]
 
-},{}],278:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 const getLocationFacts = require('./getLocationFacts.js')
 const connectLocations = require('../logistics/connectLocations')
 
@@ -79456,7 +79452,7 @@ function allowLocatingType(...locationTypes) {
   return this
 }
 
-},{"../logistics/connectLocations":265,"./getLocationFacts.js":273}],279:[function(require,module,exports){
+},{"../logistics/connectLocations":265,"./getLocationFacts.js":273}],280:[function(require,module,exports){
 const {Predicate} = require('english-io')
 const S = require('english-io').Sentence.S
 const TimedPredicate = require('../TimedPredicate')
@@ -79513,7 +79509,7 @@ module.exports = {
   })
 }
 
-},{"../TimedPredicate":262,"./goTo":280,"./location":282,"english-io":229}],280:[function(require,module,exports){
+},{"../TimedPredicate":262,"./goTo":281,"./location":283,"english-io":229}],281:[function(require,module,exports){
 const getRoute = require('../logistics/getRoute')
 const {Predicate} = require('english-io')
 
@@ -79526,13 +79522,15 @@ let goTo = new Predicate({
   ),
   expand: (subject, to) => {
     let from = {location: subject.location, locationType:subject.locationType}
+    if(to.is_a('room'))
+      to = {location:to, locationType:'IN'}
     return getRoute.sentences(from, to, subject)
   }
 })
 
 module.exports = goTo
 
-},{"../logistics/getRoute":268,"english-io":229}],281:[function(require,module,exports){
+},{"../logistics/getRoute":268,"english-io":229}],282:[function(require,module,exports){
 const {Predicate} = require('english-io')
 const TimedPredicate = require('../TimedPredicate')
 
@@ -79603,7 +79601,7 @@ Object.assign(module.exports, require('./actions'))
 Object.assign(module.exports, require('./sound'))
 module.exports.goTo = require('./goTo')
 
-},{"../TimedPredicate":262,"./actions":279,"./goTo":280,"./location":282,"./movement":283,"./sound":284,"english-io":229}],282:[function(require,module,exports){
+},{"../TimedPredicate":262,"./actions":280,"./goTo":281,"./location":283,"./movement":284,"./sound":285,"english-io":229}],283:[function(require,module,exports){
 const {Predicate} = require('english-io')
 const LocationPredicate = require('../LocationPredicate.js')
 
@@ -79648,7 +79646,7 @@ module.exports = {
   }),
 }
 
-},{"../LocationPredicate.js":261,"english-io":229}],283:[function(require,module,exports){
+},{"../LocationPredicate.js":261,"english-io":229}],284:[function(require,module,exports){
 const {Predicate} = require('english-io')
 
 module.exports = {
@@ -79674,7 +79672,7 @@ module.exports = {
   }),
 }
 
-},{"english-io":229}],284:[function(require,module,exports){
+},{"english-io":229}],285:[function(require,module,exports){
 const SoundPredicate = require('../sound/SoundPredicate')
 const DuspLoop = require('../sound/DuspLoop')
 const DuspOnce = require('../sound/DuspOnce')
@@ -79704,7 +79702,7 @@ module.exports = {
   })
 }
 
-},{"../sound/DuspLoop":285,"../sound/DuspOnce":286,"../sound/SoundPredicate":291,"../sound/ambient/Buzzing":292,"../sound/ambient/Hissing":293}],285:[function(require,module,exports){
+},{"../sound/DuspLoop":286,"../sound/DuspOnce":287,"../sound/SoundPredicate":292,"../sound/ambient/Buzzing":293,"../sound/ambient/Hissing":294}],286:[function(require,module,exports){
 const Sound = require('./Sound')
 const {unDusp, renderAudioBuffer} = require('dusp')
 
@@ -79740,7 +79738,7 @@ class DuspLoop extends Sound {
 }
 module.exports = DuspLoop
 
-},{"./Sound":289,"dusp":157}],286:[function(require,module,exports){
+},{"./Sound":290,"dusp":157}],287:[function(require,module,exports){
 const Sound = require('./Sound')
 const {unDusp, renderAudioBuffer} = require('dusp')
 
@@ -79777,7 +79775,7 @@ class DuspOnce extends Sound {
 }
 module.exports = DuspOnce
 
-},{"./Sound":289,"dusp":157}],287:[function(require,module,exports){
+},{"./Sound":290,"dusp":157}],288:[function(require,module,exports){
 const SoundPlayer = require('./SoundPlayer')
 const {getSubcontainers} = require('../logistics/getContainer')
 
@@ -79919,7 +79917,7 @@ class LocationSoundPlayer extends SoundPlayer {
 }
 module.exports = LocationSoundPlayer
 
-},{"../logistics/getContainer":267,"./SoundPlayer":290}],288:[function(require,module,exports){
+},{"../logistics/getContainer":267,"./SoundPlayer":291}],289:[function(require,module,exports){
 const LocationSoundPlayer = require('./LocationSoundPlayer')
 
 /**
@@ -79984,7 +79982,7 @@ class MobileEar {
 }
 module.exports = MobileEar
 
-},{"./LocationSoundPlayer":287}],289:[function(require,module,exports){
+},{"./LocationSoundPlayer":288}],290:[function(require,module,exports){
 const EventEmitter = require('events')
 
 
@@ -80263,7 +80261,7 @@ class Sound extends EventEmitter {
 Sound.prototype.isSound = true
 module.exports = Sound
 
-},{"events":299}],290:[function(require,module,exports){
+},{"events":300}],291:[function(require,module,exports){
  // NOTE: a browser-only class
 if(!AudioContext)
   throw "SoundPlayer only works in a browser with Web Audio API"
@@ -80469,7 +80467,7 @@ SoundPlayer.prototype.isSoundPlayer = true
 SoundPlayer.ZEROLEVEL = ZEROLEVEL
 module.exports = SoundPlayer
 
-},{}],291:[function(require,module,exports){
+},{}],292:[function(require,module,exports){
 const {Predicate} = require('english-io')
 
 class SoundPredicate extends Predicate {
@@ -80498,7 +80496,7 @@ class SoundPredicate extends Predicate {
 }
 module.exports = SoundPredicate
 
-},{"english-io":229}],292:[function(require,module,exports){
+},{"english-io":229}],293:[function(require,module,exports){
 const {components, quick, renderAudioBuffer, } = require('dusp')
 const Sound = require('../Sound')
 
@@ -80524,7 +80522,7 @@ class Buzzing extends Sound {
 }
 module.exports = Buzzing
 
-},{"../Sound":289,"dusp":157}],293:[function(require,module,exports){
+},{"../Sound":290,"dusp":157}],294:[function(require,module,exports){
 const {components, quick, renderAudioBuffer} = require('dusp')
 const Sound = require('../Sound')
 
@@ -80551,7 +80549,7 @@ class Hissing extends Sound {
 }
 module.exports = Hissing
 
-},{"../Sound":289,"dusp":157}],294:[function(require,module,exports){
+},{"../Sound":290,"dusp":157}],295:[function(require,module,exports){
 const ExplorerGame = require('../../io/ExplorerGame')
 const {FactListener} = require('english-io')
 const LocationSoundPlayer = require('../../src/sound/LocationSoundPlayer')
@@ -80609,7 +80607,7 @@ window.onclick = function() {
   })*/
 }
 
-},{"../../io/ExplorerGame":49,"../../src":264,"../../src/sound/DuspLoop":285,"../../src/sound/LocationSoundPlayer":287,"../../src/sound/ambient/Buzzing":292,"english-io":229}],295:[function(require,module,exports){
+},{"../../io/ExplorerGame":49,"../../src":264,"../../src/sound/DuspLoop":286,"../../src/sound/LocationSoundPlayer":288,"../../src/sound/ambient/Buzzing":293,"english-io":229}],296:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -80725,9 +80723,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],296:[function(require,module,exports){
-
 },{}],297:[function(require,module,exports){
+
+},{}],298:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -82443,7 +82441,7 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":295,"ieee754":300}],298:[function(require,module,exports){
+},{"base64-js":296,"ieee754":301}],299:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -82554,7 +82552,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":302}],299:[function(require,module,exports){
+},{"../../is-buffer/index.js":303}],300:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -82858,7 +82856,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],300:[function(require,module,exports){
+},{}],301:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -82944,9 +82942,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],301:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 arguments[4][231][0].apply(exports,arguments)
-},{"dup":231}],302:[function(require,module,exports){
+},{"dup":231}],303:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -82969,14 +82967,14 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],303:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],304:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -83023,7 +83021,7 @@ exports.tmpdir = exports.tmpDir = function () {
 
 exports.EOL = '\n';
 
-},{}],305:[function(require,module,exports){
+},{}],306:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -83070,7 +83068,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 }).call(this,require('_process'))
-},{"_process":306}],306:[function(require,module,exports){
+},{"_process":307}],307:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -83256,10 +83254,10 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],307:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 module.exports = require('./lib/_stream_duplex.js');
 
-},{"./lib/_stream_duplex.js":308}],308:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":309}],309:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -83384,7 +83382,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":310,"./_stream_writable":312,"core-util-is":298,"inherits":301,"process-nextick-args":305}],309:[function(require,module,exports){
+},{"./_stream_readable":311,"./_stream_writable":313,"core-util-is":299,"inherits":302,"process-nextick-args":306}],310:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -83432,7 +83430,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":311,"core-util-is":298,"inherits":301}],310:[function(require,module,exports){
+},{"./_stream_transform":312,"core-util-is":299,"inherits":302}],311:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -84442,7 +84440,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":308,"./internal/streams/BufferList":313,"./internal/streams/destroy":314,"./internal/streams/stream":315,"_process":306,"core-util-is":298,"events":299,"inherits":301,"isarray":303,"process-nextick-args":305,"safe-buffer":320,"string_decoder/":322,"util":296}],311:[function(require,module,exports){
+},{"./_stream_duplex":309,"./internal/streams/BufferList":314,"./internal/streams/destroy":315,"./internal/streams/stream":316,"_process":307,"core-util-is":299,"events":300,"inherits":302,"isarray":304,"process-nextick-args":306,"safe-buffer":321,"string_decoder/":323,"util":297}],312:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -84657,7 +84655,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":308,"core-util-is":298,"inherits":301}],312:[function(require,module,exports){
+},{"./_stream_duplex":309,"core-util-is":299,"inherits":302}],313:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -85324,7 +85322,7 @@ Writable.prototype._destroy = function (err, cb) {
   cb(err);
 };
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":308,"./internal/streams/destroy":314,"./internal/streams/stream":315,"_process":306,"core-util-is":298,"inherits":301,"process-nextick-args":305,"safe-buffer":320,"util-deprecate":323}],313:[function(require,module,exports){
+},{"./_stream_duplex":309,"./internal/streams/destroy":315,"./internal/streams/stream":316,"_process":307,"core-util-is":299,"inherits":302,"process-nextick-args":306,"safe-buffer":321,"util-deprecate":324}],314:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -85399,7 +85397,7 @@ module.exports = function () {
 
   return BufferList;
 }();
-},{"safe-buffer":320}],314:[function(require,module,exports){
+},{"safe-buffer":321}],315:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -85472,13 +85470,13 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":305}],315:[function(require,module,exports){
+},{"process-nextick-args":306}],316:[function(require,module,exports){
 module.exports = require('events').EventEmitter;
 
-},{"events":299}],316:[function(require,module,exports){
+},{"events":300}],317:[function(require,module,exports){
 module.exports = require('./readable').PassThrough
 
-},{"./readable":317}],317:[function(require,module,exports){
+},{"./readable":318}],318:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -85487,13 +85485,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":308,"./lib/_stream_passthrough.js":309,"./lib/_stream_readable.js":310,"./lib/_stream_transform.js":311,"./lib/_stream_writable.js":312}],318:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":309,"./lib/_stream_passthrough.js":310,"./lib/_stream_readable.js":311,"./lib/_stream_transform.js":312,"./lib/_stream_writable.js":313}],319:[function(require,module,exports){
 module.exports = require('./readable').Transform
 
-},{"./readable":317}],319:[function(require,module,exports){
+},{"./readable":318}],320:[function(require,module,exports){
 module.exports = require('./lib/_stream_writable.js');
 
-},{"./lib/_stream_writable.js":312}],320:[function(require,module,exports){
+},{"./lib/_stream_writable.js":313}],321:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -85557,7 +85555,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":297}],321:[function(require,module,exports){
+},{"buffer":298}],322:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -85686,7 +85684,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":299,"inherits":301,"readable-stream/duplex.js":307,"readable-stream/passthrough.js":316,"readable-stream/readable.js":317,"readable-stream/transform.js":318,"readable-stream/writable.js":319}],322:[function(require,module,exports){
+},{"events":300,"inherits":302,"readable-stream/duplex.js":308,"readable-stream/passthrough.js":317,"readable-stream/readable.js":318,"readable-stream/transform.js":319,"readable-stream/writable.js":320}],323:[function(require,module,exports){
 'use strict';
 
 var Buffer = require('safe-buffer').Buffer;
@@ -85959,7 +85957,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":320}],323:[function(require,module,exports){
+},{"safe-buffer":321}],324:[function(require,module,exports){
 (function (global){
 
 /**
@@ -86030,4 +86028,4 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[294]);
+},{}]},{},[295]);
