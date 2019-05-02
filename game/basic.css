@@ -1,0 +1,36 @@
+/* The basic style sheet */
+
+div#terminal {
+  width:500px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom: 50%;
+
+  font-family:monospace;
+  font-size:125%;
+
+  cursor:default;
+}
+pre#output {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+  font-family:inherit;
+  font-size:inherit;
+}
+input#userInput {
+  width:450px;
+  border:none;
+  outline:none;
+
+  color:inherit;
+  background: none;
+  font-family:inherit;
+  font-size:inherit;
+  cursor:inherit;
+
+  caret-color: red;
+}

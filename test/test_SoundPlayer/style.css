@@ -1,0 +1,36 @@
+
+.entitygame {
+  position:fixed;
+  left:0px;
+  right:0px;
+  top:0px;
+  bottom:0px;
+  padding:50px;
+  padding-left: 100px;
+
+  background-color:black;
+  color:white;
+
+  overflow: auto;
+}
+
+.entitygame_ouput {
+
+  font-size:20px;
+
+}
+
+.entitygame_input {
+  display: block;
+  width:100%;
+  font-size:20px;
+  background:none;
+  color:#fcc;
+  border:none;
+
+  outline: none;
+}
+
+.entitygame_input:focus {
+  border-bottom:1px solid #fcc;
+}

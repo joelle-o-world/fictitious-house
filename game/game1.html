@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>imaginary-city</title>
+
+    <link rel="stylesheet" type="text/css" href="basic.css" />
+    <link rel="stylesheet" type="text/css" href="style1.css" />
+
+    <script src="bundle.js"></script>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
+
+  </head>
+  <body>
+    <div id="terminal">
+      <pre id="output">* * * CLICK TO BEGIN * * * </pre>
+      <div id="input">
+      >
+      <input
+        autofocus
+        onkeypress="if(event.keyCode == 13) {userInput(this.value); this.value = ''}" id="userInput"
+        onblur="this.focus()"
+        placeholder="please enter an instruction."
+      />
+      </div>
+      <span id='helpLabel'> &lt- Help.</span>
+      <div id='help'></div>
+    </div>
+  </body>
+</html>
