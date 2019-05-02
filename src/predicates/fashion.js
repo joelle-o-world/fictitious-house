@@ -5,6 +5,8 @@ const GoTo = require('./GoTo')
 const Don = new Predicate({
   forms: [
     {verb: 'don', params: ['subject', 'object']},
+    {verb: 'wear', params: ['subject', 'object']},
+    {verb: 'put on', params: ['subject', 'object']},
   ],
 
   prepare(person, garment) {

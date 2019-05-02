@@ -83,7 +83,7 @@ class ExplorerGame extends EventEmitter {
 
     // parse the string as an input
     let sentence = parseImperative.first(
-      str, this.protagonist, this.dictionary.predicates)
+      str, this.protagonist, this.dictionary.actionPredicates)
     if(sentence) {
       this.wanderingDescriber.log(sentence)
       sentence.on('problem', reason => {

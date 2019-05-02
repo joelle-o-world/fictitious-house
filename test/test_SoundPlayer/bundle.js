@@ -1580,6 +1580,7 @@ class Dictionary {
     this.nouns = {} //{String:Function, String:Function, ...}
     this.phrasalNouns = [] // [String, String, ...]
     this.predicates = new PredicateSet
+    this.actionPredicates = new PredicateSet
     this.entitySpawners = []
 
     if(adjectives)
@@ -1634,6 +1635,9 @@ class Dictionary {
   /* Add predicates to the dictionary */
   addPredicates(...predicates) {
     this.predicates.addPredicates(...predicates)
+    this.actionPredicates.addPredicates(
+      ...predicates.filter(P => P.actionable)
+    )
     return this
   }
 
@@ -2165,7 +2169,7 @@ module.exports = Entity
 
 const spawn = require('./spawn2')
 
-},{"./Sentence":22,"./entityStr":25,"./spawn2":30,"./util/regOps.js":43,"./util/specarr":45,"./util/spellcheck":46,"events":302,"randexp":4}],14:[function(require,module,exports){
+},{"./Sentence":22,"./entityStr":25,"./spawn2":30,"./util/regOps.js":43,"./util/specarr":45,"./util/spellcheck":46,"events":303,"randexp":4}],14:[function(require,module,exports){
 const Substitution = require('./util/Substitution')
 const getNounPhraselet = require('./util/getNounPhraselet')
 const regops = require('./util/regops')
@@ -2465,7 +2469,7 @@ module.exports = FactListener
 // PROBLEMS:
 // - Eliminating duplicates.
 
-},{"./Sentence":22,"events":302}],17:[function(require,module,exports){
+},{"./Sentence":22,"events":303}],17:[function(require,module,exports){
 /**
  * @class Noun
  * @constructor
@@ -2567,6 +2571,7 @@ const PredicateSyntax = require('./PredicateSyntax')
   @param {Function} [options.until]
   @param {Function} [options.afterwards]
   @param {Boolean}  [options.banal=false]
+  @param {Boolean}  [options.actionable=true] Can the predicate be used treated as an imperative instruction?
 */
 
 class Predicate {
@@ -2576,7 +2581,7 @@ class Predicate {
     forms=[],
     // semantic functions
     begin, expand, check, until, afterwards, prepare, skipIf, replace, problem, meanwhile,
-    banal=false,
+    banal=false, actionable=true,
   }) {
     // if verb and params are given, initialise with one form
     if(verb && params)
@@ -2692,6 +2697,14 @@ class Predicate {
      * @default false
      */
      this.banal = banal
+
+    /**
+     * If a predicate is marked actionable it can be parsed as an imperative
+     * instruction.
+     * @property {Boolean} actionable
+     * @default true
+     */
+     this.actionable = actionable
   }
 
   /**
@@ -3922,7 +3935,7 @@ class Sentence extends EventEmitter {
 Sentence.prototype.isSentence = true
 module.exports = Sentence
 
-},{"./SentenceQueue":23,"events":302}],23:[function(require,module,exports){
+},{"./SentenceQueue":23,"events":303}],23:[function(require,module,exports){
 // a list of sentence to be executed consequetively
 const {sub} = require('./util/Substitution')
 
@@ -4036,7 +4049,7 @@ class SentenceQueue extends EventEmitter {
 }
 module.exports = SentenceQueue
 
-},{"./util/Substitution":31,"events":302}],24:[function(require,module,exports){
+},{"./util/Substitution":31,"events":303}],24:[function(require,module,exports){
 /**
   * A class for generating descriptions by following relationships between
   * objects.
@@ -6151,7 +6164,7 @@ class ExplorerGame extends EventEmitter {
 
     // parse the string as an input
     let sentence = parseImperative.first(
-      str, this.protagonist, this.dictionary.predicates)
+      str, this.protagonist, this.dictionary.actionPredicates)
     if(sentence) {
       this.wanderingDescriber.log(sentence)
       sentence.on('problem', reason => {
@@ -6194,7 +6207,7 @@ class ExplorerGame extends EventEmitter {
 }
 module.exports = ExplorerGame
 
-},{"../src/sound/MobileEar":291,"./GameIO":50,"english-io":229,"events":302}],50:[function(require,module,exports){
+},{"../src/sound/MobileEar":292,"./GameIO":50,"english-io":229,"events":303}],50:[function(require,module,exports){
 /*
 
 HTML PROTOTYPE:
@@ -6344,7 +6357,7 @@ class GameIO extends EventEmitter {
 }
 module.exports = GameIO
 
-},{"./TTSQueue":51,"./TickyText":52,"events":302}],51:[function(require,module,exports){
+},{"./TTSQueue":51,"./TickyText":52,"events":303}],51:[function(require,module,exports){
 /**
   A class for scheduling text to speech in a queue using the Responsive Voice
   API.
@@ -7372,7 +7385,7 @@ AudioBufferList.prototype.join = function join (from, to) {
   return this
 }
 
-},{"audio-buffer":57,"audio-buffer-utils":58,"events":302,"inherits":231,"is-audio-buffer":232,"is-plain-obj":236,"negative-index":238,"object-assign":240}],57:[function(require,module,exports){
+},{"audio-buffer":57,"audio-buffer-utils":58,"events":303,"inherits":231,"is-audio-buffer":232,"is-plain-obj":236,"negative-index":238,"object-assign":240}],57:[function(require,module,exports){
 /**
  * AudioBuffer class
  *
@@ -8384,7 +8397,7 @@ module.exports = function getContext (options) {
 })(this);
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":300}],63:[function(require,module,exports){
+},{"buffer":301}],63:[function(require,module,exports){
 module.exports = clamp
 
 function clamp(value, min, max) {
@@ -9602,7 +9615,7 @@ Piglet.prototype.__defineGetter__("circuit", function() {
   return this.unit.circuit
 })
 
-},{"./SignalChunk.js":76,"./config.js":145,"events":302}],75:[function(require,module,exports){
+},{"./SignalChunk.js":76,"./config.js":145,"events":303}],75:[function(require,module,exports){
 const {Readable} = require("stream")
 const AudioBuffer = require('audio-buffer')
 
@@ -9686,7 +9699,7 @@ class RenderStream extends Readable {
 }
 module.exports = RenderStream
 
-},{"audio-buffer":60,"stream":324}],76:[function(require,module,exports){
+},{"audio-buffer":60,"stream":325}],76:[function(require,module,exports){
 function SignalChunk(numberOfChannels, chunkSize) {
   this.numberOfChannels = numberOfChannels
   this.chunkSize = chunkSize
@@ -10126,7 +10139,7 @@ UnitOrPatch.prototype.scheduleFinish = function(t) {
   })
 }
 
-},{"./Event.js":70,"events":302}],79:[function(require,module,exports){
+},{"./Event.js":70,"events":303}],79:[function(require,module,exports){
 const Unit = require("../Unit.js")
 const config = require("../config.js")
 
@@ -12731,7 +12744,7 @@ localConfig.sampleInterval = 1/module.exports.sampleRate
 module.exports = localConfig
 
 }).call(this,require('_process'))
-},{"_process":309,"minimist":237}],146:[function(require,module,exports){
+},{"_process":310,"minimist":237}],146:[function(require,module,exports){
 function constructExpression(o, index, destinations) {
   if(o.constructor == String)
     o = parseExpression(o, index)
@@ -17655,7 +17668,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"audio-buffer":242,"buffer":300,"is-audio-buffer":232,"os":307,"to-array-buffer":251}],242:[function(require,module,exports){
+},{"audio-buffer":242,"buffer":301,"is-audio-buffer":232,"os":308,"to-array-buffer":251}],242:[function(require,module,exports){
 arguments[4][57][0].apply(exports,arguments)
 },{"audio-context":61,"buffer-to-arraybuffer":62,"dup":57,"is-audio-buffer":232,"is-browser":233,"is-buffer":234,"is-plain-obj":236}],243:[function(require,module,exports){
 'use strict';
@@ -78642,7 +78655,7 @@ WAAWritable.prototype.end = function () {
 	return this;
 };
 
-},{"./write":260,"inherits":231,"stream":324}],260:[function(require,module,exports){
+},{"./write":260,"inherits":231,"stream":325}],260:[function(require,module,exports){
 /**
  * @module  web-audio-stream/write
  *
@@ -78904,6 +78917,7 @@ class LocationPredicate extends Predicate {
       begin: (A, B) => A.setLocation(B, locationType),
       check: (A, B) => A.location == B && A.locationType == locationType,
       until: (callback, A) => A.once('move', callback),
+      actionable: false,
     })
   }
 }
@@ -78962,7 +78976,7 @@ d1.addPredicates(...Object.values(predicates))
 
 module.exports = d1
 
-},{"./adjectives":263,"./nouns":274,"./predicates":284,"english-io":229}],265:[function(require,module,exports){
+},{"./adjectives":263,"./nouns":274,"./predicates":285,"english-io":229}],265:[function(require,module,exports){
 const S = require('english-io').Sentence.S
 const {leadTo} = require('../predicates')
 
@@ -78979,7 +78993,7 @@ function connectLocations(entity1, entity2) {
 
 module.exports = connectLocations
 
-},{"../predicates":284,"english-io":229}],266:[function(require,module,exports){
+},{"../predicates":285,"english-io":229}],266:[function(require,module,exports){
 function* getAccessibleLocations(
   from, // entity.is_a('thing')
   accessible=['IN', 'ON'],
@@ -79162,7 +79176,7 @@ function getRouteSentences(A, B, subject) {
 }
 module.exports.sentences = getRouteSentences
 
-},{"../predicates/movement":286,"./getAccessibleLocations":266,"english-io":229}],269:[function(require,module,exports){
+},{"../predicates/movement":287,"./getAccessibleLocations":266,"english-io":229}],269:[function(require,module,exports){
 module.exports = [
   { noun:'animal',
     inherits: 'thing',
@@ -79257,7 +79271,7 @@ function getLocationFacts(entity, location, locationType) {
 }
 module.exports = getLocationFacts
 
-},{"../predicates/location":285,"english-io":229}],274:[function(require,module,exports){
+},{"../predicates/location":286,"english-io":229}],274:[function(require,module,exports){
 module.exports = [
   require('./thing'),
   ...require('./people'),
@@ -79588,32 +79602,10 @@ module.exports = {
   })
 }
 
-},{"../TimedPredicate":262,"./goTo":283,"./location":285,"english-io":229}],282:[function(require,module,exports){
-const {Predicate, S} = require('english-io')
-const {Wear} = require('./location')
-const GoTo = require('./GoTo')
-
-const Don = new Predicate({
-  forms: [
-    {verb: 'don', params: ['subject', 'object']},
-  ],
-
-  prepare(person, garment) {
-    return S(GoTo, person, garment)
-  },
-  until: callback => callback(),
-  afterwards(person, garment) {
-    return S(Wear, garment, person)
-  }
-})
-
-module.exports.Don = Don
-
-},{"./GoTo":280,"./location":285,"english-io":229}],283:[function(require,module,exports){
-arguments[4][280][0].apply(exports,arguments)
-},{"../logistics/getRoute":268,"dup":280,"english-io":229}],284:[function(require,module,exports){
-const {Predicate} = require('english-io')
+},{"../TimedPredicate":262,"./goTo":284,"./location":286,"english-io":229}],282:[function(require,module,exports){
+const {Predicate, sub} = require('english-io')
 const TimedPredicate = require('../TimedPredicate')
+const adjectives = require('../adjectives')
 
 module.exports = {
   // LOCATION
@@ -79629,6 +79621,10 @@ module.exports = {
   be: new Predicate({
     verb: 'be',
     params: ['subject', '@object'],
+    problem(entity, adjective) {
+      if(!adjectives[adjective])
+        return sub('there is no such adjective as "_"', adjective)
+    },
     begin: (entity, adjective) => entity.be(adjective),
   }),
 
@@ -79676,14 +79672,42 @@ module.exports = {
   })
 }
 
+},{"../TimedPredicate":262,"../adjectives":263,"english-io":229}],283:[function(require,module,exports){
+const {Predicate, S} = require('english-io')
+const {Wear} = require('./location')
+const GoTo = require('./GoTo')
+
+const Don = new Predicate({
+  forms: [
+    {verb: 'don', params: ['subject', 'object']},
+    {verb: 'wear', params: ['subject', 'object']},
+    {verb: 'put on', params: ['subject', 'object']},
+  ],
+
+  prepare(person, garment) {
+    return S(GoTo, person, garment)
+  },
+  until: callback => callback(),
+  afterwards(person, garment) {
+    return S(Wear, garment, person)
+  }
+})
+
+module.exports.Don = Don
+
+},{"./GoTo":280,"./location":286,"english-io":229}],284:[function(require,module,exports){
+arguments[4][280][0].apply(exports,arguments)
+},{"../logistics/getRoute":268,"dup":280,"english-io":229}],285:[function(require,module,exports){
+Object.assign(module.exports, require('./core'))
 Object.assign(module.exports, require('./location'))
 Object.assign(module.exports, require('./movement'))
 Object.assign(module.exports, require('./actions'))
 Object.assign(module.exports, require('./sound'))
 Object.assign(module.exports, require('./fashion'))
+
 module.exports.goTo = require('./goTo')
 
-},{"../TimedPredicate":262,"./actions":281,"./fashion":282,"./goTo":283,"./location":285,"./movement":286,"./sound":287,"english-io":229}],285:[function(require,module,exports){
+},{"./actions":281,"./core":282,"./fashion":283,"./goTo":284,"./location":286,"./movement":287,"./sound":288}],286:[function(require,module,exports){
 const {Predicate} = require('english-io')
 const LocationPredicate = require('../LocationPredicate.js')
 
@@ -79735,7 +79759,7 @@ module.exports = {
   }),
 }
 
-},{"../LocationPredicate.js":261,"english-io":229}],286:[function(require,module,exports){
+},{"../LocationPredicate.js":261,"english-io":229}],287:[function(require,module,exports){
 const {Predicate} = require('english-io')
 const {S, sub} = require('english-io')
 //const getRoute = require('../logistics/getRoute')
@@ -79828,7 +79852,7 @@ Object.assign(module.exports, {
   BeStuck: BeStuck,
 })
 
-},{"../logistics/getAccessibleLocations":266,"english-io":229}],287:[function(require,module,exports){
+},{"../logistics/getAccessibleLocations":266,"english-io":229}],288:[function(require,module,exports){
 const SoundPredicate = require('../sound/SoundPredicate')
 const DuspLoop = require('../sound/DuspLoop')
 const DuspOnce = require('../sound/DuspOnce')
@@ -79858,7 +79882,7 @@ module.exports = {
   })
 }
 
-},{"../sound/DuspLoop":288,"../sound/DuspOnce":289,"../sound/SoundPredicate":294,"../sound/ambient/Buzzing":295,"../sound/ambient/Hissing":296}],288:[function(require,module,exports){
+},{"../sound/DuspLoop":289,"../sound/DuspOnce":290,"../sound/SoundPredicate":295,"../sound/ambient/Buzzing":296,"../sound/ambient/Hissing":297}],289:[function(require,module,exports){
 const Sound = require('./Sound')
 const {unDusp, renderAudioBuffer} = require('dusp')
 
@@ -79894,7 +79918,7 @@ class DuspLoop extends Sound {
 }
 module.exports = DuspLoop
 
-},{"./Sound":292,"dusp":157}],289:[function(require,module,exports){
+},{"./Sound":293,"dusp":157}],290:[function(require,module,exports){
 const Sound = require('./Sound')
 const {unDusp, renderAudioBuffer} = require('dusp')
 
@@ -79931,7 +79955,7 @@ class DuspOnce extends Sound {
 }
 module.exports = DuspOnce
 
-},{"./Sound":292,"dusp":157}],290:[function(require,module,exports){
+},{"./Sound":293,"dusp":157}],291:[function(require,module,exports){
 const SoundPlayer = require('./SoundPlayer')
 const {getSubcontainers} = require('../logistics/getContainer')
 
@@ -80073,7 +80097,7 @@ class LocationSoundPlayer extends SoundPlayer {
 }
 module.exports = LocationSoundPlayer
 
-},{"../logistics/getContainer":267,"./SoundPlayer":293}],291:[function(require,module,exports){
+},{"../logistics/getContainer":267,"./SoundPlayer":294}],292:[function(require,module,exports){
 const LocationSoundPlayer = require('./LocationSoundPlayer')
 
 /**
@@ -80138,7 +80162,7 @@ class MobileEar {
 }
 module.exports = MobileEar
 
-},{"./LocationSoundPlayer":290}],292:[function(require,module,exports){
+},{"./LocationSoundPlayer":291}],293:[function(require,module,exports){
 const EventEmitter = require('events')
 
 
@@ -80417,7 +80441,7 @@ class Sound extends EventEmitter {
 Sound.prototype.isSound = true
 module.exports = Sound
 
-},{"events":302}],293:[function(require,module,exports){
+},{"events":303}],294:[function(require,module,exports){
  // NOTE: a browser-only class
 if(!AudioContext)
   throw "SoundPlayer only works in a browser with Web Audio API"
@@ -80623,7 +80647,7 @@ SoundPlayer.prototype.isSoundPlayer = true
 SoundPlayer.ZEROLEVEL = ZEROLEVEL
 module.exports = SoundPlayer
 
-},{}],294:[function(require,module,exports){
+},{}],295:[function(require,module,exports){
 const {Predicate} = require('english-io')
 
 class SoundPredicate extends Predicate {
@@ -80652,7 +80676,7 @@ class SoundPredicate extends Predicate {
 }
 module.exports = SoundPredicate
 
-},{"english-io":229}],295:[function(require,module,exports){
+},{"english-io":229}],296:[function(require,module,exports){
 const {components, quick, renderAudioBuffer, } = require('dusp')
 const Sound = require('../Sound')
 
@@ -80678,7 +80702,7 @@ class Buzzing extends Sound {
 }
 module.exports = Buzzing
 
-},{"../Sound":292,"dusp":157}],296:[function(require,module,exports){
+},{"../Sound":293,"dusp":157}],297:[function(require,module,exports){
 const {components, quick, renderAudioBuffer} = require('dusp')
 const Sound = require('../Sound')
 
@@ -80705,7 +80729,7 @@ class Hissing extends Sound {
 }
 module.exports = Hissing
 
-},{"../Sound":292,"dusp":157}],297:[function(require,module,exports){
+},{"../Sound":293,"dusp":157}],298:[function(require,module,exports){
 const ExplorerGame = require('../../io/ExplorerGame')
 const {FactListener} = require('english-io')
 const LocationSoundPlayer = require('../../src/sound/LocationSoundPlayer')
@@ -80770,7 +80794,7 @@ window.onclick = function() {
   })*/
 }
 
-},{"../../io/ExplorerGame":49,"../../src":264,"../../src/sound/DuspLoop":288,"../../src/sound/LocationSoundPlayer":290,"../../src/sound/ambient/Buzzing":295,"english-io":229}],298:[function(require,module,exports){
+},{"../../io/ExplorerGame":49,"../../src":264,"../../src/sound/DuspLoop":289,"../../src/sound/LocationSoundPlayer":291,"../../src/sound/ambient/Buzzing":296,"english-io":229}],299:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -80886,9 +80910,9 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],299:[function(require,module,exports){
-
 },{}],300:[function(require,module,exports){
+
+},{}],301:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -82604,7 +82628,7 @@ function numberIsNaN (obj) {
   return obj !== obj // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":298,"ieee754":303}],301:[function(require,module,exports){
+},{"base64-js":299,"ieee754":304}],302:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -82715,7 +82739,7 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":305}],302:[function(require,module,exports){
+},{"../../is-buffer/index.js":306}],303:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -83019,7 +83043,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],303:[function(require,module,exports){
+},{}],304:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -83105,9 +83129,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],304:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 arguments[4][231][0].apply(exports,arguments)
-},{"dup":231}],305:[function(require,module,exports){
+},{"dup":231}],306:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -83130,14 +83154,14 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],306:[function(require,module,exports){
+},{}],307:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],307:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 exports.endianness = function () { return 'LE' };
 
 exports.hostname = function () {
@@ -83184,7 +83208,7 @@ exports.tmpdir = exports.tmpDir = function () {
 
 exports.EOL = '\n';
 
-},{}],308:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -83231,7 +83255,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 }).call(this,require('_process'))
-},{"_process":309}],309:[function(require,module,exports){
+},{"_process":310}],310:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -83417,10 +83441,10 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],310:[function(require,module,exports){
+},{}],311:[function(require,module,exports){
 module.exports = require('./lib/_stream_duplex.js');
 
-},{"./lib/_stream_duplex.js":311}],311:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":312}],312:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -83545,7 +83569,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":313,"./_stream_writable":315,"core-util-is":301,"inherits":304,"process-nextick-args":308}],312:[function(require,module,exports){
+},{"./_stream_readable":314,"./_stream_writable":316,"core-util-is":302,"inherits":305,"process-nextick-args":309}],313:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -83593,7 +83617,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":314,"core-util-is":301,"inherits":304}],313:[function(require,module,exports){
+},{"./_stream_transform":315,"core-util-is":302,"inherits":305}],314:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -84603,7 +84627,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":311,"./internal/streams/BufferList":316,"./internal/streams/destroy":317,"./internal/streams/stream":318,"_process":309,"core-util-is":301,"events":302,"inherits":304,"isarray":306,"process-nextick-args":308,"safe-buffer":323,"string_decoder/":325,"util":299}],314:[function(require,module,exports){
+},{"./_stream_duplex":312,"./internal/streams/BufferList":317,"./internal/streams/destroy":318,"./internal/streams/stream":319,"_process":310,"core-util-is":302,"events":303,"inherits":305,"isarray":307,"process-nextick-args":309,"safe-buffer":324,"string_decoder/":326,"util":300}],315:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -84818,7 +84842,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":311,"core-util-is":301,"inherits":304}],315:[function(require,module,exports){
+},{"./_stream_duplex":312,"core-util-is":302,"inherits":305}],316:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -85485,7 +85509,7 @@ Writable.prototype._destroy = function (err, cb) {
   cb(err);
 };
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./_stream_duplex":311,"./internal/streams/destroy":317,"./internal/streams/stream":318,"_process":309,"core-util-is":301,"inherits":304,"process-nextick-args":308,"safe-buffer":323,"util-deprecate":326}],316:[function(require,module,exports){
+},{"./_stream_duplex":312,"./internal/streams/destroy":318,"./internal/streams/stream":319,"_process":310,"core-util-is":302,"inherits":305,"process-nextick-args":309,"safe-buffer":324,"util-deprecate":327}],317:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -85560,7 +85584,7 @@ module.exports = function () {
 
   return BufferList;
 }();
-},{"safe-buffer":323}],317:[function(require,module,exports){
+},{"safe-buffer":324}],318:[function(require,module,exports){
 'use strict';
 
 /*<replacement>*/
@@ -85633,13 +85657,13 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":308}],318:[function(require,module,exports){
+},{"process-nextick-args":309}],319:[function(require,module,exports){
 module.exports = require('events').EventEmitter;
 
-},{"events":302}],319:[function(require,module,exports){
+},{"events":303}],320:[function(require,module,exports){
 module.exports = require('./readable').PassThrough
 
-},{"./readable":320}],320:[function(require,module,exports){
+},{"./readable":321}],321:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -85648,13 +85672,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":311,"./lib/_stream_passthrough.js":312,"./lib/_stream_readable.js":313,"./lib/_stream_transform.js":314,"./lib/_stream_writable.js":315}],321:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":312,"./lib/_stream_passthrough.js":313,"./lib/_stream_readable.js":314,"./lib/_stream_transform.js":315,"./lib/_stream_writable.js":316}],322:[function(require,module,exports){
 module.exports = require('./readable').Transform
 
-},{"./readable":320}],322:[function(require,module,exports){
+},{"./readable":321}],323:[function(require,module,exports){
 module.exports = require('./lib/_stream_writable.js');
 
-},{"./lib/_stream_writable.js":315}],323:[function(require,module,exports){
+},{"./lib/_stream_writable.js":316}],324:[function(require,module,exports){
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
 var Buffer = buffer.Buffer
@@ -85718,7 +85742,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":300}],324:[function(require,module,exports){
+},{"buffer":301}],325:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -85847,7 +85871,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":302,"inherits":304,"readable-stream/duplex.js":310,"readable-stream/passthrough.js":319,"readable-stream/readable.js":320,"readable-stream/transform.js":321,"readable-stream/writable.js":322}],325:[function(require,module,exports){
+},{"events":303,"inherits":305,"readable-stream/duplex.js":311,"readable-stream/passthrough.js":320,"readable-stream/readable.js":321,"readable-stream/transform.js":322,"readable-stream/writable.js":323}],326:[function(require,module,exports){
 'use strict';
 
 var Buffer = require('safe-buffer').Buffer;
@@ -86120,7 +86144,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":323}],326:[function(require,module,exports){
+},{"safe-buffer":324}],327:[function(require,module,exports){
 (function (global){
 
 /**
@@ -86191,4 +86215,4 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[297]);
+},{}]},{},[298]);

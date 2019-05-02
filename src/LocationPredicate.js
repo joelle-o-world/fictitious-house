@@ -26,6 +26,7 @@ class LocationPredicate extends Predicate {
       begin: (A, B) => A.setLocation(B, locationType),
       check: (A, B) => A.location == B && A.locationType == locationType,
       until: (callback, A) => A.once('move', callback),
+      actionable: false,
     })
   }
 }
