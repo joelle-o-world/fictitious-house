@@ -3580,8 +3580,12 @@ class Sentence extends EventEmitter {
         // set truth value to planned
         this.truthValue = 'planned'
 
+        // fail this sentence if the queue fails
+        queue.on('problem', reasons => this.fail(reasons))
+
         // start the queue
         queue.start()
+        console.log('starting preparation queue:', queue)
 
         // exit
         return this
@@ -3595,16 +3599,7 @@ class Sentence extends EventEmitter {
       if(this.predicate.problem) {
         let problems = this.predicate.problem(...this.args, this)
         if(problems) {
-          this.truthValue = 'failed'
-          this.failureReason = problems
-
-          /**
-           * Emitted when there is a predicate defined problem starting
-           * the sentence.
-           * @event problem
-           * @param failureReason
-           */
-          this.emit('problem', this.failureReason)
+          this.fail(problems)
           return this
         }
       }
@@ -3658,6 +3653,7 @@ class Sentence extends EventEmitter {
         if(expansion) {
           let queue = new SentenceQueue(...expansion)
           queue.once('stop', () => this.stop())
+          queue.on('problem', reasons => this.fail(reasons))
           queue.start()
         }
       }
@@ -3680,6 +3676,7 @@ class Sentence extends EventEmitter {
       return this
     }
   }
+
 
   /**
    * Stops the sentence.
@@ -3744,6 +3741,7 @@ class Sentence extends EventEmitter {
     this.emit('stop')
   }
 
+
   /**
    * Called when the sentence becomes past-tense
    * @method observePast
@@ -3769,6 +3767,25 @@ class Sentence extends EventEmitter {
         }
       }
     }
+  }
+
+  /**
+   * Fails the sentence.
+   * @method fail
+   * @param reasons
+   */
+  fail(reasons) {
+    console.log('sentence failed', this, '('+this.str()+')')
+    this.truthValue = 'failed'
+    this.failureReason = reasons
+
+    /**
+     * Emitted when there is a predicate defined problem starting
+     * the sentence.
+     * @event problem
+     * @param failureReason
+     */
+    this.emit('problem', reasons)
   }
 
   /**
@@ -3894,6 +3911,7 @@ module.exports = Sentence
 
 },{"./SentenceQueue":23,"events":300}],23:[function(require,module,exports){
 // a list of sentence to be executed consequetively
+const {sub} = require('./util/Substitution')
 
 const EventEmitter = require('events')
 
@@ -3957,7 +3975,7 @@ class SentenceQueue extends EventEmitter {
 
     if(sentence) {
       //sentence.once('stop', () => this.startNextSentence())
-      sentence.on('problem', reasons => this.emit('problem', reasons))
+      //sentence.on('problem', reasons => this.emit('problem', reasons))
       let result = sentence.start()
       switch(result.truthValue) {
         case 'skipped': // sentence was skipped
@@ -3972,11 +3990,20 @@ class SentenceQueue extends EventEmitter {
           result.once('stop', () => this.startNextSentence())
           break
 
+        case 'failed':
+          let reason = sub(
+            '_ because _',
+            result.str('negative_possible_present'),
+            result.failureReason,
+          )
+          this.fail(reason)
+          break;
+
         default:
           // send a warning if truth value can't be handled
           console.warn(
             'SentenceQueue found sentence',
-            result,
+            result, '('+result.str()+')',
             'with unexpected truth value:',
             result.truthValue,
           )
@@ -3989,10 +4016,15 @@ class SentenceQueue extends EventEmitter {
       this.emit('stop')
     }
   }
+
+  fail(reasons) {
+    console.log('queue failed:', this)
+    this.emit('problem', reasons)
+  }
 }
 module.exports = SentenceQueue
 
-},{"events":300}],24:[function(require,module,exports){
+},{"./util/Substitution":31,"events":300}],24:[function(require,module,exports){
 /**
   * A class for generating descriptions by following relationships between
   * objects.
@@ -6029,7 +6061,8 @@ const {
   WanderingDescriber,
   DescriptionContext,
   sentencify,
-  parseImperative
+  parseImperative,
+  sub,
 } = require('english-io')
 const MobileEar = require('../src/sound/MobileEar')
 
@@ -6109,6 +6142,13 @@ class ExplorerGame extends EventEmitter {
       str, this.protagonist, this.dictionary.predicates)
     if(sentence) {
       this.wanderingDescriber.log(sentence)
+      sentence.on('problem', reason => {
+        this.io.writeln(sentencify(sub(
+          '_ because _',
+          sentence.str('negative_possible_present'),
+          reason
+        ).str()))
+      })
       sentence.start()
     } else
       this.io.writeln('Not understood.')
@@ -79674,8 +79714,10 @@ const GoInto = new Predicate({
       return sub('_ is nowhere', subject)
 
     let accessibleLocations = [...getAccessibleLocations(subject.location)]
-    if(!accessibleLocations.includes(container))
-      return sub('_ is inaccessible', container)
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'IN' && location == container
+    ))
+      return sub('_ is too far away', container)
   },
   until: callback => callback(),
   afterwards: (entity, container) => entity.setLocation(container, 'IN'),
@@ -79687,12 +79729,17 @@ const GetOnto = new Predicate({
   verb: 'get',
   params: ['subject', 'onto'],
 
+  prepare(subject, onto) {
+
+  },
   problem(subject, surface) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
 
     let accessibleLocations = [...getAccessibleLocations(subject.location)]
-    if(!accessibleLocations.includes(surface))
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'ON' && location == surface
+    ))
       return sub('_ is inaccessible', surface)
   },
   until: callback => callback(),
@@ -79730,7 +79777,7 @@ const Exit = new Predicate({
 
 
 
-module.exports = {
+Object.assign(module.exports, {
   // enter an IN location
   goInto: GoInto,
 
@@ -79740,7 +79787,7 @@ module.exports = {
   Exit: Exit,
 
   BeStuck: BeStuck,
-}
+})
 
 },{"../logistics/getAccessibleLocations":266,"english-io":229}],285:[function(require,module,exports){
 const SoundPredicate = require('../sound/SoundPredicate')

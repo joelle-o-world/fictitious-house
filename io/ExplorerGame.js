@@ -5,7 +5,8 @@ const {
   WanderingDescriber,
   DescriptionContext,
   sentencify,
-  parseImperative
+  parseImperative,
+  sub,
 } = require('english-io')
 const MobileEar = require('../src/sound/MobileEar')
 
@@ -85,6 +86,13 @@ class ExplorerGame extends EventEmitter {
       str, this.protagonist, this.dictionary.predicates)
     if(sentence) {
       this.wanderingDescriber.log(sentence)
+      sentence.on('problem', reason => {
+        this.io.writeln(sentencify(sub(
+          '_ because _',
+          sentence.str('negative_possible_present'),
+          reason
+        ).str()))
+      })
       sentence.start()
     } else
       this.io.writeln('Not understood.')

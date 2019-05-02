@@ -15,7 +15,9 @@ const GoInto = new Predicate({
       return sub('_ is nowhere', subject)
 
     let accessibleLocations = [...getAccessibleLocations(subject.location)]
-    if(!accessibleLocations.includes(container))
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'IN' && location == container
+    ))
       return sub('_ is too far away', container)
   },
   until: callback => callback(),
@@ -28,12 +30,17 @@ const GetOnto = new Predicate({
   verb: 'get',
   params: ['subject', 'onto'],
 
+  prepare(subject, onto) {
+
+  },
   problem(subject, surface) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
 
     let accessibleLocations = [...getAccessibleLocations(subject.location)]
-    if(!accessibleLocations.includes(surface))
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'ON' && location == surface
+    ))
       return sub('_ is inaccessible', surface)
   },
   until: callback => callback(),
@@ -71,7 +78,7 @@ const Exit = new Predicate({
 
 
 
-module.exports = {
+Object.assign(module.exports, {
   // enter an IN location
   goInto: GoInto,
 
@@ -81,4 +88,4 @@ module.exports = {
   Exit: Exit,
 
   BeStuck: BeStuck,
-}
+})
