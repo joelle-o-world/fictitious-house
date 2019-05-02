@@ -32,9 +32,11 @@ module.exports = {
     locationType: 'consist'
   }),
 
-  wear: new LocationPredicate({
+  Wear: new LocationPredicate({
     verb: 'wear',
     locationType: 'wear',
+    location: 'subject',
+    thing:'object'
   }),
 
   // location related predicates

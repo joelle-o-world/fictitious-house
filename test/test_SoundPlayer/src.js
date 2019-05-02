@@ -21,6 +21,7 @@ let allEntitys = d1.quickDeclare(
   'the second landing leads to a bathroom',
 
   'there is a wardrobe in the second bedroom',
+  'there is a shirt in the wardrobe',
 )
 
 let protagonist = allEntitys[0]

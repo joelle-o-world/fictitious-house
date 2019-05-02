@@ -23,7 +23,7 @@ function getLocationFacts(entity, location, locationType) {
       return [S(predicates.beOn, entity, location)]
 
      case 'wear':
-      return [S(predicates.wear, entity, location)]
+      return [S(predicates.Wear, entity, location)]
 
     default:
       console.warn("Unknown locationType:", locationType)

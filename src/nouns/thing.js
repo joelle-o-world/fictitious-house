@@ -57,7 +57,7 @@ function setLocation(location, locationType) {
 
   // check for problems
   if(!locationType || !this.canBeIn(location, locationType)) {
-    console.warn(this, location)
+    console.warn(this.str(), this, location.str(), location)
     throw "incompatible locationType: "+locationType
   }
 

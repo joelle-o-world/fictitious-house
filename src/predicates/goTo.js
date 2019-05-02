@@ -13,7 +13,8 @@ let goTo = new Predicate({
     if(to.is_a('room') || to.is_a('space'))
       to = {location:to, locationType:'IN'}
     return getRoute.sentences(from, to, subject)
-  }
+  },
+  banal: true,
 })
 
 module.exports = goTo
