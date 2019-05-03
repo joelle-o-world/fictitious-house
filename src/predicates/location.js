@@ -41,8 +41,11 @@ module.exports = {
 
   // location related predicates
   leadTo: new Predicate({
-    verb: 'lead',
-    params: ['subject', 'to'],
+    forms: [
+      {verb: 'lead', params: ['subject', 'to']},
+      {verb: 'be accessible', params:['subject', 'from']},
+      {verb: 'be connected', params:['subject', 'to']},
+    ],
 
     begin: (A, B) => A.connectTo(B),
     check: (A, B) => A.adjacentLocations.includes(B),
