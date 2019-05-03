@@ -154,6 +154,7 @@ class GameIO extends EventEmitter {
   }
 
   print(...stuff) {
+    stuff = stuff.filter(thing => !thing.banal)
     this.printQueue.add(...stuff)
     this.printNext()
   }
@@ -167,7 +168,7 @@ class GameIO extends EventEmitter {
       let next = this.printQueue.next()
       if(next) {
         if(next.constructor == String)
-          this.writeSentence(next)
+          this.write(next)
         else if(next.isSubstitution)
           this.writeSentence(next.str(this.descriptionCtx))
         else if(next.isSentax || next.isSubjectContractedSentax)
@@ -3960,15 +3961,15 @@ class Sentax {
       else return null
     } else if(A.isSubjectContractedSentax) {
       if(A.subject == B.subject) {
-        for(let i in A.sentaxs) {
-          let C = A.sentaxs[i]
-          if(C.verb == B.verb && C.tense == B.tense) {
-            A.sentaxs[i] = Sentax.merge(C, B)
-            let out = new SubjectContractedSentax(...A.sentaxs)
-            out.sentaxs[i] = Sentax.merge(C, B)
-            return out
-          }
+        //for(let i in A.sentaxs) {
+        let C = A.sentaxs[A.sentaxs.length-1]
+        if(C.verb == B.verb && C.tense == B.tense) {
+          A.sentaxs[i] = Sentax.merge(C, B)
+          let out = new SubjectContractedSentax(...A.sentaxs)
+          out.sentaxs[i] = Sentax.merge(C, B)
+          return out
         }
+      //  }
 
         // otherwise)
         return new SubjectContractedSentax(...A.sentaxs, B)
@@ -4566,6 +4567,10 @@ class Sentence extends EventEmitter {
         this.stop()
     } else
       console.warn('tried to remove a cause which doesn\'t exist')
+  }
+
+  get banal() {
+    return this.predicate.banal
   }
 }
 Sentence.prototype.isSentence = true
@@ -79990,7 +79995,7 @@ module.exports = {
 }
 
 },{"../TimedPredicate":266,"../adjectives":267,"english-io":233}],287:[function(require,module,exports){
-const {Predicate, S} = require('english-io')
+const {Predicate, S, sub} = require('english-io')
 const {Wear} = require('./location')
 const GoTo = require('./GoTo')
 
@@ -80010,7 +80015,23 @@ const Don = new Predicate({
   }
 })
 
+const TakeOff = new Predicate({
+  forms: [
+    {verb: 'take off', params:['subject', 'object']},
+  ],
+
+  problem(person, garment) {
+    if(garment.location != person || garment.locationType != 'wear')
+      return sub('_ is not wearing _', person, garment)
+  },
+  until: callback => callback,
+  afterwards(person, garment) {
+    garment.setLocation(person, 'hold')
+  }
+})
+
 module.exports.Don = Don
+module.exports.TakeOff = TakeOff
 
 },{"./GoTo":284,"./location":290,"english-io":233}],288:[function(require,module,exports){
 arguments[4][284][0].apply(exports,arguments)
@@ -81073,6 +81094,7 @@ let allEntitys = d1.quickDeclare(
   'there is a shirt in the wardrobe',
 
   'the vestibule leads to a street',
+  'the street is called Cadiz Street.',
   'the street leads to the cemetary',
 )
 
