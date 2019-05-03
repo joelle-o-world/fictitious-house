@@ -10,6 +10,10 @@ const GoInto = new Predicate({
     {verb: 'enter', params: ['subject', 'object']},
   ],
 
+  skipIf(subject, container) {
+    if(subject.location == container && subject.locationType == 'IN')
+      return true
+  },
   problem(subject, container) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
@@ -30,8 +34,9 @@ const GetOnto = new Predicate({
   verb: 'get',
   params: ['subject', 'onto'],
 
-  prepare(subject, onto) {
-
+  skipIf(subject, surface) {
+    if(subject.location == surface && subject.locationType == 'ON')
+      return true
   },
   problem(subject, surface) {
     if(!subject.location)
@@ -76,6 +81,58 @@ const Exit = new Predicate({
   }
 })
 
+const PassThrough = new Predicate({
+  forms: [
+    {verb: 'pass', params:['subject', 'through']},
+    {verb: 'go', params:['subject', 'through']},
+    {verb: 'cross', params:['subject', 'object']},
+  ],
+  actionable: false,
+  problem(subject, container) {
+    if(!subject.location)
+      return sub('_ is nowhere', subject)
+
+    if(subject.location == container && subject.locationType == 'IN')
+      return null
+
+    let accessibleLocations = [...getAccessibleLocations(subject.location)]
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'IN' && location == container
+    ))
+      return sub('_ is too far away', container)
+  },
+  begin(person, container) {
+    person.setLocation(container, 'IN')
+  },
+  until: callback => callback(),
+})
+
+const GoAcross = new Predicate({
+  forms: [
+    {verb: 'go', params:['subject', 'across']},
+    {verb: 'pass', params:['subject', 'over']},
+    {verb: 'cross', params:['subject', 'object']}
+  ],
+  actionable: false,
+  problem(subject, container) {
+    if(!subject.location)
+      return sub('_ is nowhere', subject)
+
+    if(subject.location == container && subject.locationType == 'ON')
+      return null
+
+    let accessibleLocations = [...getAccessibleLocations(subject.location)]
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'IN' && location == container
+    ))
+      return sub('_ is too far away', container)
+  },
+  begin(person, container) {
+    person.setLocation(container, 'ON')
+  },
+  until: callback => callback(),
+})
+
 
 
 Object.assign(module.exports, {
@@ -88,4 +145,7 @@ Object.assign(module.exports, {
   Exit: Exit,
 
   BeStuck: BeStuck,
+
+  PassThrough: PassThrough,
+  GoAcross: GoAcross,
 })

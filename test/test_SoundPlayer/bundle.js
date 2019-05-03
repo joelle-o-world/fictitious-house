@@ -1535,12 +1535,12 @@ class ContractionQueue {
 
     let winner = null
     let winningDepth = -1
-    for(let form of this.queue[0].sentaxs()) {
+    for(let form of this.queue[0].sentaxs().sort(() => Math.random()*2-1)) {
       let A = form
       let i
       for(i=1; i<this.queue.length && this.queue[i].isSentence; i++) {
         let success = false
-        for(let B of this.queue[i].sentaxs()) {
+        for(let B of this.queue[i].sentaxs().sort(() => Math.random()*2-1)) {
           let C = Sentax.contractPair(A, B)
           if(C) {
             A = C
@@ -4815,11 +4815,13 @@ const specarr = require('./util/specarr')
 const entityPhraselet = require('./Entity_nounPhraseletStr')
 
 function entityStr(entity, ctx, options={}) {
-  // Convert a entity into a noun phrase string.
+  // Convert an Entity into a noun phrase string.
 
-  if(!ctx)
-    null//console.warn( "call to entityStr without a description context" )
-  else {
+  let properNoun = specarr.randomString(entity, entity.properNouns, ctx)
+  if(properNoun)
+    return properNoun
+
+  if(ctx) {
     let pronoun = ctx.getPronounFor(entity)
     if(pronoun) {
       ctx.log(entity, pronoun)
@@ -6809,7 +6811,10 @@ class ExplorerGame extends EventEmitter {
       let sentences = this.wanderingDescriber.nextFew(2)
       if(sentences)
         this.io.print(...sentences)
-    }, 6000)
+    }, 10000)
+    let sentences = this.wanderingDescriber.nextFew(2)
+    if(sentences)
+      this.io.print(...sentences)
 
     // feed changes in game world into the io output
     this.changeListener.on('fact', change => {
@@ -6844,7 +6849,7 @@ class ExplorerGame extends EventEmitter {
       })
       sentence.start()
     } else
-      this.io.println('Not understood.')
+      this.io.println("I'm sorry, I do not understand \""+str+"\"")
   }
 
   get protagonist() {
@@ -79438,7 +79443,7 @@ module.exports.getSubcontainers = getSubcontainers
 },{}],272:[function(require,module,exports){
 const getAccessibleLocations = require('./getAccessibleLocations')
 const S = require('english-io').Sentence.S
-const {goInto, getOnto} = require('../predicates/movement')
+const {goInto, getOnto, PassThrough, GoAcross} = require('../predicates/movement')
 
 function getRoute(A, B) { // A and B are location,loctionType pairs
   let visited = [B] // an improvement could be to index the visited var by locationType
@@ -79482,17 +79487,31 @@ function getRouteSentences(A, B, subject) {
     return null
 
   let instructions = []
-  for(let i=1; i<route.length; i++) {
+  for(let i=1; i<route.length-1; i++) {
 
     let {location, locationType} = route[i]
 
     if(locationType == 'IN') {
       instructions.push(S(goInto, subject, location))
+      instructions.push(S(PassThrough, subject, location))
 
     } else if(locationType == 'ON') {
       instructions.push(S(getOnto, subject, location))
+      instructions.push(S(GoAcross, subject, location))
     }
   }
+
+  let {location, locationType} = route[route.length-1]
+
+  if(locationType == 'IN') {
+    instructions.push(S(goInto, subject, location))
+
+  } else if(locationType == 'ON') {
+    instructions.push(S(getOnto, subject, location))
+  }
+
+  console.log(instructions.map(sent => sent.str()))
+
   return instructions
 }
 module.exports.sentences = getRouteSentences
@@ -80089,8 +80108,11 @@ module.exports = {
 
   // location related predicates
   leadTo: new Predicate({
-    verb: 'lead',
-    params: ['subject', 'to'],
+    forms: [
+      {verb: 'lead', params: ['subject', 'to']},
+      {verb: 'be accessible', params:['subject', 'from']},
+      {verb: 'be connected', params:['subject', 'to']},
+    ],
 
     begin: (A, B) => A.connectTo(B),
     check: (A, B) => A.adjacentLocations.includes(B),
@@ -80110,6 +80132,10 @@ const GoInto = new Predicate({
     {verb: 'enter', params: ['subject', 'object']},
   ],
 
+  skipIf(subject, container) {
+    if(subject.location == container && subject.locationType == 'IN')
+      return true
+  },
   problem(subject, container) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
@@ -80130,8 +80156,9 @@ const GetOnto = new Predicate({
   verb: 'get',
   params: ['subject', 'onto'],
 
-  prepare(subject, onto) {
-
+  skipIf(subject, surface) {
+    if(subject.location == surface && subject.locationType == 'ON')
+      return true
   },
   problem(subject, surface) {
     if(!subject.location)
@@ -80176,6 +80203,58 @@ const Exit = new Predicate({
   }
 })
 
+const PassThrough = new Predicate({
+  forms: [
+    {verb: 'pass', params:['subject', 'through']},
+    {verb: 'go', params:['subject', 'through']},
+    {verb: 'cross', params:['subject', 'object']},
+  ],
+  actionable: false,
+  problem(subject, container) {
+    if(!subject.location)
+      return sub('_ is nowhere', subject)
+
+    if(subject.location == container && subject.locationType == 'IN')
+      return null
+
+    let accessibleLocations = [...getAccessibleLocations(subject.location)]
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'IN' && location == container
+    ))
+      return sub('_ is too far away', container)
+  },
+  begin(person, container) {
+    person.setLocation(container, 'IN')
+  },
+  until: callback => callback(),
+})
+
+const GoAcross = new Predicate({
+  forms: [
+    {verb: 'go', params:['subject', 'across']},
+    {verb: 'pass', params:['subject', 'over']},
+    {verb: 'cross', params:['subject', 'object']}
+  ],
+  actionable: false,
+  problem(subject, container) {
+    if(!subject.location)
+      return sub('_ is nowhere', subject)
+
+    if(subject.location == container && subject.locationType == 'ON')
+      return null
+
+    let accessibleLocations = [...getAccessibleLocations(subject.location)]
+    if(!accessibleLocations.some(
+      ({location, locationType}) => locationType == 'IN' && location == container
+    ))
+      return sub('_ is too far away', container)
+  },
+  begin(person, container) {
+    person.setLocation(container, 'ON')
+  },
+  until: callback => callback(),
+})
+
 
 
 Object.assign(module.exports, {
@@ -80188,6 +80267,9 @@ Object.assign(module.exports, {
   Exit: Exit,
 
   BeStuck: BeStuck,
+
+  PassThrough: PassThrough,
+  GoAcross: GoAcross,
 })
 
 },{"../logistics/getAccessibleLocations":270,"english-io":233}],292:[function(require,module,exports){
@@ -81094,8 +81176,9 @@ let allEntitys = d1.quickDeclare(
   'there is a shirt in the wardrobe',
 
   'the vestibule leads to a street',
-  'the street is called Cadiz Street.',
-  'the street leads to the cemetary',
+  'the street is called Cadiz Street',
+  'Cadiz Street leads to another street that is called Date Street',
+  'Date Street leads to the cemetary',
 )
 
 let protagonist = allEntitys[0]

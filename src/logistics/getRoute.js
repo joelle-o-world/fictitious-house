@@ -1,6 +1,6 @@
 const getAccessibleLocations = require('./getAccessibleLocations')
 const S = require('english-io').Sentence.S
-const {goInto, getOnto} = require('../predicates/movement')
+const {goInto, getOnto, PassThrough, GoAcross} = require('../predicates/movement')
 
 function getRoute(A, B) { // A and B are location,loctionType pairs
   let visited = [B] // an improvement could be to index the visited var by locationType
@@ -44,17 +44,31 @@ function getRouteSentences(A, B, subject) {
     return null
 
   let instructions = []
-  for(let i=1; i<route.length; i++) {
+  for(let i=1; i<route.length-1; i++) {
 
     let {location, locationType} = route[i]
 
     if(locationType == 'IN') {
       instructions.push(S(goInto, subject, location))
+      instructions.push(S(PassThrough, subject, location))
 
     } else if(locationType == 'ON') {
       instructions.push(S(getOnto, subject, location))
+      instructions.push(S(GoAcross, subject, location))
     }
   }
+
+  let {location, locationType} = route[route.length-1]
+
+  if(locationType == 'IN') {
+    instructions.push(S(goInto, subject, location))
+
+  } else if(locationType == 'ON') {
+    instructions.push(S(getOnto, subject, location))
+  }
+
+  console.log(instructions.map(sent => sent.str()))
+
   return instructions
 }
 module.exports.sentences = getRouteSentences
