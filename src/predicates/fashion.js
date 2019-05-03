@@ -1,4 +1,4 @@
-const {Predicate, S} = require('english-io')
+const {Predicate, S, sub} = require('english-io')
 const {Wear} = require('./location')
 const GoTo = require('./GoTo')
 
@@ -18,4 +18,20 @@ const Don = new Predicate({
   }
 })
 
+const TakeOff = new Predicate({
+  forms: [
+    {verb: 'take off', params:['subject', 'object']},
+  ],
+
+  problem(person, garment) {
+    if(garment.location != person || garment.locationType != 'wear')
+      return sub('_ is not wearing _', person, garment)
+  },
+  until: callback => callback,
+  afterwards(person, garment) {
+    garment.setLocation(person, 'hold')
+  }
+})
+
 module.exports.Don = Don
+module.exports.TakeOff = TakeOff
