@@ -6,7 +6,7 @@ const DuspLoop = require('../../src/sound/DuspLoop')
 const d1 = require('../../src')
 
 let allEntitys = d1.quickDeclare(
-  'a person is in a vestibule',
+  'a man is in a vestibule',
 
   'the vestibule leads to a bedroom',
   'the vestibule leads to another bedroom',
