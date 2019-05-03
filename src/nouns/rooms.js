@@ -35,4 +35,5 @@ module.exports = [
 
   {noun:'garden', inherits:'space'},
   {noun:'street', inherits:'space'},
+  {noun:'cemetary', inherits:'space'},
 ]

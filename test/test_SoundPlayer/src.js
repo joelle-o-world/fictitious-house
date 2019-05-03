@@ -22,6 +22,9 @@ let allEntitys = d1.quickDeclare(
 
   'there is a wardrobe in the second bedroom',
   'there is a shirt in the wardrobe',
+
+  'the vestibule leads to a street',
+  'the street leads to the cemetary',
 )
 
 let protagonist = allEntitys[0]
@@ -36,7 +39,7 @@ window.onclick = function() {
     protagonist:protagonist,
     dictionary:d1,
     audioDestination: audioctx.destination,
-    useResponsiveVoice: false,
+    useResponsiveVoice: true,
     useTickyText: true,
   })
   document.body.appendChild(game1.io.div)

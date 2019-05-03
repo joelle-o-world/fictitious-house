@@ -1,5 +1,5 @@
 const EventEmitter = require('events')
-const GameIO = require('./GameIO')
+const {GameIO} = require('english-io').html
 const {
   FactListener,
   WanderingDescriber,
@@ -38,6 +38,7 @@ class ExplorerGame extends EventEmitter {
     this.wanderingDescriber = new WanderingDescriber(protagonist)
     this.changeListener = new FactListener
     this.ctx = new DescriptionContext
+    this.io.descriptionCtx = this.ctx
     this.mainTense = 'simple_present'
     this.dictionary = dictionary
 
@@ -57,14 +58,14 @@ class ExplorerGame extends EventEmitter {
 
     // every six seconds print a bit from the wandering describer
     setInterval(() => {
-      let sentence = this.wanderingDescriber.next()
-      if(sentence)
-        this.io.writeln(sentencify(sentence.str(this.mainTense, this.ctx, 0)))
+      let sentences = this.wanderingDescriber.nextFew(2)
+      if(sentences)
+        this.io.print(...sentences)
     }, 6000)
 
     // feed changes in game world into the io output
     this.changeListener.on('fact', change => {
-      this.io.writeln(sentencify(change.str(this.mainTense, this.ctx, 0)))
+      this.io.print(change)
       this.wanderingDescriber.log(change)
     })
 
@@ -87,7 +88,7 @@ class ExplorerGame extends EventEmitter {
     if(sentence) {
       this.wanderingDescriber.log(sentence)
       sentence.on('problem', reason => {
-        this.io.writeln(sentencify(sub(
+        this.io.println(sentencify(sub(
           '_ because _',
           sentence.str('negative_possible_present'),
           reason
@@ -95,7 +96,7 @@ class ExplorerGame extends EventEmitter {
       })
       sentence.start()
     } else
-      this.io.writeln('Not understood.')
+      this.io.println('Not understood.')
   }
 
   get protagonist() {
