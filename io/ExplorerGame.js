@@ -61,7 +61,10 @@ class ExplorerGame extends EventEmitter {
       let sentences = this.wanderingDescriber.nextFew(2)
       if(sentences)
         this.io.print(...sentences)
-    }, 6000)
+    }, 10000)
+    let sentences = this.wanderingDescriber.nextFew(2)
+    if(sentences)
+      this.io.print(...sentences)
 
     // feed changes in game world into the io output
     this.changeListener.on('fact', change => {
@@ -96,7 +99,7 @@ class ExplorerGame extends EventEmitter {
       })
       sentence.start()
     } else
-      this.io.println('Not understood.')
+      this.io.println("I'm sorry, I do not understand \""+str+"\"")
   }
 
   get protagonist() {
