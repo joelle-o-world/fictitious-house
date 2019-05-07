@@ -1,9 +1,9 @@
-const ExplorerGame = require('../../io/ExplorerGame')
+const ExplorerGame = require('../io/ExplorerGame')
 const {FactListener} = require('english-io')
-const LocationSoundPlayer = require('../../src/sound/LocationSoundPlayer')
-const Buzzing = require('../../src/sound/ambient/Buzzing')
-const DuspLoop = require('../../src/sound/DuspLoop')
-const d1 = require('../../src')
+const LocationSoundPlayer = require('../src/sound/LocationSoundPlayer')
+const Buzzing = require('../src/sound/ambient/Buzzing')
+const DuspLoop = require('../src/sound/DuspLoop')
+const d1 = require('../src')
 
 let allEntitys = d1.quickDeclare(
   'a man is in a vestibule',
