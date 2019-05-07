@@ -20,13 +20,15 @@ let allEntitys = d1.quickDeclare(
   'the staircase leads to another landing',
   'the second landing leads to a bathroom',
 
-  'there is a wardrobe in the second bedroom',
-  'there is a shirt in the wardrobe',
+  'there is a bicycle in the vestibule',
+  'there is another bicycle in the vestibule',
 
   'the vestibule leads to a street',
   'the street is called Cadiz Street',
   'Cadiz Street leads to another street that is called Date Street',
-  'Date Street leads to the cemetary',
+  'Date Street leads to the cemetery',
+  'another street is called Walworth Road',
+  'Cadiz Street leads to Walworth Road'
 )
 
 let protagonist = allEntitys[0]

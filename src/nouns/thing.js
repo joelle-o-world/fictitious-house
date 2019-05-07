@@ -45,6 +45,30 @@ function extend(o) {
     // allow universal consistence
     o.allowLocatingType('consist')
     o.allowLocationType('consist')
+
+    o.on('becomeNoun', noun => {
+      if(noun.consistsOf) {
+        let entities = this.dictionary.interpretSloppyList(
+          noun.consistsOf
+        )
+        for(let e of entities) {
+          if(!e.is_a('thing'))
+            throw '`consistsOf` properties must be "things"'
+          e.setLocation(o, 'consist')
+        }
+      }
+
+      if(noun.contains) {
+        let entities = this.dictionary.interpretSloppyList(
+          noun.contains
+        )
+        for(let e of entities) {
+          if(!e.is_a('thing'))
+            throw '`contains` properties must be "things"'
+          e.setLocation(o, 'IN')
+        }
+      }
+    })
 }
 module.exports = {noun:'thing', extend:extend}
 

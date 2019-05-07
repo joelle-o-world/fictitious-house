@@ -62,6 +62,7 @@ const Exit = new Predicate({
     {verb:'exit', params:['subject']},
     {verb:'go out'},
     {verb:'get out'},
+    {verb:'leave'},
   ],
   replace(subject) {
     if(

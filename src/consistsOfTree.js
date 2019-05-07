@@ -16,4 +16,6 @@ module.exports = {
 
   cupboard: ['some drawers'],
   drawer: ['a doorknob'],
+
+  bicycle: ['2 wheels', 'a bicycle frame'],
 }

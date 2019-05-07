@@ -12,6 +12,12 @@ module.exports = [
   {noun:'rizla', inherits:'item'},
   {noun:'computer', inherits:'item'},
   {noun:'salmon wrap', inherits:'item'},
+  {noun:'bicycle', inherits:'item'},
+  {noun:'handlebars', inherits:'item'},
+  {noun:'bicycle frame', inherits:'item'},
+  {noun:'wheel', inherits:'item'},
+  {noun:'oven', inherits:'item', extend: e => e.allowLocatingType('IN')},
+
 
 
   // CHAIRS

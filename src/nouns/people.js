@@ -2,7 +2,7 @@ module.exports = [
   { noun: 'person',
     inherits:'thing',
     extend: e => e.allowLocatingType('hold', 'wear', 'consist')
-                  .allowLocationType('IN', 'ON')
+                  .allowLocationType('IN', 'ON'),
   },
 
   { noun: 'human', alias:'person' },
