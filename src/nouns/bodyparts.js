@@ -8,7 +8,7 @@ let bodyPart = {
 let body_parts = [
   'body', 'arm', 'elbow', 'forearm', 'bicep', 'hand',
   'palm', 'knuckle', 'finger', 'thumb',
-  'sole', 'toe', 'nail', 'fingerprint',
+  'sole', 'toe', 'toenail', 'fingerprint', 'fingernail',
   'leg', 'thigh', 'knee', 'ankle', 'shin', 'foot',
   'head', 'eye', 'nose', 'ear', 'hair', 'mouth',
   'torso',

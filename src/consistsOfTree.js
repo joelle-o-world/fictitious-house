@@ -7,8 +7,8 @@ module.exports = {
   leg: ['a thigh', 'a knee', 'an ankle', 'the shin', 'a foot'],
   hand: ['a palm', 'a knuckle', '4 fingers', '1 thumb'],
   foot: ['the sole', '5 toes'],
-  toe: ['the nail'],
-  finger: ['the nail', 'the fingerprint'],
+  toe: ['the toenail'],
+  finger: ['the fingernail', 'the fingerprint'],
   head: ['2 eyes', 'a nose', '2 ears', 'the hairs'],
   eye: ['the eyelash', 'the eyebrow', 'the pupil'],
 
