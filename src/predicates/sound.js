@@ -3,6 +3,7 @@ const DuspLoop = require('../sound/DuspLoop')
 const DuspOnce = require('../sound/DuspOnce')
 const Buzzing = require('../sound/ambient/Buzzing')
 const Hissing = require('../sound/ambient/Hissing')
+const FolieSound = require('../sound/FolieSound')
 
 module.exports = {
   buzz: new SoundPredicate({
@@ -24,5 +25,13 @@ module.exports = {
       {verb: 'make a hissing sound'},
     ],
     sound: () => new Hissing
+  }),
+
+  drip: new SoundPredicate({
+    forms: [
+      {verb: 'drip'},
+      {verb: 'make a dripping sound'},
+    ],
+    sound: () => new FolieSound('drip')
   })
 }
