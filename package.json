@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/joelyjoel/fictitious-house#readme",
   "dependencies": {
+    "bluebird": "^3.5.4",
     "dusp": "^1.1.0",
     "english-io": "^1.3.0"
   }
