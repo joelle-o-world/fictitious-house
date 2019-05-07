@@ -3,7 +3,7 @@
 */
 
 const { lstatSync, readdirSync, writeFileSync } = require('fs')
-const { join, basename } = require('path')
+const { join, basename, relative } = require('path')
 const findFiles = require('./findFiles')
 
 const isDirectory = source => lstatSync(source).isDirectory()
@@ -16,6 +16,7 @@ const dirs = getDirectories('./folie')
 let index = {}
 for(let dir of dirs) {
   let files = findFiles(dir, ['.mp3', '.wav'])
+    .map(file => relative('./folie', file))
   index[basename(dir)] = files
 }
 
