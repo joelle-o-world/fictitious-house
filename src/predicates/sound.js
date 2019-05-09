@@ -33,5 +33,34 @@ module.exports = {
       {verb: 'make a dripping sound'},
     ],
     sound: () => new FolieSound('drip')
+  }),
+
+  Cough: new SoundPredicate({
+    forms: [
+      {verb: 'cough'}
+    ],
+    sound: () => new FolieSound('cough')
+  }),
+
+  Cough: new SoundPredicate({
+    forms: [
+      {verb: 'fart'},
+      {verb: 'make a farting sound'}
+    ],
+    sound: () => new FolieSound('fart')
+  }),
+
+  MakeAnEatingSound: new SoundPredicate({
+    forms: [
+      {verb: 'make an eating sound'}
+    ],
+    sound: () => new FolieSound('eat')
+  }),
+
+  MakeAShatteringSound: new SoundPredicate({
+    forms: [
+      {verb: 'make a shattering sound'},
+    ],
+    sound: () => new FolieSound('shatter')
   })
 }
