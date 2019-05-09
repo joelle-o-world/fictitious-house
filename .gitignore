@@ -1,3 +1,4 @@
 node_modules/
 folie/
 .DS_Store
+bin/bundle.js
