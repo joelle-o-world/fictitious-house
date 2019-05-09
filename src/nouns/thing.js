@@ -1,5 +1,7 @@
 const getLocationFacts = require('./getLocationFacts.js')
 const connectLocations = require('../logistics/connectLocations')
+const subEntities = require('../logistics/subEntities')
+const {search} = require('english-io')
 
 function extend(o) {
     // where is this object
@@ -23,6 +25,8 @@ function extend(o) {
     o.emitParentMove = emitParentMove
     o.emitChildEnter = emitChildEnter
     o.emitChildExit = emitChildExit
+
+    o.findWithin = findWithin
 
     o.nowPlayingSounds = []
 
@@ -159,4 +163,8 @@ function allowLocatingType(...locationTypes) {
     if(!this.possibleLocatingTypes.includes(locationType))
       this.possibleLocatingTypes.push(locationType)
   return this
+}
+function findWithin(str) {
+  let list = [...search(str, subEntities(this))]
+  return list.length ? list : null
 }
