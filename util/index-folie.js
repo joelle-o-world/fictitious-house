@@ -21,5 +21,5 @@ for(let dir of dirs) {
 }
 
 
-writeFileSync('./folie/index.json', JSON.stringify(index))
-console.log('done')
+writeFileSync('./folie/index.json', JSON.stringify(index, undefined, 2))
+console.log('Indexed /folie/ directory.')

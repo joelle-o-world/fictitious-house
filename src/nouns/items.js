@@ -17,27 +17,30 @@ module.exports = [
   {noun:'bicycle frame', inherits:'item'},
   {noun:'wheel', inherits:'item'},
   {noun:'oven', inherits:'item', extend: e => e.allowLocatingType('IN')},
-
+  {noun:'piece of furniture', inherits:'item'},
+  {noun:'shower', inherits:'piece of furniture'},
+  {noun:'toilet', inherits:'piece of furniture'},
+  {noun:'sink', inherits:'piece of furniture'},
 
 
   // CHAIRS
   { noun: 'chair',
-    inherits:'item',
+    inherits:'piece of furniture',
     extend: e => e.allowLocatingType('SEAT', 'ON'),
   },
   { noun: 'armchair', inherits:'chair'},
   { noun: 'sofa', inherits:'chair'},
 
   // TABLES
-  {noun:'table', inherits:'item', extend: e => e.allowLocatingType('ON')},
+  {noun:'table', inherits:'piece of furniture', extend: e => e.allowLocatingType('ON')},
   {noun:'desk', inherits:'table'},
   {noun:'nightstand', inherits:'table'},
 
   // BED
-  {noun: 'bed', inherits:'item', extend: e => e.allowLocatingType('ON', 'SIT')},
+  {noun: 'bed', inherits:'piece of furniture', extend: e => e.allowLocatingType('ON', 'SIT')},
 
   // CUPBOARD/BOX
-  {noun: 'cupboard', inherits:'item', extend: e=>e.allowLocatingType('IN')},
+  {noun: 'cupboard', inherits:'piece of furniture', extend: e=>e.allowLocatingType('IN')},
   {noun:'drawer', inherits:'thing', extend:e=>e.allowLocatingType('thing')},
   {noun:'wardrobe', inherits:'cupboard'},
   {noun:'box', inherits:'item', extend: e=>e.allowLocatingType('IN')},

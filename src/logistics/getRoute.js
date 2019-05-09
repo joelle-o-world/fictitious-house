@@ -44,6 +44,8 @@ function getRouteSentences(A, B, subject) {
     return null
 
   let instructions = []
+  if(route.length > 1)
+    instructions.push(S(PassThrough, subject, route[0].location))
   for(let i=1; i<route.length-1; i++) {
 
     let {location, locationType} = route[i]

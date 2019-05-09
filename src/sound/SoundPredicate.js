@@ -10,7 +10,7 @@ class SoundPredicate extends Predicate {
         let sound = options.sound(subject)
         if(sound) {
           sentence.sound = sound
-          sound.once('stop', () => sentence.stop())
+          sound.once('stop', () => sentence.stop()) // UNTIL!!
           sound.entitySource = subject
           sound.start()
         }

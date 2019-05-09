@@ -87,7 +87,6 @@ class LocationSoundPlayer extends SoundPlayer {
   }
 
   addSubPlayer(entity) {
-    console.log('addSubPlayer(', entity.str(), ')')
 
     if(!this.muffleDestination) {
       let gain = this.ctx.createGain()

@@ -1,7 +1,7 @@
 const Promise = require('bluebird')
 const {resolve} = require('path')
 
-const folieURL = '../../folie/'
+const folieURL = '../fictitious-house/folie/'
 
 const folieIndex = require('../../folie/index.json')
 const folieBuffers = {}
@@ -26,7 +26,6 @@ async function getFolie(type) {
     let promise = new Promise((fulfil, reject) => {
       // Decode asynchronously
       request.onload = function() {
-        console.log(request.response)
         context.decodeAudioData(request.response, function(buffer) {
           // got the buffer
           folieBuffers[audioPath] = buffer

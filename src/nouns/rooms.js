@@ -3,10 +3,13 @@ module.exports = {
     room
       .be_a('thing')
       .allowLocatingType('IN')
+    room.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
   },
   space: space => {
     space.be_a('thing')
-    .allowLocatingType('IN')
+      .allowLocatingType('IN')
+
+    space.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
   },
   kitchen: room => room.be_a('room'),
   bathroom: room => room.be_a('room'),

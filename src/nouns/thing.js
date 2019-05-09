@@ -11,6 +11,9 @@ function extend(o) {
     o.open = true
     o.adjacentLocations = []
 
+    // object properties
+    o.sizeInFootsteps = 5 + Math.random()* 5 // footsteps
+
     // what objects are here
     o.locating = []
     o.possibleLocatingTypes = []

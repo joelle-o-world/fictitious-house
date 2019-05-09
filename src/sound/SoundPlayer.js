@@ -82,7 +82,6 @@ class SoundPlayer {
     if(sound.soundPlayer == this)
       return ;
 
-    console.log(this.location.str(), '.play(', sound)
 
     sound.soundPlayer = this
 
@@ -150,7 +149,7 @@ class SoundPlayer {
     // find the channel of the sound
     console.log(this, '.stop(', sound, ')')
     sound.soundPlayer = null
-    
+
     let i
     if(sound.isSound)
       i = this.currentMix.findIndex(channel => channel.sound == sound)

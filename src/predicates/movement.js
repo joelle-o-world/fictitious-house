@@ -1,5 +1,6 @@
 const {Predicate} = require('english-io')
 const {S, sub} = require('english-io')
+const {WalkAcross, WalkThrough} = require('./walk')
 //const getRoute = require('../logistics/getRoute')
 const getAccessibleLocations = require('../logistics/getAccessibleLocations')
 
@@ -89,6 +90,12 @@ const PassThrough = new Predicate({
     {verb: 'cross', params:['subject', 'object']},
   ],
   actionable: false,
+
+  replace(subject, container) {
+    if(subject.findWithin('a foot'))
+      return S(WalkThrough, subject, container)
+  },
+
   problem(subject, container) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
@@ -115,6 +122,12 @@ const GoAcross = new Predicate({
     {verb: 'cross', params:['subject', 'object']}
   ],
   actionable: false,
+
+  replace(subject, container) {
+    if(subject.findWithin('a foot'))
+      return S(WalkAcross, subject, container)
+  },
+
   problem(subject, container) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
