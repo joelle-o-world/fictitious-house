@@ -2,8 +2,10 @@ const Sound = require('./Sound')
 const getFolie = require('./getFolie')
 
 class FolieSound extends Sound {
-  constructor(type) {
-    super()
+  constructor(type, looped=false) {
+    super({
+      behaviour: looped ? 'loop' : 'once'
+    })
     this.type = type
   }
 

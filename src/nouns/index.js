@@ -8,4 +8,5 @@ module.exports = [
   ...require('./garments'),
   ...require('./food'),
   ...require('./animals'),
+  ...require('./ambiences')
 ]

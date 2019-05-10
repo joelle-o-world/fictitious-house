@@ -26,7 +26,10 @@ module.exports = [
   {noun:'staircase', inherits:'room'},
   {noun:'landing', inherits:'room'},
 
-  {noun:'garden', inherits:'space'},
+  {
+    noun:'garden',
+    inherits:'space',
+  },
   {noun:'street', inherits:'space'},
   {noun:'cemetery', inherits:'space'},
 ]
