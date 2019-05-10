@@ -1,30 +1,20 @@
-module.exports = {
-  room: room => {
-    room
-      .be_a('thing')
-      .allowLocatingType('IN')
-    room.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
-  },
-  space: space => {
-    space.be_a('thing')
-      .allowLocatingType('IN')
-
-    space.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
-  },
-  kitchen: room => room.be_a('room'),
-  bathroom: room => room.be_a('room'),
-  living_room: room => room.be_a('room'),
-  bedroom: room => room.be_a('room'),
-  corridor: room => room.be_a('room'),
-  garden: room => room.be_a('space'),
-  hallway: room => room.be_a('room'),
-
-
-}
-
 module.exports = [
-  {noun:'room', inherits:'thing', extend: e=>e.allowLocatingType('IN')},
-  {noun:'space', inherits:'thing', extend: e=>e.allowLocatingType('IN')},
+  {
+    noun:'room',
+    inherits:'thing',
+    extend(e) {
+      e.allowLocatingType('IN')
+      e.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
+    },
+  },
+  {
+    noun:'space',
+    inherits:'thing',
+    extend(e) {
+      e.allowLocatingType('IN')
+      e.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
+    },
+  },
 
   {noun:'kitchen', inherits:'room'},
   {noun:'bathroom', inherits:'room'},

@@ -12,7 +12,7 @@ function extend(o) {
     o.adjacentLocations = []
 
     // object properties
-    o.sizeInFootsteps = 5 + Math.random()* 5 // footsteps
+    o.sizeInFootsteps = 1 + Math.random()* 3 // footsteps
 
     // what objects are here
     o.locating = []

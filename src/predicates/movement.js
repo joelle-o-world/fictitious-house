@@ -4,6 +4,7 @@ const {WalkAcross, WalkThrough} = require('./walk')
 //const getRoute = require('../logistics/getRoute')
 const getAccessibleLocations = require('../logistics/getAccessibleLocations')
 const dictionary = require('../index')
+const FolieSound = require('../sound/FolieSound')
 
 const GoInto = new Predicate({
   forms:[
@@ -26,8 +27,26 @@ const GoInto = new Predicate({
     ))
       return sub('_ is too far away', container)
   },
-  until: callback => callback(),
-  afterwards: (entity, container) => entity.setLocation(container, 'IN'),
+  until(callback, entity, container) {
+    // Play a door sound if appropriate
+    if(
+      // one must be a room
+      (entity.location.is_a('room') || container.is_a('room'))
+      // both must be rooms or spaces
+      &&(entity.location.is_a('room') || entity.location.is_a('space'))
+      &&(container.is_a('room') || container.is_a('space'))
+    ) {
+      let sound = new FolieSound('door')
+      sound.entitySource = entity
+      sound.once('stop', () => callback())
+      sound.start()
+    } else
+      callback()
+  },
+  afterwards(entity, container) {
+    // set new location
+    entity.setLocation(container, 'IN')
+  },
 })
 
 

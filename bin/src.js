@@ -6,11 +6,11 @@ const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 
 let allEntitys = d1.quickDeclare(
-  'a random person is in a hall',
+  'a random person is in a corridor',
 
-  'the hall leads to a bedroom',
-  'the hall leads to another bedroom',
-  'the hall leads to a staircase',
+  'the corridor leads to a bedroom',
+  'the corridor leads to another bedroom',
+  'the corridor leads to a staircase',
   'the second bedroom is a living room',
   'the second bedroom leads to a garden',
   'the staircase leads to a landing',
@@ -20,10 +20,10 @@ let allEntitys = d1.quickDeclare(
   'the staircase leads to another landing',
   'the second landing leads to a bathroom',
 
-  'there is a bicycle in the hall',
-  'there is another bicycle in the hall',
+  'there is a bicycle in the corridor',
+  'there is another bicycle in the corridor',
 
-  'the hall leads to a street',
+  'the corridor leads to a street',
   'the street is called Cadiz Street',
   'Cadiz Street leads to another street that is called Date Street',
   'Date Street leads to the cemetery',
