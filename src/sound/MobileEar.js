@@ -20,6 +20,7 @@ class MobileEar {
     this.protagonist = protagonist
 
     this.moveCallback = () => this.refreshSoundPlayer()
+    console.log('Ear', this)
   }
 
   get protagonist() {

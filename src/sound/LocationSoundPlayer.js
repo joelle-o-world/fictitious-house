@@ -45,6 +45,15 @@ class LocationSoundPlayer extends SoundPlayer {
           this.addSubPlayer(subcontainer)
       }
 
+      if(this.location.container && !this.location.container.soundPlayer)
+        this.addSubPlayer(this.location.container)
+
+      for(let neighbor of this.location.adjacentLocations)
+        if(neighbor.isContainer)
+          this.addSubPlayer(neighbor)
+        else if(neighbor.container)
+          this.addSubPlayer(neighbor.container)
+
       // set up recursive listening
       this.childEnterCallback = child => {
         // exit early if child is not in this container
@@ -90,18 +99,27 @@ class LocationSoundPlayer extends SoundPlayer {
     return list
   }
 
-  addSubPlayer(entity) {
-
-    if(!this.muffleDestination) {
+  get muffle() {
+    if(!this._muffle) {
+      let filter = this.ctx.createBiquadFilter()
+      filter.frequency.value = 500 + Math.random()*1000
+      filter.Q.value = 0
       let gain = this.ctx.createGain()
-      gain.gain.value = 0.3
+      gain.gain.value = 0.5
+
+      filter.connect(gain)
       gain.connect(this.destination)
-      this.muffleDestination = gain
+
+      this._muffle = filter
     }
 
+    return this._muffle
+  }
+
+  addSubPlayer(entity) {
     let subPlayer = new LocationSoundPlayer({
       location: entity,
-      audioDestination: this.muffleDestination, // for now.
+      audioDestination: this.muffle, // for now.
       upDepth: this.upDepth - 1,
       parentPlayer: this,
     })
@@ -116,6 +134,7 @@ class LocationSoundPlayer extends SoundPlayer {
   }
 
   decomission() {
+    console.log('decomission sound player for:', this.location.str())
     // stop all sounds
     this.stopAll()
 
@@ -130,8 +149,9 @@ class LocationSoundPlayer extends SoundPlayer {
     this.location = null
 
     // decomission all subPlayers
-    for(let player of this.subPlayers)
-      player.decomission()
+    console.log(this.subPlayers.map(player => player.location.str()))
+    while(this.subPlayers.length)
+      this.subPlayers[0].decomission()
 
     // remove self from parent player
     if(this.parentPlayer)

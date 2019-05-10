@@ -15,6 +15,7 @@ let body_parts = [
   'neck',
   'eyelash', 'eyebrow', 'pupil',
   'lip', 'tooth',
+  'wing', 'beak'
 ]
 
 module.exports = [

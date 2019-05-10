@@ -6,7 +6,7 @@ module.exports = {
     //verb: 'be', thing: 'subject', location:'in',
     forms: [
       {verb: 'be', params:['subject', 'in']},
-      {verb: 'be', params:['object', 'in'], constants:{subject:'there'}}
+    //  {verb: 'be', params:['object', 'in'], constants:{subject:'there'}}
     ],
     locationType:'IN'
   }),

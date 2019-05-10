@@ -70,5 +70,36 @@ module.exports = {
       {verb: 'make a shattering sound'},
     ],
     sound: () => new FolieSound('shatter')
+  }),
+
+  Honk: new SoundPredicate({
+    forms: [
+      {verb: 'honk'},
+      {verb: 'make the sound of a goose'},
+    ],
+    sound: () => new FolieSound('goose'),
+  }),
+
+  Woof: new SoundPredicate({
+    forms: [
+      {verb: 'woof'},
+      {verb: 'bark'},
+    ],
+    sound: () => new FolieSound('woof'),
+  }),
+
+  Meow: new SoundPredicate({
+    forms: [
+      {verb:'meow'},
+      {verb: 'mew'},
+    ],
+    sound: () => new FolieSound('meow')
+  }),
+
+  MakeTheSoundOfADog: new SoundPredicate({
+    forms: [
+      {verb:'make the sound of a dog'},
+    ],
+    sound: () => new FolieSound('dog')
   })
 }

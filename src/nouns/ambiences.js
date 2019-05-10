@@ -25,4 +25,22 @@ module.exports = [
       sound.start()
     }
   },
+
+  { noun: 'ambient street sound',
+    inherits: 'ambience',
+    extend(e) {
+      let sound = new FolieSound('quiet-street', true)
+      sound.entitySource = e
+      sound.start()
+    }
+  },
+
+  { noun: 'ambient noisy street sound',
+    inherits: 'ambience',
+    extend(e) {
+      let sound = new FolieSound('busy-street', true)
+      sound.entitySource = e
+      sound.start()
+    }
+  }
 ]

@@ -26,10 +26,11 @@ module.exports = [
   {noun:'staircase', inherits:'room'},
   {noun:'landing', inherits:'room'},
 
-  {
-    noun:'garden',
-    inherits:'space',
+  { noun:'garden', inherits:'space'},
+  { noun:'street', inherits:'space',
+    extend(e) {
+      e.sizeInFootsteps = Math.floor(Math.random()*16 + 8)
+    }
   },
-  {noun:'street', inherits:'space'},
-  {noun:'cemetery', inherits:'space'},
+  {noun:'cemetery', inherits:'garden'},
 ]
