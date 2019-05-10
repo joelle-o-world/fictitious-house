@@ -6,7 +6,7 @@ const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 
 let allEntitys = d1.quickDeclare(
-  'a man is in a hall',
+  'a random person is in a hall',
 
   'the hall leads to a bedroom',
   'the hall leads to another bedroom',
@@ -30,8 +30,8 @@ let allEntitys = d1.quickDeclare(
   'another street is called Walworth Road',
   'Cadiz Street leads to Walworth Road',
 
-  'Every 10 seconds, the man farts',
-  'Every 13 seconds, the man burps',
+  //'Every 10 seconds, the person farts',
+  //'Every 13 seconds, the person burps',
 )
 
 let protagonist = allEntitys[0]

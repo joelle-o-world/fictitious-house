@@ -3,6 +3,7 @@ const {S, sub} = require('english-io')
 const {WalkAcross, WalkThrough} = require('./walk')
 //const getRoute = require('../logistics/getRoute')
 const getAccessibleLocations = require('../logistics/getAccessibleLocations')
+const dictionary = require('../index')
 
 const GoInto = new Predicate({
   forms:[
@@ -73,10 +74,10 @@ const Exit = new Predicate({
       let options = subject.location.adjacentLocations
       if(options.length) {
         let room = options[Math.floor(Math.random()*options.length)]
-        return S(GoInto, subject, room)
+        return dictionary.S('GoTo', subject, room)
       }
     } else if(subject.locationType == 'IN' && subject.location.open && subject.location.container) {
-      return S(GoInto, subject, subject.location.container)
+      return dictionary.S('GoTo', subject, subject.location.container)
     }
 
     return S(BeStuck, subject)

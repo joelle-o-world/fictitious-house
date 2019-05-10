@@ -7,8 +7,8 @@ module.exports = {
 
   // OTHER
   beCalled: new Predicate({
-    verb:'be',
-    params:['subject', '@called'],
+    verb:'be called',
+    params:['subject', '@object'],
     begin: (A, name) => A.name = name,
     check: (A, name) => A.name == name,
   }),
@@ -24,8 +24,8 @@ module.exports = {
   }),
 
   beA: new Predicate({
-    verb: 'be',
-    params: ['subject', '@a'],
+    verb: 'be a',
+    params: ['subject', '@object'],
     begin: (entity, classname) => entity.be_a(classname),
     check: (entity, className) => entity.is_a(className),
     banal: true,
