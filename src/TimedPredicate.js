@@ -1,4 +1,5 @@
 const {Predicate} = require('english-io')
+const delay = require('./delay')
 
 /**
  * @class TimedPredicate
@@ -18,7 +19,3 @@ module.exports = TimedPredicate
 
 // delay with callback. in the future this function will allow for more nuanced
 // game time, different from real-world time
-
-function delay(seconds, callback) {
-  setTimeout(callback, seconds*1000)
-}

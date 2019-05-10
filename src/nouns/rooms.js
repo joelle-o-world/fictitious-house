@@ -32,7 +32,7 @@ module.exports = [
   {noun:'bedroom', inherits:'room'},
   {noun:'corridor', inherits:'room'},
   {noun:'hallway', inherits:'room'},
-  {noun:'vestibule', inherits:'room'},
+  {noun:'hall', inherits:'room'},
   {noun:'staircase', inherits:'room'},
   {noun:'landing', inherits:'room'},
 

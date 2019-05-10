@@ -21,6 +21,8 @@ class SoundPredicate extends Predicate {
       sentence.sound.stop()
     }
 
+    options.important = true
+
     super(options)
   }
 }

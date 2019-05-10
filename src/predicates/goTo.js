@@ -10,9 +10,33 @@ let goTo = new Predicate({
   ),
   expand: (subject, to) => {
     let from = {location: subject.location, locationType:subject.locationType}
-    if(to.is_a('room') || to.is_a('space'))
-      to = {location:to, locationType:'IN'}
+    if(to.possibleLocatingTypes.includes('IN'))
+      to = {location: to, locationType:'IN'}
+    else if(to.possibleLocatingTypes.includes('ON'))
+      to = {location: to, locationType:'IN'}
+    else if(to.locationType == 'ON')
+      to = {location:to.location, locationType:'ON'}
+    else if(to.container)
+      to = {location:to.container, locationType: 'IN'}
+    /*if(to.is_a('room') || to.is_a('space'))
+      to = {location:to, locationType:'IN'}*/
     return getRoute.sentences(from, to, subject)
+  },
+  problem(subject, to) {
+    let from = {location: subject.location, locationType:subject.locationType}
+    if(to.possibleLocatingTypes.includes('IN'))
+      to = {location: to, locationType:'IN'}
+    else if(to.possibleLocatingTypes.includes('ON'))
+      to = {location: to, locationType:'IN'}
+    else if(to.locationType == 'ON')
+      to = {location:to.location, locationType:'ON'}
+    else if(to.container)
+      to = {location:to.container, locationType: 'IN'}
+    /*if(to.is_a('room') || to.is_a('space'))
+      to = {location:to, locationType:'IN'}*/
+    let route = getRoute.sentences(from, to, subject)
+    if(!route)
+      return 'there is no way there'
   },
   banal: true,
 })

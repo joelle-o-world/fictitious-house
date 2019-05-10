@@ -68,6 +68,7 @@ class ExplorerGame extends EventEmitter {
 
     // feed changes in game world into the io output
     this.changeListener.on('fact', change => {
+      change.important = true
       this.io.print(change)
       this.wanderingDescriber.log(change)
     })

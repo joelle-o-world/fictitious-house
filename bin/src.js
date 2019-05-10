@@ -6,11 +6,11 @@ const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 
 let allEntitys = d1.quickDeclare(
-  'a man is in a vestibule',
+  'a man is in a hall',
 
-  'the vestibule leads to a bedroom',
-  'the vestibule leads to another bedroom',
-  'the vestibule leads to a staircase',
+  'the hall leads to a bedroom',
+  'the hall leads to another bedroom',
+  'the hall leads to a staircase',
   'the second bedroom is a living room',
   'the second bedroom leads to a garden',
   'the staircase leads to a landing',
@@ -20,15 +20,18 @@ let allEntitys = d1.quickDeclare(
   'the staircase leads to another landing',
   'the second landing leads to a bathroom',
 
-  'there is a bicycle in the vestibule',
-  'there is another bicycle in the vestibule',
+  'there is a bicycle in the hall',
+  'there is another bicycle in the hall',
 
-  'the vestibule leads to a street',
+  'the hall leads to a street',
   'the street is called Cadiz Street',
   'Cadiz Street leads to another street that is called Date Street',
   'Date Street leads to the cemetery',
   'another street is called Walworth Road',
-  'Cadiz Street leads to Walworth Road'
+  'Cadiz Street leads to Walworth Road',
+
+  'Every 10 seconds, the man farts',
+  'Every 13 seconds, the man burps',
 )
 
 let protagonist = allEntitys[0]
@@ -44,7 +47,7 @@ window.onclick = function() {
     dictionary:d1,
     audioDestination: audioctx.destination,
     useResponsiveVoice: true,
-    useTickyText: true,
+    useTickyText: false,
   })
   document.body.appendChild(game1.io.div)
 
