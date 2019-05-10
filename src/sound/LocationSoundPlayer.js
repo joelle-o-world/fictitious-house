@@ -14,18 +14,20 @@ const {getSubcontainers} = require('../logistics/getContainer')
  */
 
 class LocationSoundPlayer extends SoundPlayer {
-  constructor({location, audioDestination, upDepth=1}) {
+  constructor({location, audioDestination, upDepth=1, parentPlayer=null}) {
     super(audioDestination)
     if(location.soundPlayer)
       throw 'Entity already has a sound player: ' + location.str()
 
     this.location = location
     this.location.soundPlayer = this
+    this.parentPlayer = parentPlayer
 
 
-    // play already playing sounds of the location itself
-    for(let sound of this.location.nowPlayingSounds)
-      this.play(sound)
+    // if main player, play already playing sounds of the location itself
+    if(!this.parentPlayer)
+      for(let sound of this.location.nowPlayingSounds)
+        this.play(sound)
 
     // play already playing sounds of entitys in the location
     for(let {nowPlayingSounds} of this.location.locating) {
@@ -75,7 +77,9 @@ class LocationSoundPlayer extends SoundPlayer {
 
   getDomain() {
     // return a list of entitys which this player is responsibile for.
-    let list = [this.location, ...this.location.locating]
+    let list = [...this.location.locating]
+    if(!this.parentPlayer)
+      list.unshift(this.location)
     for(let i=1; i<list.length; i++) {
       let item = list[i]
       list.push(...item.locating.filter(
@@ -99,8 +103,8 @@ class LocationSoundPlayer extends SoundPlayer {
       location: entity,
       audioDestination: this.muffleDestination, // for now.
       upDepth: this.upDepth - 1,
+      parentPlayer: this,
     })
-    subPlayer.parentPlayer = this
     this.subPlayers.push(subPlayer)
   }
 

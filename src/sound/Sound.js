@@ -263,14 +263,24 @@ class Sound extends EventEmitter {
    * @readOnly
    */
   get isAudible() {
-    return this.entitySource &&
-      this.entitySource.container &&
-      this.entitySource.container.soundPlayer
+    if(this.findSoundPlayer())
+      return true
+    else
+      return false
   }
 
   findSoundPlayer() {
-    if(this.isAudible)
+    if(!this.entitySource)
+      return false
+
+    if(this.entitySource.container && this.entitySource.container.soundPlayer)
       return this.entitySource.container.soundPlayer
+
+    else if(
+      !this.entitySource.container
+      && this.entitySource.soundPlayer
+    )
+      return this.entitySource.soundPlayer
   }
 }
 Sound.prototype.isSound = true

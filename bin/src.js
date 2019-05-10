@@ -30,6 +30,7 @@ let allEntitys = d1.quickDeclare(
   'another street is called Walworth Road',
   'Cadiz Street leads to Walworth Road',
 
+
   //'Every 10 seconds, the person farts',
   //'Every 13 seconds, the person burps',
 )

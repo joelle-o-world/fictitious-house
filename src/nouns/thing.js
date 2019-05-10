@@ -96,6 +96,10 @@ function setLocation(location, locationType) {
   let oldLocation = this.location
   let oldLocationType = this.locationType
 
+  // exit early if hasn't really moved
+  if(oldLocation == location && oldLocationType == locationType)
+    return
+
   // remove self from old location
   if(this.location) {
     this.location.emit('exited', this, oldLocationType)

@@ -20,7 +20,7 @@ module.exports = {
   lookAt: new Predicate({
     verb: 'look',
     params: ['subject', 'at'],
-    prepare: (subject, object) => [S(goTo, subject, object)]
+    prepare: (subject, object) => S(goTo, subject, object)
   }),
 
   // Picking up and putting down:
