@@ -6,16 +6,7 @@ const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 
 let allEntitys = d1.quickDeclare(
-  'a person is in a room',
-  'a box is in the room',
-  'the room leads to a garden',
-  //'there is a box in the room',
-  'a goose is in the room',
-  'the box loves the goose',
-  'every 10 seconds the goose makes the sound of a goose',
-  'the room leads to a street',
-  'the street leads to a cemetery',
-  /*'a random person is in a corridor',
+  'a random person is in a corridor',
 
   'the corridor leads to a kitchen',
   'the corridor leads to a bedroom',
@@ -30,8 +21,8 @@ let allEntitys = d1.quickDeclare(
   'the staircase leads to another landing',
   'the second landing leads to a bathroom',
 
-  'there is a bicycle in the corridor',
-  'there is another bicycle in the corridor',
+  //'there is a bicycle in the corridor',
+  //'there is another bicycle in the corridor',
 
   'the corridor leads to a street',
   'the street is called Cadiz Street',
@@ -39,9 +30,10 @@ let allEntitys = d1.quickDeclare(
   'Date Street leads to the cemetery',
   'another street is called Walworth Road',
   'Cadiz Street leads to Walworth Road',
+  'the cemetery leads to a church',
 
-  'there is a goose in the kitchen',
-  'every 5 seconds the goose makes a farting sound',*/
+  'a goose is in the kitchen',
+  'every 5 seconds the goose makes a farting sound',
 
   //'Every 10 seconds, the person farts',
   //'Every 13 seconds, the person burps',
