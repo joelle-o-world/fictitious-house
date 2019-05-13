@@ -75,6 +75,9 @@ function extend(o) {
           e.setLocation(o, 'IN')
         }
       }
+
+      if(noun.reverb)
+        o.reverb = noun.reverb
     })
 }
 module.exports = {noun:'thing', extend:extend}

@@ -1,4 +1,5 @@
 node_modules/
 folie/
+impulse-response/
 .DS_Store
 bin/bundle.js

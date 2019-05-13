@@ -6,6 +6,7 @@ module.exports = [
       e.allowLocatingType('IN')
       e.sizeInFootsteps = Math.floor(Math.random()*10 + 4)
     },
+    reverb: 'small',
   },
   {
     noun:'space',

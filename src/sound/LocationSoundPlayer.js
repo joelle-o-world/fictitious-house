@@ -1,5 +1,6 @@
 const SoundPlayer = require('./SoundPlayer')
 const {getSubcontainers} = require('../logistics/getContainer')
+const getImpulseResponse = require('../sound/getImpulseResponse')
 
 /*
   There are problems with this class.
@@ -16,6 +17,7 @@ const {getSubcontainers} = require('../logistics/getContainer')
 class LocationSoundPlayer extends SoundPlayer {
   constructor({location, audioDestination, upDepth=1, parentPlayer=null}) {
     super(audioDestination)
+
     if(location.soundPlayer)
       throw 'Entity already has a sound player: ' + location.str()
 
@@ -23,6 +25,19 @@ class LocationSoundPlayer extends SoundPlayer {
     this.location.soundPlayer = this
     this.parentPlayer = parentPlayer
 
+    if(!this.parentPlayer && this.location.reverb) {
+      let convolver = this.ctx.createConvolver()
+      if(this.location.impulseResponse)
+        convolver.buffer = this.location.impulseResponse
+      else
+        getImpulseResponse(location.reverb).then(buffer => {
+          this.location.impulseResponse = buffer
+          convolver.buffer = buffer
+        })
+      convolver.connect(this.destination)
+      this.destination = convolver
+      console.log(convolver)
+    }
 
     // if main player, play already playing sounds of the location itself
     if(!this.parentPlayer)

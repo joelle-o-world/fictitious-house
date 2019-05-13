@@ -6,10 +6,12 @@ const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 
 let allEntitys = d1.quickDeclare(
-  'a box is in a room',
+  'a person is in a room',
+  'a box is in the room',
   'the room leads to a garden',
   //'there is a box in the room',
-  'a goose is in the box',
+  'a goose is in the room',
+  'the box loves the goose',
   'every 10 seconds the goose makes the sound of a goose',
   'the room leads to a street',
   'the street leads to a cemetery',

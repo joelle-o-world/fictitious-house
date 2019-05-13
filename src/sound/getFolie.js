@@ -9,7 +9,7 @@ let nBuffers = 0
 
 const context = new AudioContext
 
-async function getFolie(type) {
+function getFolie(type) {
   let choices = folieIndex[type]
   let audioPath = resolve(
     folieURL,
@@ -24,11 +24,10 @@ async function getFolie(type) {
     request.responseType = 'arraybuffer';
 
     let promise = new Promise((fulfil, reject) => {
-      // Decode asynchronously
       request.onload = function() {
+        // Decode asynchronously
         context.decodeAudioData(request.response, function(buffer) {
           // got the buffer
-          folieBuffers[audioPath] = buffer
           fulfil(buffer)
         }, reject);
       }
