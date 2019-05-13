@@ -4,6 +4,7 @@ const LocationSoundPlayer = require('../src/sound/LocationSoundPlayer')
 const Buzzing = require('../src/sound/ambient/Buzzing')
 const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
+const {randomSentence} = require('english-io')
 
 let allEntitys = d1.quickDeclare(
   'a random person is in a corridor',
@@ -56,7 +57,12 @@ window.onclick = function() {
   })
   document.body.appendChild(game1.io.div)
 
-
+  setInterval(() => {
+    let s = game1.randomSentence()
+    s.start()
+    s.important = true
+    game1.io.print(s)
+  }, 7000)
 
   /*let room = protagonist.container
   window.mySoundPlayer = new LocationSoundPlayer({

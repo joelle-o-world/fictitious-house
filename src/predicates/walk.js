@@ -1,6 +1,7 @@
-const {Predicate, S} = require('english-io')
+const {Predicate, S, sub} = require('english-io')
 const SoundPredicate = require('../sound/SoundPredicate')
 const FolieSound = require('../sound/FolieSound')
+const getAccessibleLocations = require('../logistics/getAccessibleLocations')
 
 const WalkThrough = new Predicate({
   forms: [
@@ -21,6 +22,11 @@ const WalkThrough = new Predicate({
     return sentences
   },
   problem(subject, container) {
+    if(!subject.is_a('thing'))
+      return sub('_ is not a physical entity', subject)
+    if(!container.is_a('thing'))
+      return sub('_ is not a physical entity', container)
+
     if(!subject.location)
       return sub('_ is nowhere', subject)
 

@@ -6,6 +6,7 @@ const {
   DescriptionContext,
   sentencify,
   parseImperative,
+  randomSentence,
   sub,
 } = require('english-io')
 const MobileEar = require('../src/sound/MobileEar')
@@ -127,6 +128,10 @@ class ExplorerGame extends EventEmitter {
 
     // emit the `changeProtagonist` event
     this.emit('changeProtagonist', this._protagonist)
+  }
+
+  randomSentence() {
+    return randomSentence(this.dictionary, this.protagonist)
   }
 }
 module.exports = ExplorerGame
