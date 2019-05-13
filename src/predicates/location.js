@@ -49,5 +49,6 @@ module.exports = {
 
     begin: (A, B) => A.connectTo(B),
     check: (A, B) => A.adjacentLocations.includes(B),
+    actionable: false,
   }),
 }

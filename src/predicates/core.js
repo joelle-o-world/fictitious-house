@@ -41,10 +41,6 @@ module.exports = {
     params: ['subject', 'object'],
   }),
 
-  jump: new TimedPredicate({
-    verb: 'jump', params:['subject'],
-    duration:5,
-  }),
 
   steal: new Predicate({
     verb:'steal',

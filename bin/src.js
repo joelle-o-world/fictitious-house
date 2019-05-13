@@ -56,29 +56,4 @@ window.onclick = function() {
     useTickyText: false,
   })
   document.body.appendChild(game1.io.div)
-
-  setInterval(() => {
-    let s = game1.randomSentence()
-    s.start()
-    s.important = true
-    game1.io.print(s)
-  }, 7000)
-
-  /*let room = protagonist.container
-  window.mySoundPlayer = new LocationSoundPlayer({
-    location: room,
-    audioDestination: audioctx.destination,
-  })
-
-
-  console.log(room.soundPlayer.getDomain().map(entity => entity.str()))*/
-
-  /*let sound = new DuspLoop('Z50', 1)
-  sound.entitySource = allEntitys[5]
-  console.log(sound.entitySource.str(), 'is buzzing')
-  sound.start()
-
-  sound.on('move', (oldLocation, newLocation) => {
-    console.log('movement', oldLocation.str(), 'to', newLocation.str())
-  })*/
 }

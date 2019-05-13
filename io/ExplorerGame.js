@@ -84,6 +84,15 @@ class ExplorerGame extends EventEmitter {
   }
 
   input(str) {
+    if(str == '') {
+      let action = this.randomAction()
+      this.io.monitor('Chosen random command: '+action.str('imperative') + '\n')
+      return this.input(action.str('imperative'))
+      /*this.io.monitor('> Random: '+action.str('imperative') + '\n')
+      action.start()
+      return*/
+    }
+
     // emit an input event
     this.emit('input', str)
 
@@ -132,6 +141,14 @@ class ExplorerGame extends EventEmitter {
 
   randomSentence() {
     return randomSentence(this.dictionary, this.protagonist)
+  }
+
+  randomAction() {
+    return randomSentence.imperative(
+      this.dictionary,
+      this.protagonist,
+      this.protagonist
+    )
   }
 }
 module.exports = ExplorerGame

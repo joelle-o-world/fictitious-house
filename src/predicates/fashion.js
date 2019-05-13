@@ -12,6 +12,16 @@ const Don = new Predicate({
   prepare(person, garment) {
     return S(GoTo, person, garment)
   },
+  problem(person, garment) {
+    if(!person.is_a('thing'))
+      return sub('_ is not a physical entity', person)
+    if(!garment.is_a('thing'))
+      return sub('_ is not a physical entity', garment)
+    if(!person.possibleLocatingTypes.includes('wear'))
+      return sub('_ has no way of wearing things', person)
+    if(!person.possibleLocationTypes.includes('wear'))
+      return sub('_ is not a garment', person)
+  },
   until: callback => callback(),
   afterwards(person, garment) {
     return S(Wear, garment, person)

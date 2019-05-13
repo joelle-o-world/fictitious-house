@@ -101,5 +101,12 @@ module.exports = {
       {verb:'make the sound of a dog'},
     ],
     sound: () => new FolieSound('dog')
-  })
+  }),
+
+  Jump: new SoundPredicate({
+    forms: [
+      {verb:'jump', params:['subject']}
+    ],
+    sound: () => new FolieSound('jump'),
+  }),
 }

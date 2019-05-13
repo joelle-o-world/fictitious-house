@@ -133,6 +133,7 @@ const PassThrough = new Predicate({
     person.setLocation(container, 'IN')
   },
   until: callback => callback(),
+  actionable: false,
 })
 
 const GoAcross = new Predicate({
@@ -165,6 +166,7 @@ const GoAcross = new Predicate({
     person.setLocation(container, 'ON')
   },
   until: callback => callback(),
+  actionable: false,
 })
 
 

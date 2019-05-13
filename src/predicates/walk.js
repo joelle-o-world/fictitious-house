@@ -43,6 +43,7 @@ const WalkThrough = new Predicate({
     person.setLocation(container, 'IN')
   },
   //until: callback => callback(),
+  actionable: false,
 })
 
 const WalkAcross = new Predicate({
@@ -82,6 +83,7 @@ const WalkAcross = new Predicate({
     person.setLocation(container, 'ON')
   },
   //until: callback => callback(),
+  actionable: false,
 })
 
 const Step = new SoundPredicate({
