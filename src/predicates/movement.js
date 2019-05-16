@@ -76,6 +76,7 @@ const GetOnto = new Predicate({
 const BeStuck = new Predicate({
   forms:[{verb:'be stuck'}],
   until: callback => callback(),
+  actionable: false,
 })
 
 const Exit = new Predicate({

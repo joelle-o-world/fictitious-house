@@ -84,6 +84,7 @@ module.exports = {
     forms: [
       {verb: 'woof'},
       {verb: 'bark'},
+      {verb: 'bark like a dog'},
     ],
     sound: () => new FolieSound('woof'),
   }),

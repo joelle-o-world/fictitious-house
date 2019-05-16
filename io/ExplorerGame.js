@@ -60,9 +60,16 @@ class ExplorerGame extends EventEmitter {
 
     // every six seconds print a bit from the wandering describer
     setInterval(() => {
-      let sentences = this.wanderingDescriber.nextFew(2)
-      if(sentences)
-        this.io.print(...sentences)
+      if(Math.random() < 0.5) {
+        let sentences = this.wanderingDescriber.nextFew(2)
+        if(sentences)
+          this.io.print(...sentences)
+      } else {
+        let sentence = this.randomAction()
+        this.io.print(
+          'Perhaps '+ sentence.str('possible_present', this.ctx) + '. '
+        )
+      }
     }, 10000)
     let sentences = this.wanderingDescriber.nextFew(2)
     if(sentences)
