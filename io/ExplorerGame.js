@@ -38,6 +38,7 @@ class ExplorerGame extends EventEmitter {
       useResponsiveVoice: useResponsiveVoice,
     })
     this.wanderingDescriber = new WanderingDescriber(protagonist)
+    this.wanderingDescriber.includeHistory = true
     this.changeListener = new FactListener
     this.ctx = new DescriptionContext
     this.io.descriptionCtx = this.ctx
@@ -59,15 +60,17 @@ class ExplorerGame extends EventEmitter {
     }
 
     // every six seconds print a bit from the wandering describer
+    this.lastSuggestion = null
     setInterval(() => {
-      if(Math.random() < 0.5) {
+      if(Math.random() < 0.75) {
         let sentences = this.wanderingDescriber.nextFew(2)
         if(sentences)
           this.io.print(...sentences)
       } else {
         let sentence = this.randomAction()
+        this.lastSuggestion = sentence.str('imperative', this.ctx.duplicate())
         this.io.print(
-          'Perhaps '+ sentence.str('possible_present', this.ctx) + '. '
+          sentencify('perhaps '+ sentence.str('possible_present', this.ctx))
         )
       }
     }, 10000)
@@ -93,9 +96,10 @@ class ExplorerGame extends EventEmitter {
 
   input(str) {
     if(str == '') {
-      let action = this.randomAction()
-      this.io.monitor('Chosen random command: '+action.str('imperative') + '\n')
-      return this.input(action.str('imperative'))
+      let action = this.lastSuggestion || this.randomAction().str('imperative')
+      this.lastSuggestion = null
+      this.io.monitor('Chosen random command: '+action + '\n')
+      return this.input(action)
     }
 
     // emit an input event

@@ -4,10 +4,12 @@ const {Predicate, sub} = require('english-io')
 let goTo = new Predicate({
   verb:'go', params:['subject', 'to'],
 
-  skipIf: (subject, to) => (
-    subject.location == to.location &&
-    subject.locationType == to.locationType
-  ),
+  skipIf: (subject, to) => {
+    if(subject.location == to.location&&subject.locationType == to.locationType)
+      return true
+    else if(to.isWithin(subject))
+      return true
+  },
   expand: (subject, to) => {
     let from = {location: subject.location, locationType:subject.locationType}
     if(to.possibleLocatingTypes.includes('IN'))

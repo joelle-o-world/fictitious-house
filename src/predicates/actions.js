@@ -38,6 +38,10 @@ module.exports = {
       S(pickUp, actor, object),
       S(goTo, actor, container),
     ],
+    problem(actor, object, container) {
+      if(!container.possibleLocatingTypes.includes('IN'))
+        return sub('_ is not a container', surface)
+    },
     afterwards: (actor, object, container) => S(beIn, object, container)
   }),
 
@@ -51,12 +55,19 @@ module.exports = {
       S(pickUp, actor, object),
       S(goTo, actor, surface),
     ],
+    problem(actor, object, surface) {
+      if(!surface.possibleLocatingTypes.includes('ON'))
+        return sub('_ is not a level surface', surface)
+    },
     afterwards: (actor, object, surface) => S(beOn, object, surface)
   }),
 
   steal: new Predicate({
     verb:'steal',
     params: ['subject', 'object'],
+    prepare(thief, booty) {
+      return this.dictionary.S('GoTo', thief, booty)
+    },
     expand(thief, booty) {
       return [
         this.dictionary.S('PickUp', thief, booty),

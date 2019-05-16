@@ -37,8 +37,10 @@ module.exports = {
   }),
 
   love: new Predicate({
-    verb: 'love',
-    params: ['subject', 'object'],
+    forms: [
+      {verb: 'love', params: ['subject', 'object']},
+      {verb: 'be in love with', params: ['subject', 'object']}
+    ],
   }),
 
   thereIs: new Predicate({
@@ -57,7 +59,7 @@ module.exports = {
     prepare(giver, object, reciever) {
       return [
         this.dictionary.S('PickUp', giver, object),
-        this.dictionary.S('GoTo', giver, reciever)
+        this.dictionary.S('GoTo', giver, reciever),
       ]
     },
     problem(giver, object, reciever) {
