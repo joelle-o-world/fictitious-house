@@ -89,9 +89,6 @@ class ExplorerGame extends EventEmitter {
       let action = this.randomAction()
       this.io.monitor('Chosen random command: '+action.str('imperative') + '\n')
       return this.input(action.str('imperative'))
-      /*this.io.monitor('> Random: '+action.str('imperative') + '\n')
-      action.start()
-      return*/
     }
 
     // emit an input event
@@ -101,9 +98,9 @@ class ExplorerGame extends EventEmitter {
     let parsed = parse.imperative(this.protagonist, str, this.dictionary, this.ctx)
     if(parsed) {
       if(parsed.isParsedSentence) {
-        let sentence = parsed.start()
+        let sentence = parsed.start(this.protagonist)
 
-        if(sentence.truthValue == 'true') {
+        if(sentence.truthValue == 'true' || sentence.truthValue == 'replaced') {
           this.wanderingDescriber.log(sentence)
         } else if(sentence.truthValue == 'failed') {
           this.io.println(sentencify(sub(
@@ -115,10 +112,14 @@ class ExplorerGame extends EventEmitter {
           console.warn('Unhandled user instruction:', str, sentence)
         }
       } else if(parsed.isParsedSpecialSentence) {
-        console.log(parsed.start())
+        parsed.start(this.protagonist)
       } else {
         console.warn('Unregognised parse object,', parsed, ', for \"'+str+'\"')
       }
+    } else if(parsed == parse.sentence(str, this.dictionary, this.ctx)) {
+      parsed.start()
+      if(parsed && parsed.isSentence)
+        this.wanderingDescriber.log(sentence)
     } else
       this.io.println("I'm sorry, I do not understand \""+str+"\"")
   }
