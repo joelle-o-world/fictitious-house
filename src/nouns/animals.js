@@ -5,6 +5,11 @@ module.exports = [
   },
   { noun: 'octopus', inherits:'animal'},
   { noun: 'dolphin', inherits:'animal'},
-  { noun: 'goose', inherits:'animal'},
+
+  { noun: 'goose',
+    inherits:'animal',
+    modusOperandi: 'every 7 seconds, make the sound of a goose'
+  },
+
   { noun: 'mule', inherits:'animal'}
 ]

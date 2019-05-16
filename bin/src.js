@@ -35,7 +35,6 @@ let allEntitys = d1.declare(
   'the cemetery leads to a church',
 
   'a goose is in the kitchen',
-  'every 5 seconds, the goose makes the sound of a goose',
 
   //'Every 10 seconds, the person farts',
   //'Every 13 seconds, the person burps',
