@@ -8,6 +8,7 @@ const {
   parseImperative,
   randomSentence,
   sub,
+  parse,
 } = require('english-io')
 const MobileEar = require('../src/sound/MobileEar')
 
@@ -97,18 +98,27 @@ class ExplorerGame extends EventEmitter {
     this.emit('input', str)
 
     // parse the string as an input
-    let sentence = parseImperative.first(
-      str, this.protagonist, this.dictionary.actionPredicates)
-    if(sentence) {
-      this.wanderingDescriber.log(sentence)
-      sentence.on('problem', reason => {
-        this.io.println(sentencify(sub(
-          '_ because _',
-          sentence.str('negative_possible_present'),
-          reason
-        ).str()))
-      })
-      sentence.start()
+    let parsed = parse.imperative(this.protagonist, str, this.dictionary, this.ctx)
+    if(parsed) {
+      if(parsed.isParsedSentence) {
+        let sentence = parsed.start()
+
+        if(sentence.truthValue == 'true') {
+          this.wanderingDescriber.log(sentence)
+        } else if(sentence.truthValue == 'failed') {
+          this.io.println(sentencify(sub(
+            '_ because _',
+            sentence.str('negative_possible_present'),
+            sentence.failureReason,
+          ).str()))
+        } else {
+          console.warn('Unhandled user instruction:', str, sentence)
+        }
+      } else if(parsed.isParsedSpecialSentence) {
+        console.log(parsed.start())
+      } else {
+        console.warn('Unregognised parse object,', parsed, ', for \"'+str+'\"')
+      }
     } else
       this.io.println("I'm sorry, I do not understand \""+str+"\"")
   }
