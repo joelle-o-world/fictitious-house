@@ -123,7 +123,10 @@ class ExplorerGame extends EventEmitter {
       else
         console.warn('Unhandled user declaration:', str)
     } else
-      this.io.println("I'm sorry, I do not understand \""+str+"\"")
+      this.io.println(
+        "I'm sorry, I do not understand \""+str+"\". "
+        + 'Why not try entering: \"' + this.randomAction().str('imperative') + '\"?'
+      )
   }
 
   get protagonist() {
