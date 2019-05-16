@@ -12,7 +12,6 @@ const audioContext = new AudioContext
 
 function getImpulseResponse(type) {
   let choices = irIndex[type]
-  console.log(choices, type)
   let audioPath = resolve(
     irURL,
     choices[Math.floor(Math.random()*choices.length)]

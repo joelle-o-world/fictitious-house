@@ -90,7 +90,7 @@ class SoundPlayer {
 
     // Exit if the sound has changed state during audio render.
     if(sound.soundPlayer != this || !sound.playing) {
-      console.log(sound, 'changed its mind')
+      console.warn(sound, 'changed its mind')
       return
     }
 
@@ -147,7 +147,6 @@ class SoundPlayer {
    */
   stop(sound) {
     // find the channel of the sound
-    console.log(this, '.stop(', sound, ')')
     sound.soundPlayer = null
 
     let i

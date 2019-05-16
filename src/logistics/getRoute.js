@@ -8,7 +8,6 @@ function getRoute(A, B) { // A and B are location,loctionType pairs
 
   for(var i=0; i<visited.length; i++) {
     let locations = getAccessibleLocations(visited[i].location)
-
     for(let couple of locations) {
       // skip if has been visited
       if(visited.some(
@@ -68,8 +67,6 @@ function getRouteSentences(A, B, subject) {
   } else if(locationType == 'ON') {
     instructions.push(S(getOnto, subject, location))
   }
-
-  console.log(instructions.map(sent => sent.str()))
 
   return instructions
 }

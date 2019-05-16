@@ -36,7 +36,6 @@ class LocationSoundPlayer extends SoundPlayer {
         })
       convolver.connect(this.destination)
       this.destination = convolver
-      console.log(convolver)
     }
 
     // if main player, play already playing sounds of the location itself
@@ -142,14 +141,12 @@ class LocationSoundPlayer extends SoundPlayer {
   }
 
   removeSubPlayer(entity) {
-    console.log('removeSubPlayer(', entity.str(), ')')
     let player = entity.soundPlayer
     if(player.parentPlayer == this)
       player.decomission()
   }
 
   decomission() {
-    console.log('decomission sound player for:', this.location.str())
     // stop all sounds
     this.stopAll()
 
@@ -164,7 +161,6 @@ class LocationSoundPlayer extends SoundPlayer {
     this.location = null
 
     // decomission all subPlayers
-    console.log(this.subPlayers.map(player => player.location.str()))
     while(this.subPlayers.length)
       this.subPlayers[0].decomission()
 

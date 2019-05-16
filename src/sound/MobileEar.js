@@ -14,13 +14,11 @@ const LocationSoundPlayer = require('./LocationSoundPlayer')
 class MobileEar {
   constructor({protagonist, audioDestination, upDepth = 1}) {
     this.audioDestination = audioDestination
-    console.log(this.audioDestination)
     this.upDepth = upDepth
 
     this.protagonist = protagonist
 
     this.moveCallback = () => this.refreshSoundPlayer()
-    console.log('Ear', this)
   }
 
   get protagonist() {
