@@ -6,8 +6,9 @@ const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 const {randomSentence} = require('english-io')
 
-let allEntitys = d1.quickDeclare(
-  'a random person is in a corridor',
+console.log(d1)
+let allEntitys = d1.declare(
+  'a man is in a corridor',
 
   'the corridor leads to a kitchen',
   'the corridor leads to a bedroom',
@@ -34,11 +35,12 @@ let allEntitys = d1.quickDeclare(
   'the cemetery leads to a church',
 
   'a goose is in the kitchen',
-  'every 5 seconds the goose makes the sound of a goose',
+  'every 5 seconds, the goose makes the sound of a goose',
 
   //'Every 10 seconds, the person farts',
   //'Every 13 seconds, the person burps',
-)
+).domain
+
 
 let protagonist = allEntitys[0]
 console.log('protagonist:', protagonist)

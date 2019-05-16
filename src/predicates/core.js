@@ -9,8 +9,8 @@ module.exports = {
   beCalled: new Predicate({
     verb:'be called',
     params:['subject', '@object'],
-    begin: (A, name) => A.name = name,
-    check: (A, name) => A.name == name,
+    begin: (A, name) => A.addProperNoun(name),
+    check: (A, name) => A.properNouns.includes(name),
   }),
 
   be: new Predicate({
