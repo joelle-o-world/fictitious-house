@@ -49,9 +49,23 @@ module.exports = {
     banal: true,
   }),
 
-  gaveTo: new Predicate({
+  GiveTo: new Predicate({
     forms: [
       {verb:'give', params:['subject', 'object', 'to']},
-    ]
+    ],
+
+    prepare(giver, object, reciever) {
+      return [
+        this.dictionary.S('PickUp', giver, object),
+        this.dictionary.S('GoTo', giver, reciever)
+      ]
+    },
+    problem(giver, object, reciever) {
+      if(!reciever.possibleLocatingTypes.includes('hold'))
+        return sub('_ cannot hold things', reciever)
+    },
+    begin(giver, object, reciever) {
+      object.setLocation(reciever, 'hold')
+    },
   })
 }

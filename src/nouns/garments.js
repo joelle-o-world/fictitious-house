@@ -1,7 +1,7 @@
 module.exports = [
   { noun:'garment',
     inherits:'thing',
-    extend: e=>e.allowLocationType('wear', 'IN', 'ON')
+    extend: e=>e.allowLocationType('wear', 'IN', 'ON', 'hold')
   },
 
   { noun: 'shirt', inherits:'garment'},
