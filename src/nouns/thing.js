@@ -30,6 +30,7 @@ function extend(o) {
     o.emitChildExit = emitChildExit
 
     o.findWithin = findWithin
+    o.isWithin = isWithin
 
     o.nowPlayingSounds = []
 
@@ -177,4 +178,16 @@ function allowLocatingType(...locationTypes) {
 function findWithin(str) {
   let list = [...search(str, subEntities(this))]
   return list.length ? list : null
+}
+
+function isWithin(e) {
+  let loc = this
+
+  do {
+    if(loc == e)
+      return true
+  } while(loc = loc.location)
+
+  // otherwise
+  return false
 }

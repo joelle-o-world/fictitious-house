@@ -1,5 +1,5 @@
 const getRoute = require('../logistics/getRoute')
-const {Predicate} = require('english-io')
+const {Predicate, sub} = require('english-io')
 
 let goTo = new Predicate({
   verb:'go', params:['subject', 'to'],
@@ -23,6 +23,10 @@ let goTo = new Predicate({
     return getRoute.sentences(from, to, subject)
   },
   problem(subject, to) {
+    console.log(subject.str(), to.str())
+    if(to.isWithin(subject))
+      return sub('_ is part of _', to, subject)
+
     let from = {location: subject.location, locationType:subject.locationType}
     if(to.possibleLocatingTypes.includes('IN'))
       to = {location: to, locationType:'IN'}
@@ -32,6 +36,7 @@ let goTo = new Predicate({
       to = {location:to.location, locationType:'ON'}
     else if(to.container)
       to = {location:to.container, locationType: 'IN'}
+
     /*if(to.is_a('room') || to.is_a('space'))
       to = {location:to, locationType:'IN'}*/
     let route = getRoute.sentences(from, to, subject)
