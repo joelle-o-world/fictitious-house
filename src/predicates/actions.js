@@ -1,4 +1,4 @@
-const {Predicate} = require('english-io')
+const {Predicate, sub} = require('english-io')
 const S = require('english-io').Sentence.S
 const TimedPredicate = require('../TimedPredicate')
 //const {goTo} = require('./movement')
