@@ -8,7 +8,7 @@ module.exports = [
 
   { noun: 'goose',
     inherits:'animal',
-    modusOperandi: 'every 7 seconds, make the sound of a goose'
+    modusOperandi: 'Every 7 seconds, make the sound of a goose.'
   },
 
   { noun: 'mule', inherits:'animal'}

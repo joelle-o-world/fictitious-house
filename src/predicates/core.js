@@ -41,13 +41,6 @@ module.exports = {
     params: ['subject', 'object'],
   }),
 
-
-  steal: new Predicate({
-    verb:'steal',
-    params: ['subject', 'object'],
-    until: callback => callback(),
-  }),
-
   thereIs: new Predicate({
     forms: [
       {verb:'be', params:['object'], constants:{_subject:'there'}},

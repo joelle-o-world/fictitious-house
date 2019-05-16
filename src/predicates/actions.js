@@ -52,5 +52,17 @@ module.exports = {
       S(goTo, actor, surface),
     ],
     afterwards: (actor, object, surface) => S(beOn, object, surface)
-  })
+  }),
+
+  steal: new Predicate({
+    verb:'steal',
+    params: ['subject', 'object'],
+    expand(thief, booty) {
+      return [
+        this.dictionary.S('PickUp', thief, booty),
+        this.dictionary.S('GoOut', thief)
+      ]
+    },
+    until: callback => callback(),
+  }),
 }
