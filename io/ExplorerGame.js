@@ -114,12 +114,14 @@ class ExplorerGame extends EventEmitter {
       } else if(parsed.isParsedSpecialSentence) {
         parsed.start(this.protagonist)
       } else {
-        console.warn('Unregognised parse object,', parsed, ', for \"'+str+'\"')
+        console.warn('Unrecognised parse object,', parsed, ', for \"'+str+'\"')
       }
-    } else if(parsed == parse.sentence(str, this.dictionary, this.ctx)) {
-      parsed.start()
-      if(parsed && parsed.isSentence)
-        this.wanderingDescriber.log(sentence)
+    } else if(parsed = parse.sentence(str, this.dictionary, this.ctx)) {
+      let result = parsed.start(this.protagonist)
+      if(result && result.isSentence)
+        this.wanderingDescriber.log(result)
+      else
+        console.warn('Unhandled user declaration:', str)
     } else
       this.io.println("I'm sorry, I do not understand \""+str+"\"")
   }
