@@ -44,6 +44,7 @@ let allEntitys = d1.declare(
 
 let protagonist = allEntitys[0]
 console.log('protagonist:', protagonist)
+window.protagonist = protagonist
 
 window.onclick = function() {
   window.onclick = null
