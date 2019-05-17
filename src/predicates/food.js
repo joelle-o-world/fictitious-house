@@ -75,6 +75,7 @@ const FindFood = new Predicate({
     {verb:'go to fetch food'},
     {verb:'search for food'},
     {verb:'forage'},
+    {verb:'forage for food'},
   ],
 
   problem(finder) {
