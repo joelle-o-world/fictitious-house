@@ -9,4 +9,5 @@ module.exports = {
     entity.open = false
     entity.stopBeing('open')
   },
+  broken: entity => entity,
 }

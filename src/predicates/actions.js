@@ -40,7 +40,7 @@ module.exports = {
     ],
     problem(actor, object, container) {
       if(!container.possibleLocatingTypes.includes('IN'))
-        return sub('_ is not a container', surface)
+        return sub('_ is not a container', container)
     },
     afterwards: (actor, object, container) => S(beIn, object, container)
   }),

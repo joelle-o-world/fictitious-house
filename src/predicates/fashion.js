@@ -37,7 +37,7 @@ const TakeOff = new Predicate({
     if(garment.location != person || garment.locationType != 'wear')
       return sub('_ is not wearing _', person, garment)
   },
-  until: callback => callback,
+  until: callback => callback(),
   afterwards(person, garment) {
     garment.setLocation(person, 'hold')
   }

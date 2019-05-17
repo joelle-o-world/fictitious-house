@@ -48,7 +48,8 @@ module.exports = {
       {verb:'be', params:['object'], constants:{_subject:'there'}},
       {verb:'exist', params:['subject']},
     ],
-    banal: true,
+    //banal: true,
+    actionable:false,
   }),
 
   GiveTo: new Predicate({

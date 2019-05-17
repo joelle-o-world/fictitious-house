@@ -58,5 +58,6 @@ window.onclick = function() {
     useResponsiveVoice: true,
     useTickyText: false,
   })
+//  game1.ctx.you = protagonist
   document.body.appendChild(game1.io.div)
 }
