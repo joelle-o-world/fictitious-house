@@ -26,3 +26,5 @@ for(let noun in consistsOfTree) {
 for(let noun in containsTree) {
   d1.nouns[noun].contains = containsTree[noun]
 }
+
+d1.gameSyntaxs = require('./gameSyntaxs')
