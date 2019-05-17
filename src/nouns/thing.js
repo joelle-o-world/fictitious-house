@@ -20,6 +20,7 @@ function extend(o) {
 
     // functions:
     o.setLocation = setLocation
+    o.delete = () => console.warn('thing:.delete() has not been implemented')
     o.canBeIn = canBeIn
     o.allowLocatingType = allowLocatingType
     o.allowLocationType = allowLocationType

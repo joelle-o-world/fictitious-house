@@ -5,6 +5,7 @@ Object.assign(module.exports, require('./actions'))
 Object.assign(module.exports, require('./sound'))
 Object.assign(module.exports, require('./fashion'))
 Object.assign(module.exports, require('./walk'))
+Object.assign(module.exports, require('./food'))
 Object.assign(module.exports, require('./experimental'))
 
 module.exports.goTo = require('./goTo')

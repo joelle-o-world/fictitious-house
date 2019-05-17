@@ -11,6 +11,7 @@ let allEntitys = d1.declare(
   'a man is in a corridor',
 
   'the corridor leads to a kitchen',
+  'a sausage is in the fridge',
   'the corridor leads to a bedroom',
   'the corridor leads to another bedroom',
   'the corridor leads to a staircase',

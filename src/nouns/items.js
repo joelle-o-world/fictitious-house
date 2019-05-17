@@ -40,7 +40,12 @@ module.exports = [
   {noun: 'bed', inherits:'piece of furniture', extend: e => e.allowLocatingType('ON', 'SIT')},
 
   // CUPBOARD/BOX
-  {noun: 'cupboard', inherits:'piece of furniture', extend: e=>e.allowLocatingType('IN')},
+  {
+    noun: 'cupboard',
+    inherits:'piece of furniture',
+    extend: e=>e.allowLocatingType('IN')
+  },
+  {noun: 'fridge', inherits:'cupboard', modusOperandi:'make a buzzing sound'},
   {noun:'drawer', inherits:'thing', extend:e=>e.allowLocatingType('thing')},
   {noun:'wardrobe', inherits:'cupboard'},
   {noun:'box', inherits:'item', extend: e=>e.allowLocatingType('IN')},

@@ -8,7 +8,7 @@ module.exports = {
   foot: ['the sole', '5 toes'],
   toe: ['the toenail'],
   finger: ['the fingernail', 'the fingerprint'],
-  head: ['2 eyes', 'a nose', '2 ears', 'the hairs'],
+  head: ['2 eyes', 'a nose', '2 ears', 'the hairs', 'a mouth'],
   eye: ['the eyelash', 'the eyebrow', 'the pupil'],
 
   // animals

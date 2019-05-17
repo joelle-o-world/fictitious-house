@@ -51,7 +51,6 @@ const GoInto = new Predicate({
   },
   afterwards(entity, container) {
     // set new location
-    console.log("Go Into", container.str(), "(afterwards)")
     entity.setLocation(container, 'IN')
   },
 })
