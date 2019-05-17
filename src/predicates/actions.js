@@ -1,5 +1,4 @@
-const {Predicate, sub} = require('english-io')
-const S = require('english-io').Sentence.S
+const {Predicate, sub, S} = require('english-io')
 const TimedPredicate = require('../TimedPredicate')
 //const {goTo} = require('./movement')
 const goTo = require('./goTo')
@@ -21,8 +20,6 @@ const pickUp = new TimedPredicate({
   duration: 1,
   afterwards: (subject, object) => S(hold, object, subject),
 })
-
-
 
 module.exports = {
   lookAt: new Predicate({
@@ -72,7 +69,7 @@ module.exports = {
     verb:'steal',
     params: ['subject', 'object'],
     prepare(thief, booty) {
-      return this.dictionary.S('GoTo', thief, booty)
+      return this.dictionary.S('Approach', thief, booty)
     },
     expand(thief, booty) {
       return [
@@ -80,6 +77,7 @@ module.exports = {
         this.dictionary.S('GoOut', thief)
       ]
     },
+    afterwards: thief => S('FeelGuilty', thief),
     until: callback => callback(),
   }),
 }

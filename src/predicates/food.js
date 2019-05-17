@@ -29,6 +29,7 @@ const Eat = new Predicate({
 
   afterwards(eater, food) {
     food.delete()
+    return S('FeelSatisfied', eater)
   }
 })
 module.exports.Eat = Eat
@@ -50,3 +51,40 @@ const FeedTo = new Predicate({
   }
 })
 module.exports.FeedTo = FeedTo
+
+const Feed = new Predicate({
+  forms: [
+    {verb: 'feed', params:['subject', 'object']},
+  ],
+
+  problem(finder) {
+    if(!finder.findNearest('the food'))
+      return sub('there is no food to be found')
+  },
+
+  expand(finder, feedee) {
+    let food = finder.findNearest('the food')
+    return S('FeedTo', finder, food, feedee)
+  },
+})
+module.exports.Feed = Feed
+
+const FindFood = new Predicate({
+  forms: [
+    {verb:'go to find food'},
+    {verb:'go to fetch food'},
+    {verb:'search for food'},
+    {verb:'forage'},
+  ],
+
+  problem(finder) {
+    if(!finder.findNearest('the food'))
+      return sub('there is no food to be found')
+  },
+
+  expand(finder) {
+    let food = finder.findNearest('the food')
+    return S('PickUp', finder, food)
+  },
+})
+module.exports.FindFood = FindFood
