@@ -1,6 +1,3 @@
-
-
-
 /* Get the container of any entity */
 function getContainer(entity) {
   // Recursively, search down the location tree to find the first `IN`

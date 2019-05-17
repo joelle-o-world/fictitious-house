@@ -1,5 +1,6 @@
 const {Predicate, S} = require('english-io')
 const getRoute = require('../logistics/getRoute')
+const getReachable = require('../logistics/getReachable')
 
 const Approach = new Predicate({
   forms: [
@@ -8,11 +9,13 @@ const Approach = new Predicate({
   ],
 
   expand(mover, to) {
-    if(mover.container == to.container)
-      return []
+    for(let location of getReachable(to))
+      if(location == mover.container)
+        return []
+  //  if(mover.container == to.container)
+    //  return []
 
     let route = getRoute.approach(mover, to)
-    console.log('route', route)
 
     let steps = []
     for(let i=1; i<route.length; i++) {
@@ -25,5 +28,6 @@ const Approach = new Predicate({
 
     return steps
   },
+  banal: true,
 })
 module.exports = Approach

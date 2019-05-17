@@ -119,6 +119,13 @@ class ExplorerGame extends EventEmitter {
             sentence.str('negative_possible_present'),
             sentence.failureReason,
           ).str()))
+        } else if(sentence.truthValue == 'planned') {
+          sentence.on('start', () => this.wanderingDescriber.log(sentence))
+          sentence.on('problem', reason => this.io.println(sentencify(sub(
+            '_ because _',
+            sentence.str('negative_possible_present'),
+            reason,
+          ).str())))
         } else {
           console.warn('Unhandled user instruction:', str, sentence)
         }
