@@ -11,6 +11,7 @@ const {
   parse,
 } = require('english-io')
 const MobileEar = require('../src/sound/MobileEar')
+const {findBestMatch} = require('string-similarity')
 
 
 /**
@@ -160,7 +161,7 @@ class ExplorerGame extends EventEmitter {
     } else
       this.io.println(
         "I'm sorry, I do not understand \""+str+"\". "
-        + 'Why not try entering: \"' + this.randomAction().str('imperative') + '\"?'
+        + 'Why not try entering: \"' + this.bestMatchAction(str, undefined, this.ctx.duplicate()) + '\"?'
       )
   }
 
@@ -200,6 +201,15 @@ class ExplorerGame extends EventEmitter {
       this.protagonist,
       this.protagonist
     )
+  }
+
+  bestMatchAction(str, n=50, ctx) {
+    let choices = []
+    for(let i=0; i<n; i++)
+      choices.push(this.randomAction().str('imperative', ctx))
+
+    let r =  findBestMatch(str, choices).bestMatch.target
+    return r
   }
 
   addSpecialSyntaxs(...syntaxs) {
