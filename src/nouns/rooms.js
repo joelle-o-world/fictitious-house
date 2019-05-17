@@ -26,6 +26,7 @@ module.exports = [
   {noun:'hall', inherits:'room'},
   {noun:'staircase', inherits:'room'},
   {noun:'landing', inherits:'room'},
+  {noun:'attic', inherits:'room', contains:['an attic spider']},
   {noun:'church', inherits:'room', reverb:'church'},
 
   { noun:'garden', inherits:'space'},

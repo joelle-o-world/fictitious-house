@@ -110,4 +110,11 @@ module.exports = {
     ],
     sound: () => new FolieSound('jump'),
   }),
+
+  MakeAScuttlingSound: new SoundPredicate({
+    forms: [
+      {verb:'make a scuttling sound'},
+    ],
+    sound: () => new FolieSound('scuttle', true)
+  })
 }

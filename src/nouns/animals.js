@@ -11,5 +11,10 @@ module.exports = [
     modusOperandi: 'Every 7 seconds, make the sound of a goose.'
   },
 
-  { noun: 'mule', inherits:'animal'}
+  { noun: 'mule', inherits:'animal'},
+  { noun: 'attic spider',
+    inherits:'animal',
+    consistsOf: ['3 legs'],
+    modusOperandi: 'Move in a particular way. Make a scuttling sound.',
+  }
 ]

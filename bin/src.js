@@ -22,6 +22,7 @@ let allEntitys = d1.declare(
   'the landing leads to another bedroom',
   'the landing leads to another bedroom',
   'the landing leads to another bedroom',
+  'the landing leads to an attic',
   'the staircase leads to another landing',
   'the second landing leads to a bathroom',
 
