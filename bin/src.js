@@ -5,6 +5,7 @@ const Buzzing = require('../src/sound/ambient/Buzzing')
 const DuspLoop = require('../src/sound/DuspLoop')
 const d1 = require('../src')
 const {randomSentence} = require('english-io')
+const gameSyntaxs = require('../src/gameSyntaxs')
 
 console.log(d1)
 let allEntitys = d1.declare(
@@ -58,6 +59,7 @@ window.onclick = function() {
     audioDestination: audioctx.destination,
     useResponsiveVoice: true,
     useTickyText: false,
+    specialSyntaxs: gameSyntaxs,
   })
 //  game1.ctx.you = protagonist
   document.body.appendChild(game1.io.div)

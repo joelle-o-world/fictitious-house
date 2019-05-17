@@ -25,7 +25,6 @@ let goTo = new Predicate({
     return getRoute.sentences(from, to, subject)
   },
   problem(subject, to) {
-    console.log(subject.str(), to.str())
     if(to.isWithin(subject))
       return sub('_ is part of _', to, subject)
 

@@ -22,7 +22,8 @@ const MobileEar = require('../src/sound/MobileEar')
 class ExplorerGame extends EventEmitter {
   constructor({
     protagonist, dictionary, audioDestination,
-    useTickyText, useResponsiveVoice
+    useTickyText, useResponsiveVoice,
+    specialSyntaxs=null,
   }) {
     if(!protagonist || !protagonist.isEntity)
       throw 'ExplorerGame constructor expects a Entity protagonist as argument'
@@ -44,6 +45,10 @@ class ExplorerGame extends EventEmitter {
     this.io.descriptionCtx = this.ctx
     this.mainTense = 'simple_present'
     this.dictionary = dictionary
+    this.specialSyntaxs = []
+
+    if(specialSyntaxs)
+      this.addSpecialSyntaxs(...specialSyntaxs)
 
     // set up soundplayer
     this.audioDestination = audioDestination
@@ -70,7 +75,7 @@ class ExplorerGame extends EventEmitter {
         let sentence = this.randomAction()
         this.lastSuggestion = sentence.str('imperative', this.ctx.duplicate())
         this.io.print(
-          sentencify('perhaps '+ sentence.str('possible_present', this.ctx))
+          sentencify('perhaps '+ sentence.str('possible_present', this.ctx))+' '
         )
       }
     }, 10000)
@@ -106,7 +111,19 @@ class ExplorerGame extends EventEmitter {
     this.emit('input', str)
 
     // parse the string as an input
-    let parsed = parse.imperative(this.protagonist, str, this.dictionary, this.ctx)
+    let args
+    for(let syntax of this.specialSyntaxs)
+      if(args = syntax.parse(str, this.ctx, this.protagonist)) {
+        let out = syntax.exec(args, this.protagonist)
+        if(out) {
+          this.io.print(out)
+          return
+        }
+      }
+
+    let parsed = parse.imperative(
+      this.protagonist, str, this.dictionary, this.ctx
+    )
     if(parsed) {
       if(parsed.isParsedSentence) {
         let sentence = parsed.start(this.protagonist)
@@ -183,6 +200,13 @@ class ExplorerGame extends EventEmitter {
       this.protagonist,
       this.protagonist
     )
+  }
+
+  addSpecialSyntaxs(...syntaxs) {
+    for(let syntax of syntaxs) {
+      syntax.dictionary = this.dictionary
+      this.specialSyntaxs.push(syntax)
+    }
   }
 }
 module.exports = ExplorerGame
