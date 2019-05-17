@@ -40,6 +40,11 @@ let allEntitys = d1.declare(
   'a goose is in the kitchen',
   'another man is in the cemetery',
 
+  'a filter is on the table',
+  'the tobacco is on the table',
+  'the rizla is on the table',
+  'a cigarette lighter is on the nightstand',
+
   //'Every 10 seconds, the person farts',
   //'Every 13 seconds, the person burps',
 ).domain

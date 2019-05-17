@@ -15,8 +15,6 @@ module.exports = {
   octopus: ['a head', '8 legs'],
   goose: ['a head', '2 legs', '2 wings'],
 
-  cigarette: ['the rizla', 'the tobacco', 'the filter'],
-
   cupboard: ['some drawers'],
   drawer: ['a doorknob'],
 

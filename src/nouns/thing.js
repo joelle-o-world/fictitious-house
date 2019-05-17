@@ -94,7 +94,9 @@ function setLocation(location, locationType) {
   // check for problems
   if(!locationType || !this.canBeIn(location, locationType)) {
     console.warn(this.str(), this, location.str(), location)
-    throw "incompatible locationType: "+locationType
+    throw "incompatible locationType between \""
+      + this.str() +'\" and \"'+ location.str()+'\": '
+      + locationType
   }
 
   // make a note of the old location for emitting an event

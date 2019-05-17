@@ -6,10 +6,16 @@ module.exports = [
 
   // MISC
   {noun:'doorknob', inherits:'thing'},
-  {noun:'cigarette', inherits:'item'},
+  {
+    noun:'cigarette',
+    inherits:'item',
+  },
   {noun:'filter', inherits:'item'},
   {noun:'tobacco', inherits:'item'},
   {noun:'rizla', inherits:'item'},
+  {noun:'source of fire', inherits:'item'},
+  {noun:'cigarette lighter', inherits:'source of fire'},
+  {noun:'matchstick', inherits:'source of fire'},
   {noun:'computer', inherits:'item'},
   {noun:'salmon wrap', inherits:'item'},
   {noun:'bicycle', inherits:'item'},
