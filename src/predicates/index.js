@@ -8,3 +8,4 @@ Object.assign(module.exports, require('./walk'))
 Object.assign(module.exports, require('./experimental'))
 
 module.exports.goTo = require('./goTo')
+module.exports.Approach = require('./Approach')

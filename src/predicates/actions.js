@@ -11,7 +11,7 @@ const pickUp = new TimedPredicate({
 
   // semantics
   skipIf: (sub, ob) => ob.location == sub && ob.locationType == 'hold',
-  prepare: (subject, object) => [S(goTo, subject, object)],
+  prepare: (subject, object) => [S('Approach', subject, object)],
   duration: 1,
   afterwards: (subject, object) => S(hold, object, subject),
 })
@@ -36,7 +36,7 @@ module.exports = {
     duration: 1,
     prepare: (actor, object, container) => [
       S(pickUp, actor, object),
-      S(goTo, actor, container),
+      S('Approach', actor, container),
     ],
     problem(actor, object, container) {
       if(!container.possibleLocatingTypes.includes('IN'))
@@ -53,7 +53,7 @@ module.exports = {
     duration: 1,
     prepare: (actor, object, surface) => [
       S(pickUp, actor, object),
-      S(goTo, actor, surface),
+      S('Approach', actor, surface),
     ],
     problem(actor, object, surface) {
       if(!surface.possibleLocatingTypes.includes('ON'))

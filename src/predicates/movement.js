@@ -17,6 +17,12 @@ const GoInto = new Predicate({
     if(subject.location == container && subject.locationType == 'IN')
       return true
   },
+  prepare(subject, container) {
+    return [
+      S('Approach', subject, container),
+      S(PassThrough, subject, subject.location)
+    ]
+  },
   problem(subject, container) {
     if(!subject.location)
       return sub('_ is nowhere', subject)
@@ -45,6 +51,7 @@ const GoInto = new Predicate({
   },
   afterwards(entity, container) {
     // set new location
+    console.log("Go Into", container.str(), "(afterwards)")
     entity.setLocation(container, 'IN')
   },
 })
@@ -68,6 +75,12 @@ const GetOnto = new Predicate({
       ({location, locationType}) => locationType == 'ON' && location == surface
     ))
       return sub('_ is inaccessible', surface)
+  },
+  prepare(subject, container) {
+    return [
+      S('Approach', subject, container),
+      S(PassThrough, subject, subject.location)
+    ]
   },
   until: callback => callback(),
   afterwards: (entity, surface) => entity.setLocation(surface, 'ON'),
