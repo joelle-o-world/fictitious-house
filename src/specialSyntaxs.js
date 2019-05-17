@@ -32,7 +32,21 @@ const After_Seconds_ = new SpecialSentenceSyntax('after #_ seconds,? ~_', {
   }
 })
 
+const _Then_ = new SpecialSentenceSyntax('~_,? then,? ~_', {
+  start([A, B], domain) {
+    if(A.isParsedSentence) {
+      let s = A.create(domain)
+      s.on('stop', () => {
+        B.start(domain)
+      })
+      s.start()
+    } else
+      console.warn('unhandled "then" sentence')
+  }
+})
+
 module.exports.EverySeconds_ = EverySeconds_
 module.exports._EverySeconds = _EverySeconds
 module.exports._After_Seconds = _After_Seconds
 module.exports.After_Seconds_ = After_Seconds_
+module.exports._Then_ = _Then_
