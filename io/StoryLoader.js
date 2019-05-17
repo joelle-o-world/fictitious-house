@@ -25,7 +25,7 @@ class StoryLoader {
 
   async begin() {
     let story = await this.story
-    let sentences = unSentencify(this.story.text)
+    let sentences = unSentencify(this.story.text, false)
 
     let domain = []
     let ctx = new DescriptionContext
