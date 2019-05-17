@@ -12,6 +12,12 @@ const pickUp = new TimedPredicate({
   // semantics
   skipIf: (sub, ob) => ob.location == sub && ob.locationType == 'hold',
   prepare: (subject, object) => [S('Approach', subject, object)],
+  problem(subject, object) {
+    if(!subject.possibleLocatingTypes.includes('hold'))
+      return sub('_ has no way of grasping things', subject)
+    if(!object.possibleLocationTypes.includes('hold'))
+      return sub('_ is ungraspable', object)
+  },
   duration: 1,
   afterwards: (subject, object) => S(hold, object, subject),
 })
