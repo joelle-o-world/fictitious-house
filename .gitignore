@@ -4,3 +4,4 @@ impulse-response/
 .DS_Store
 bin/bundle.js
 game/bundle.js
+editor/bundle.js
