@@ -6,17 +6,51 @@
     <link rel="stylesheet" href="editor.css">
 
     <link rel="stylesheet" href="../game/game.css">
+    <link rel="stylesheet" href="browser.css">
 
     <style>
       #browser {z-index: 1;}
       #editor {z-index:2;}
-      #game {z-index: 3;}
+      #games {z-index: 3;}
+
+      #games > div.game > iframe.game {
+        position:fixed;
+        top:0px;
+        bottom:0px;
+        right:0px;
+        left:0px;
+        width:100%;
+        height:100%;
+        border:none;
+      }
+
+      #games > div.game > button.close {
+        position:fixed;
+        top:0px;
+        left:0px;
+        padding:15px;
+        z-index: 4;
+
+        background:none;
+        border:none;
+
+        color:white;
+        font-family:monospace;
+        font-size:16px;
+        outline:none;
+      }
+      #games > div.game > button.close:hover {
+        text-decoration: underline;
+      }
     </style>
     <title></title>
   </head>
   <body>
-    <div id='browser'></div>
+    <div id='browser'>
+      <h2>Demo levels</h2>
+      <div id='demos'></div>
+    </div>
     <div id='editor'></div>
-    <div id='game'></div>
+    <div id='games'></div>
   </body>
 </html>

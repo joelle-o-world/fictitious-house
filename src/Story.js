@@ -9,7 +9,7 @@ class Story {
     this.text = text
     this.protagonist = protagonist
     let lines = unSentencify(text)
-    this.title = title || sentencify(lines[0])
+    this.title = title || (sentencify(lines[0])+'..')
   }
 }
 module.exports = Story

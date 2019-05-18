@@ -6,6 +6,7 @@ const D = require('../src')
 
 window.onload = function() {
   let editor1 = new StoryEditor(story, D)
-  editor1.gameWrapperDiv = document.getElementById('game')
-  document.getElementById('editor').appendChild(editor1.div)
+  editor1.gameWrapperDiv = document.getElementById('games')
+  editor1.editorWrapperDiv = document.getElementById('editor')
+  document.getElementById('demos').appendChild(editor1.thumbnail)
 }
