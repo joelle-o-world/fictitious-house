@@ -1,0 +1,58 @@
+@font-face {
+  font-family: determination;
+  src: url(determinationmonoweb-webfont.ttf);
+}
+.entitygame, .gameloader {
+  position:fixed;
+  left:0px;
+  right:0px;
+  top:0px;
+  bottom:0px;
+  padding:50px;
+  padding-left: 100px;
+
+  background-color:black;
+  color:white;
+
+  overflow: auto;
+}
+
+pre.entitygame_output {
+  font-size:16px;
+  width:100%;
+  white-space: pre-wrap;
+  font-family: determination;
+  test-justify: auto;
+}
+
+.entitygame_input {
+  display: block;
+  width:100%;
+  font-size:20px;
+  background:none;
+  color:#f00;
+  font-family: determination;
+  border:none;
+
+  outline: none;
+}
+
+.gameloader {
+  cursor:pointer;
+}
+
+@-webkit-keyframes blinker {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+.gameloader_info {
+  font-family: determination;
+  font-size:30px;
+  text-align:center;
+  display:block;
+
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+  -webkit-animation-duration: 1.7s;
+}
