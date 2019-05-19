@@ -14,7 +14,7 @@
   resize: none;
   outline:none;
   width:75%;
-  height:200px;
+  height:500px;
 
   caret-color: red;
 
@@ -31,7 +31,7 @@
   background-color:black;
   border-left:1px solid #ccc;
   width:25%;
-  height:200px;
+  height:500px;
   overflow: hidden;
 }
 /*.storyeditor_sidebar:hover {
