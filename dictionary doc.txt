@@ -1,0 +1,316 @@
+IMPERATIVE:
+	approach _
+	bark
+	bark like a dog
+	be _
+	be a _
+	be accessible from _
+	be called _
+	be connected to _
+	be in _
+	be in love with _
+	be made of _
+	be on _
+	be on fire
+	be part of _
+	be stuck
+	burp
+	buzz
+	consist of _
+	cough
+	cross _
+	dine on _
+	don _
+	drip
+	eat _
+	enter _
+	exist
+	exit
+	fart
+	feed _
+	feed _ to _
+	feel a sense of shame
+	feel guilty
+	feel naughty
+	feel sated
+	feel satisfied
+	forage
+	forage for food
+	get into _
+	get onto _
+	get out
+	give _ to _
+	go across _
+	go into _
+	go out
+	go through _
+	go ting
+	go to _
+	go to fetch food
+	go to find food
+	go up to _
+	hiss
+	hold _
+	honk
+	jump
+	lead to _
+	leave
+	light _
+	light a cigarette
+	look at _
+	lose the game
+	love _
+	make a burping sound
+	make a buzzing sound
+	make a dripping sound
+	make a farting sound
+	make a hissing sound
+	make a scuttling sound
+	make a shattering sound
+	make an eating sound
+	make the sound of a dog
+	make the sound of a goose
+	meow
+	mew
+	move in a particular way
+	pass over _
+	pass through _
+	pick up _
+	place _ on _
+	put _ in _
+	put _ inside _
+	put _ on _
+	put on _
+	put one foot in front of the other
+	roll a cigarette
+	say hello
+	say hello to _
+	search for food
+	set _ on fire
+	smoke
+	smoke _
+	smoke a cigarette
+	steal _
+	step
+	take a step
+	take off _
+	tell _ to _
+	ting
+	walk across _
+	walk through _
+	wear _
+	win the game
+	woof
+
+
+SIMPLE_PRESENT:
+	_ /am|are|is/ _
+	_ /am|are|is/ a _
+	_ /am|are|is/ accessible from _
+	_ /am|are|is/ called _
+	_ /am|are|is/ connected to _
+	_ /am|are|is/ in _
+	_ /am|are|is/ in love with _
+	_ /am|are|is/ made of _
+	_ /am|are|is/ on _
+	_ /am|are|is/ on fire
+	_ /am|are|is/ part of _
+	_ /am|are|is/ stuck
+	_ /approach|approachs/ _
+	_ /bark|barks/
+	_ /bark|barks/ like a dog
+	_ /burp|burps/
+	_ /buzz|buzzes/
+	_ /consist|consists/ of _
+	_ /cough|coughs/
+	_ /cross|crosses/ _
+	_ /dine|dines/ on _
+	_ /don|dons/ _
+	_ /drip|drips/
+	_ /eat|eats/ _
+	_ /enter|enters/ _
+	_ /exist|exists/
+	_ /exit|exits/
+	_ /fart|farts/
+	_ /feed|feeds/ _
+	_ /feed|feeds/ _ to _
+	_ /feel|feels/ a sense of shame
+	_ /feel|feels/ guilty
+	_ /feel|feels/ naughty
+	_ /feel|feels/ sated
+	_ /feel|feels/ satisfied
+	_ /forage|forages/
+	_ /forage|forages/ for food
+	_ /get|gets/ into _
+	_ /get|gets/ onto _
+	_ /get|gets/ out
+	_ /give|gives/ _ to _
+	_ /go|goes/ across _
+	_ /go|goes/ into _
+	_ /go|goes/ out
+	_ /go|goes/ through _
+	_ /go|goes/ ting
+	_ /go|goes/ to _
+	_ /go|goes/ to fetch food
+	_ /go|goes/ to find food
+	_ /go|goes/ up to _
+	_ /hiss|hisses/
+	_ /hold|holds/ _
+	_ /honk|honks/
+	_ /jump|jumps/
+	_ /lead|leads/ to _
+	_ /leave|leaves/
+	_ /light|lights/ _
+	_ /light|lights/ a cigarette
+	_ /look|looks/ at _
+	_ /lose|loses/ the game
+	_ /love|loves/ _
+	_ /make|makes/ a burping sound
+	_ /make|makes/ a buzzing sound
+	_ /make|makes/ a dripping sound
+	_ /make|makes/ a farting sound
+	_ /make|makes/ a hissing sound
+	_ /make|makes/ a scuttling sound
+	_ /make|makes/ a shattering sound
+	_ /make|makes/ an eating sound
+	_ /make|makes/ the sound of a dog
+	_ /make|makes/ the sound of a goose
+	_ /meow|meows/
+	_ /mew|mews/
+	_ /move|moves/ in a particular way
+	_ /pass|passes/ over _
+	_ /pass|passes/ through _
+	_ /pick|picks/ up _
+	_ /place|places/ _ on _
+	_ /put|puts/ _ in _
+	_ /put|puts/ _ inside _
+	_ /put|puts/ _ on _
+	_ /put|puts/ on _
+	_ /put|puts/ one foot in front of the other
+	_ /roll|rolls/ a cigarette
+	_ /say|says/ hello
+	_ /say|says/ hello to _
+	_ /search|searchs/ for food
+	_ /set|sets/ _ on fire
+	_ /smoke|smokes/
+	_ /smoke|smokes/ _
+	_ /smoke|smokes/ a cigarette
+	_ /steal|steals/ _
+	_ /step|steps/
+	_ /take|takes/ a step
+	_ /take|takes/ off _
+	_ /tell|tells/ _ to _
+	_ /ting|tings/
+	_ /walk|walks/ across _
+	_ /walk|walks/ through _
+	_ /wear|wears/ _
+	_ /win|wins/ the game
+	_ /woof|woofs/
+	there is _
+
+
+SIMPLE_PAST:
+	_ approached _
+	_ ate _
+	_ barked
+	_ barked like a dog
+	_ burped
+	_ buzzed
+	_ consisted of _
+	_ coughed
+	_ crossed _
+	_ dined on _
+	_ donned _
+	_ dripped
+	_ entered _
+	_ existed
+	_ exitted
+	_ farted
+	_ feedded _
+	_ feedded _ to _
+	_ feeled a sense of shame
+	_ feeled guilty
+	_ feeled naughty
+	_ feeled sated
+	_ feeled satisfied
+	_ foraged
+	_ foraged for food
+	_ gived _ to _
+	_ got into _
+	_ got onto _
+	_ got out
+	_ held _
+	_ hissed
+	_ honked
+	_ jumped
+	_ lead to _
+	_ leaved
+	_ lighted _
+	_ lighted a cigarette
+	_ looked at _
+	_ losed the game
+	_ loved _
+	_ made a burping sound
+	_ made a buzzing sound
+	_ made a dripping sound
+	_ made a farting sound
+	_ made a hissing sound
+	_ made a scuttling sound
+	_ made a shattering sound
+	_ made an eating sound
+	_ made the sound of a dog
+	_ made the sound of a goose
+	_ meowed
+	_ mewed
+	_ moved in a particular way
+	_ passed over _
+	_ passed through _
+	_ picked up _
+	_ placed _ on _
+	_ put _ in _
+	_ put _ inside _
+	_ put _ on _
+	_ put on _
+	_ put one foot in front of the other
+	_ rolled a cigarette
+	_ said hello
+	_ said hello to _
+	_ searched for food
+	_ setted _ on fire
+	_ smoked
+	_ smoked _
+	_ smoked a cigarette
+	_ stepped
+	_ stole _
+	_ telled _ to _
+	_ tinged
+	_ took a step
+	_ took off _
+	_ walked across _
+	_ walked through _
+	_ was _
+	_ was a _
+	_ was accessible from _
+	_ was called _
+	_ was connected to _
+	_ was in _
+	_ was in love with _
+	_ was made of _
+	_ was on _
+	_ was on fire
+	_ was part of _
+	_ was stuck
+	_ weared _
+	_ went across _
+	_ went into _
+	_ went out
+	_ went through _
+	_ went ting
+	_ went to _
+	_ went to fetch food
+	_ went to find food
+	_ went up to _
+	_ winned the game
+	_ woofed
+	there was _
+
