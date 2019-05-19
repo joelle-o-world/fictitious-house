@@ -2,15 +2,14 @@ const Story = require('../src/Story')
 const StoryLoader = require('./StoryLoader')
 
 class StoryEditor {
-  constructor(story, dictionary) {
+  constructor(story, dictionary, options={}) {
     this.story = new Story(story)
-    this.makeHTML()
-    this.makeThumbnail()
+    this.makeHTML(options)
     this.updateInterface()
     this.dictionary = dictionary
   }
 
-  makeThumbnail() {
+  /*makeThumbnail() {
     if(this.thumbnail)
       return this.thumbnail
 
@@ -34,47 +33,50 @@ class StoryEditor {
 
     this.thumbnail = div
     return this.thumbnail
-  }
+  }*/
 
-  makeHTML() {
+  makeHTML({removeBTN = false}) {
     if(this.div)
       return this.div
 
     let div = document.createElement('div')
+    div.editor = this
     div.className = 'storyeditor'
-
-    div.sidebar = document.createElement('div')
-    div.sidebar.className = 'storyeditor_sidebar'
-    div.appendChild(div.sidebar)
-
-
-    div.close = document.createElement('button')
-    div.close.innerText = 'close'
-    div.close.onclick = () => this.div.parentNode.removeChild(this.div)
-    div.sidebar.appendChild(div.close)
-
-    div.debug = document.createElement('button')
-    div.debug.innerText = 'debug'
-    div.debug.onclick = () => this.debug()
-    div.sidebar.appendChild(div.debug)
-
-    div.play = document.createElement('button')
-    div.play.innerText = 'play...'
-    div.play.onclick = () => this.play()
-    div.sidebar.appendChild(div.play)
 
     div.storyInput = document.createElement('textarea')
     div.storyInput.className = 'storyeditor_input'
     div.storyInput.setAttribute('spellcheck', false)
     div.appendChild(div.storyInput)
 
+    div.sidebar = document.createElement('div')
+    div.sidebar.className = 'storyeditor_sidebar'
+    div.appendChild(div.sidebar)
+
+    div.debug = document.createElement('button')
+    div.debug.innerText = 'debug'
+    div.debug.onclick = () => this.debug()
+    div.sidebar.appendChild(div.debug)
+
+    if(removeBTN) {
+      div.remove = document.createElement('button')
+      div.remove.innerText = 'delete'
+      div.remove.onclick = () => this.remove()
+      div.sidebar.appendChild(div.remove)
+    }
+
+    div.play = document.createElement('button')
+    div.play.innerText = 'play...'
+    div.play.onclick = () => this.play()
+    div.sidebar.appendChild(div.play)
+
     this.div = div
     return div
   }
 
   updateInterface(story=this.story) {
+    this.story = new Story(story)
     this.div.storyInput.value = story.text
-    this.thumbnail.storyName.innerText = story.title
+  //  this.thumbnail.storyName.innerText = story.title
   }
 
   getStory() {
@@ -111,6 +113,11 @@ class StoryEditor {
     console.warn('StoryEditor: .debug() is not yet defined')
   }
 
+  remove() {
+    this.div.parentNode.removeChild(this.div)
+    if(window.saveStories)
+      window.saveStories()
+  }
   // TODO: getStory() // from this.interface
 }
 module.exports = StoryEditor

@@ -1,24 +1,37 @@
 .storyeditor {
   box-sizing: border-box;
-  position:fixed;
-  top:0px;
-  bottom:0px;
-  left:0px;
-  right:0px;
-  width:100%;
-  height:100%;
+  padding:0px;
+  margin:25px;
+  overflow: hidden;
+  border-radius: 5px;
+}
 
-  background-image: url("paper6.gif");
-  background-color:white;
+.storyeditor_input {
+  display:inline-block;
+  box-sizing: border-box;
+  border:none;
+  padding:25px;
+  resize: none;
+  outline:none;
+  width:75%;
+  height:200px;
+
+  caret-color: red;
+
+  background-color:#1e2128;
+
+  font-size:13px;
+  font-family: monospace;
+  color:#eec;
 }
 
 .storyeditor_sidebar {
+  display: inline-block;
   box-sizing: border-box;
-  float:right;
   background-color:black;
   border-left:1px solid #ccc;
   width:25%;
-  height:100%;
+  height:200px;
   overflow: hidden;
 }
 /*.storyeditor_sidebar:hover {
@@ -44,31 +57,6 @@
   border:1px dashed white;
   background-color: white;
   color:black;
-}
-
-.storyeditor_input {
-  display:block;
-  box-sizing: border-box;
-  border:none;
-  padding:25px;
-  resize: none;
-  outline:none;
-  width:600px;
-  margin-left: auto;
-  margin-right: auto;
-  height:100%;
-
-  caret-color: red;
-
-  background:none;
-
-/*  background-size: 275px 300px;*/
-
-  font-size:16px;
-  font-family: monospace;
-  color:black;
-
-  text-shadow: 0px 0px 20px white;
 }
 
 .storyeditor_thumbnail {
