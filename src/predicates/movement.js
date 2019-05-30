@@ -10,6 +10,8 @@ const GoInto = new Predicate({
   forms:[
     {verb: 'go', params: ['subject', 'into']},
     {verb: 'get', params: ['subject', 'into']},
+    {verb: 'get in', params: ['subject', 'to']},
+    {verb: 'go in', params: ['subject', 'to']},
     {verb: 'enter', params: ['subject', 'object']},
   ],
 
